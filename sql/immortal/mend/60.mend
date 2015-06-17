@@ -1,0 +1,15 @@
+begin;
+
+drop table if exists `equip_grade`;
+-- 装备系别评分
+create table `equip_grade`(
+    `role_id` int unsigned not null comment '角色ID',
+    `equip_type` int unsigned not null comment '甲类型',
+    `level` int unsigned not null comment '等级',
+    `grade` int unsigned not null comment '评分',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 60 where `key` = 'version';
+
+commit;

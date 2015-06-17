@@ -1,0 +1,24 @@
+begin;
+
+alter table `userother` add column `mystery_refresh_time` int unsigned not null comment '神秘商店下次刷新时间戳';
+
+-- 商品购买记录
+create table `shop_log`(
+    `role_id` int unsigned not null comment '角色ID',
+    `vendible_id` int unsigned not null comment '商品ID',
+    `daily_count` int unsigned not null comment '本日购买数量',
+    `history_count` int unsigned not null comment '历史购买数量',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 神秘商店商品列表
+create table `mystery_shop_goods`(
+    `role_id` int unsigned not null comment '角色ID',
+    `vendible_id` int unsigned not null comment '商品ID',
+    `buyed_count` int unsigned not null comment '已购买数量',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 6 where `key` = 'version';
+
+commit;

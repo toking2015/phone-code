@@ -1,0 +1,14 @@
+begin;
+
+-- 后台定时处理 
+create table `run_time`(
+    `id` int unsigned not null auto_increment comment '自增ID', 
+    `cmd` char(32) not null default '' comment '执行指令', 
+    `data` blob not null default '' comment '执行内容', 
+    primary key(`id`),
+    key(`cmd`)
+)engine=innodb auto_increment=1 default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 3 where `key` = 'version';
+
+commit;

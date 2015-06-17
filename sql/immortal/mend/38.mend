@@ -1,0 +1,15 @@
+begin;
+
+-- 好友赠送限制列表
+create table `friend_limit`(
+    `role_id` int unsigned not null default 0 comment '玩家id',
+    `friend_id` int unsigned not null default 0 comment '好友id',
+    `time_limit` int unsigned not null default 0 comment '活跃度时间限制',
+    `type_limit` int unsigned not null default 0 comment '物品时间限制',
+    `num_limit` tinyint unsigned not null default 0 comment '物品数量限制',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 38 where `key` = 'version';
+
+commit;

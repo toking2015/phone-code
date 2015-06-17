@@ -1,0 +1,15 @@
+begin;
+
+-- 添加二级属性
+alter table `fightextable` add column `recover_add_fix` int unsigned not null default 0 comment 'recover_add_fix';
+alter table `fightextable` add column `recover_del_fix` int unsigned not null default 0 comment 'recover_del_fix';
+alter table `fightextable` add column `recover_add_per` int unsigned not null default 0 comment 'recover_add_per';
+alter table `fightextable` add column `recover_del_per` int unsigned not null default 0 comment 'recover_del_per';
+alter table `fightextable` add column `rage_add_fix` int unsigned not null default 0 comment 'rage_add_fix';
+alter table `fightextable` add column `rage_del_fix` int unsigned not null default 0 comment 'rage_del_fix';
+alter table `fightextable` add column `rage_add_per` int unsigned not null default 0 comment 'rage_add_per';
+alter table `fightextable` add column `rage_del_per` int unsigned not null default 0 comment 'rage_del_per';
+
+update server_info set value = 16 where `key` = 'version';
+
+commit;

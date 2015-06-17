@@ -1,0 +1,19 @@
+begin;
+
+-- 副本战斗log
+create table `copy_fightlog`(
+    `copy_id` int unsigned not null comment 'ID',
+    `fight_id` int unsigned not null comment '战斗log',
+    `ack_id` int unsigned not null comment '进攻者',
+    `ack_level` int unsigned not null comment '进攻者等级',
+    `ack_name` char(32) not null default '' comment '进攻者名字',
+    `ack_avatar` smallint unsigned not null comment '进攻者头像',
+    `log_time` int unsigned not null default 0 comment '战斗记录时间',
+    `star` int unsigned not null default 0 comment '星级',
+    `fight_value` int unsigned not null default 0 comment '战斗力',
+    key(`copy_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 32 where `key` = 'version';
+
+commit;

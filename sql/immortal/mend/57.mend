@@ -1,0 +1,12 @@
+begin;
+
+-- 任务积分奖励列表
+create table `task_day_val_reward`(
+    `role_id` int unsigned not null default 0 comment '角色id',
+    `reward_id` int unsigned not null default 0 comment '奖励id',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 57 where `key` = 'version';
+
+commit;

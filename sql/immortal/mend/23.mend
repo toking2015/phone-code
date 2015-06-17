@@ -1,0 +1,8 @@
+
+begin;
+
+alter table `singlearena` add column `avatar` smallint unsigned not null default 0 comment '头像';
+
+update server_info set value = 23 where `key` = 'version';
+
+commit;

@@ -1,0 +1,11 @@
+begin;
+
+alter table `ranks` add column `avatar` smallint unsigned not null default 0 comment '头像';
+
+alter table `ranks` add column `name` char(32) not null default '' comment '玩家名字';
+
+alter table `ranks` add column `team_level` int unsigned not null default 0 comment '战队等级';
+
+update server_info set value = 44 where `key` = 'version';
+
+commit;

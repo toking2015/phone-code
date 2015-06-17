@@ -1,0 +1,9 @@
+begin;
+
+alter table `market_sell` add column `buy_name` char(32) not null comment '购买人';
+alter table `market_sell` add column `buy_count` int unsigned not null comment '购买数量';
+alter table `market_sell` add column `money` int unsigned not null comment '获得金钱';
+
+update server_info set value = 37 where `key` = 'version';
+
+commit;

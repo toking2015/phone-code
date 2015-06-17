@@ -1,0 +1,11 @@
+﻿-- 服务器列表
+create table `service`(
+    `id` smallint unsigned not null comment '服务器id',
+    `name` char(32) not null comment '服务器名称',
+    `version` char(32) not null comment '版本标识',
+    `host` char(64) not null comment '域名',
+    `open_time` int unsigned not null comment '开服时间',
+    key(`id`),
+    key(`version`)
+)engine=innodb auto_increment=1 default character set=utf8 collate=utf8_general_ci;
+

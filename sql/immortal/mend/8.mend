@@ -1,0 +1,18 @@
+begin;
+
+-- 拍卖行, 售卖方购买记录
+create table `market_log`(
+    `role_id` int unsigned not null comment '售卖方角色id',
+    `name` char(32) not null comment '玩家名字',
+    `cate` int unsigned not null comment '货物类型',
+    `objid` int unsigned not null comment '货物扩展id',
+    `val` int unsigned not null comment '货物值',
+    `time` int unsigned not null comment '购买时间',
+    `price` int unsigned not null comment '总价',
+    key(`role_id`),
+    key(`time`)
+)engine=innodb auto_increment=1 default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 8 where `key` = 'version';
+
+commit;

@@ -1,0 +1,6 @@
+begin;
+
+alter table usercoin add column `star` int unsigned not null default 0 comment '玩家星星' after `water`;
+update server_info set value = 2 where `key` = 'version';
+
+commit;

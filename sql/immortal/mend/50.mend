@@ -1,0 +1,7 @@
+begin;
+
+alter table `ranks` add column `index` int unsigned not null default 0 comment '记录排名';
+
+update server_info set value = 50 where `key` = 'version';
+
+commit;

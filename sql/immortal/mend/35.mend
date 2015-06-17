@@ -1,0 +1,7 @@
+begin;
+
+alter table `tomb` add column `try_count_now` int unsigned not null comment '当前这次是第几次挑战次数';
+
+update server_info set value = 35 where `key` = 'version';
+
+commit;

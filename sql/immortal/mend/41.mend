@@ -1,0 +1,11 @@
+begin;
+
+
+alter table `friend` add column `friend_avatar` smallint unsigned not null default 0 comment '头像';
+alter table `friend` add column `friend_level` tinyint unsigned not null default 0 comment '战队等级';
+alter table `friend` add column `friend_name` char(32) not null default '' comment '玩家名字';
+alter table `friend` add column `friend_gname` char(32) not null default '' comment '公会名字';
+
+update server_info set value = 41 where `key` = 'version';
+
+commit;

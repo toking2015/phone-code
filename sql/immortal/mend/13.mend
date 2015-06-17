@@ -1,0 +1,17 @@
+begin;
+
+drop table `copy_log_round`;
+drop table `copy_mopup_times`;
+
+-- 副本扫荡信息
+create table `copy_mopup`(
+    `role_id` int unsigned not null default 0 comment '角色id',
+    `type` int unsigned not null comment '副本扫荡类型',
+    `boss_id` int unsigned not null comment '扫荡boss_id',
+    `times` int unsigned not null comment '扫荡次数',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 13 where `key` = 'version';
+
+commit;

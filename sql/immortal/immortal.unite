@@ -1,0 +1,4 @@
+﻿delete from server_info where `key` = 'unite_time';
+insert into server_info values( 'unite_time', unix_timestamp(now()) );
+delete from singlearena;
+

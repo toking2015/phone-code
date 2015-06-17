@@ -1,0 +1,2 @@
+drop database if exists `immortal_bms`;
+create database `immortal_bms` default character set utf8 collate utf8_general_ci;

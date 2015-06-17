@@ -1,0 +1,7 @@
+begin;
+
+alter table `pay` add column `price` int unsigned not null comment '充值金额' after `coin`;
+
+update server_info set value = 33 where `key` = 'version';
+
+commit;

@@ -1,0 +1,7 @@
+begin;
+
+delete from equip_grade;
+
+update server_info set value = 55 where `key` = 'version';
+
+commit;

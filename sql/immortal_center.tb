@@ -1,0 +1,57 @@
+﻿-- 服务器列表
+create table `service`(
+    `id` smallint unsigned not null comment '服务器id',
+    `name` char(32) not null comment '服务器名称',
+    `group` char(32) not null comment '版本标识',
+    `host` char(64) not null comment '域名',
+    `index` int not null comment '标识索引(0 为取 id值作索引)',
+    `open_time` int unsigned not null comment '开服时间',
+    `flag` int unsigned not null comment '服务器标志(0:正常,1:维护)',
+    `hint` char(255) not null comment '维护信息文本显示',
+    key(`id`),
+    key(`group`)
+)engine=innodb auto_increment=1 default character set=utf8 collate=utf8_general_ci;
+
+-- 平台信息
+create table `platform_info`(
+    `name` char(32) not null comment '平台名(唯一标识)',
+    `group` char(32) not null comment '分组名',
+    `flag` int unsigned not null comment '平台标志(0:正常,1:维护)',
+    `hint` char(255) not null comment '维护信息文本显示',
+    primary key(`name`),
+    key(`group`)
+)engine=myisam default character set=utf8 collate=utf8_general_ci;
+
+-- 黑名单白名单
+CREATE TABLE `name_list` (
+    `platform` char(32) NOT NULL COMMENT '平台名(唯一标识)',
+    `aid` char(255) NOT NULL COMMENT '平台登录 account_name',
+    `flag` int(10) unsigned NOT NULL COMMENT '0:正常, 1:黑名单, 2:白名单',
+    KEY `platform` (`platform`),
+    KEY `aid` (`aid`),
+    KEY `flag` (`flag`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8
+
+-- 平台组
+CREATE TABLE `group` (
+    `name` char(32) NOT NULL COMMENT '名称',
+    `desc` char(255) NOT NULL COMMENT '描述',
+    KEY `name` (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8
+
+-- 礼包码
+create table `present_code`(
+    `code` char(32) not null comment '激活码',
+    `platform` char(32) not null comment '平台名称',
+    `reward_id` int unsigned not null comment '对应reward.xls',
+    `rid` int unsigned not null comment '激活角色id(0 为未激活)', 
+    `group` char(32) not null comment '分组信息(对应 immortal_center.group )',
+    `reward_group` int unsigned not null comment '礼包分组(0 可重复领取, 非0同分组只可领取一次)', 
+    `time` int unsigned not null comment '激活日期',
+    key(`code`),
+    key(`platform`),
+    key(`rid`),
+    key(`group`),
+    key(`reward_group`),
+    key(`time`)
+)engine=myisam default character set=utf8 collate=utf8_general_ci;

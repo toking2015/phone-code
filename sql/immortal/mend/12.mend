@@ -1,0 +1,8 @@
+begin;
+
+
+alter table `usercoin` add column `medal` int unsigned not null comment '玩家勋章';
+
+update server_info set value = 12 where `key` = 'version';
+
+commit;

@@ -1,0 +1,17 @@
+begin;
+
+-- 玩家Pay信息
+drop table `userpay`;
+-- 玩家Pay信息
+create table `userpay`(
+    `guid` int unsigned not null default 0 comment '角色id',
+    `pay_sum` int unsigned not null default 0 comment '总充值额',
+    `pay_count` int unsigned not null default 0 comment '总充次数',
+    `month_time` int unsigned not null default 0 comment '月卡到期时间',
+    `month_reward` int unsigned not null default 0 comment '月卡每天奖励',
+    key(`guid`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 9 where `key` = 'version';
+
+commit;

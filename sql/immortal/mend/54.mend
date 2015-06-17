@@ -1,0 +1,7 @@
+begin;
+
+alter table mailinfo modify column `path` int unsigned not null default 0 comment '途径';
+
+update server_info set value = 54 where `key` = 'version';
+
+commit;

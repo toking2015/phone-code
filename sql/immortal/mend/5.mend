@@ -1,0 +1,19 @@
+begin;
+
+-- 拍卖行
+create table `market_sell`(
+    `cargo_id` int unsigned not null comment '全服唯一id',
+    `role_id` int unsigned not null comment '角色id',
+    `cate` int unsigned not null comment '货物类型',
+    `objid` int unsigned not null comment '货物扩展id',
+    `val` int unsigned not null comment '货物值',
+    `percent` int unsigned not null comment '修正价格[80-180]',
+    `start_time` int unsigned not null comment '上架时间',
+    key(`cargo_id`),
+    key(`role_id`),
+    key(`start_time`)
+)engine=innodb auto_increment=1 default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 5 where `key` = 'version';
+
+commit;

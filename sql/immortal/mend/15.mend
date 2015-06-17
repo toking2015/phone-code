@@ -1,0 +1,8 @@
+begin;
+
+
+alter table `userother` add column `single_arena_win_times` int unsigned not null comment '技场挑战成功次数';
+
+update server_info set value = 15 where `key` = 'version';
+
+commit;

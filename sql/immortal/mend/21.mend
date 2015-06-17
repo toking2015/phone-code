@@ -1,0 +1,7 @@
+begin;
+
+alter table `userother` add column `purview` int unsigned not null default 0 comment '权限';
+
+update server_info set value = 21 where `key` = 'version';
+
+commit;

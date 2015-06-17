@@ -1,0 +1,8 @@
+begin;
+
+alter table `market_sell` add column `equip_level` int unsigned not null comment '装备等级分段' after `percent`;
+alter table `market_sell` add column `equip_type` int unsigned not null comment '装备类型' after `percent`;
+
+update server_info set value = 22 where `key` = 'version';
+
+commit;

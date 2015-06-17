@@ -1,0 +1,14 @@
+begin;
+
+drop table if exists `copy_material`;
+-- 资源点材料采集
+create table `copy_material`(
+    `role_id` int unsigned not null comment '角色ID',
+    `collect_level` int unsigned not null comment '采集点等级',
+    `left_collect_times` int unsigned not null comment '可采集次数',
+    `del_timestamp` int unsigned not null comment '下一次增加次数的时间戳',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 28 where `key` = 'version';
+commit;

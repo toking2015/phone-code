@@ -1,0 +1,8 @@
+begin;
+
+alter table totem            add column `packet` int unsigned not null default 0 comment '背包类型';
+alter table totem_glyph      add column `packet` int unsigned not null default 0 comment '背包类型';
+alter table totem_glyph_attr add column `packet` int unsigned not null default 0 comment '背包类型';
+
+update server_info set value = 29 where `key` = 'version';
+commit;

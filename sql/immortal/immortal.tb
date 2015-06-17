@@ -1,0 +1,800 @@
+﻿-- 服务器信息
+create table `server_info`(
+    `key` char(64) not null comment '键名',
+    `value` varchar(256) not null comment '键值',
+    key(`key`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 角色一级表
+create table `usersimple`(
+    `guid` int unsigned not null comment '角色ID',
+    `name` char(32) not null default '' comment '玩家名字',
+    `gender` tinyint unsigned not null default 0 comment '性别',
+    `avatar` smallint unsigned not null default 0 comment '头像',
+    `team_level` int unsigned not null default 0 comment '战队等级',
+    `team_xp` int unsigned not null default 0 comment '战队经验',
+    `vip_level` int unsigned not null default 0 comment 'vip等级',
+    `vip_xp` int unsigned not null default 0 comment 'vip经验',
+    `strength` int unsigned not null default 0 comment '体力',
+    `guild_id` int unsigned not null default 0 comment '公会Id',
+    `fight_value` int unsigned not null default 0 comment '战斗力',
+    key(`guid`),
+    key(`name`),
+    key(`team_level`),
+    key(`vip_level`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 角色零散数据
+create table `userother`(
+    `guid` int unsigned not null comment '角色ID',
+    `single_arena_rank` int unsigned not null default 0 comment '技场最高排名',
+    `paper_skill` int unsigned not null comment '手工技能ID',
+    `mystery_refresh_time` int unsigned not null comment '神秘商店下次刷新时间戳',
+    `single_arena_win_times` int unsigned not null default 0 comment '竞技场挑战成功次数',
+    `purview` int unsigned not null default 0 comment '权限',
+    `chat_ban_endtime` int unsigned not null default 0 comment '聊天屏闭结束时间',
+    `last_action` varchar(4096) not null default '' comment '最后行为记录',
+    `market_day_get` int unsigned not null default 0 comment '拍卖行纯获得金币',
+    `market_day_cost` int unsigned not null default 0 comment '拍卖行纯花费金币',
+    `market_day_time` int unsigned not null default 0 comment '拍卖行一天时间戳',
+    key(`guid`),
+    key(`last_action`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 战队信息
+create table `team`(
+    `guid` int unsigned not null comment '角色ID',
+    `can_change_name` int unsigned not null default 0 comment '能否改名',
+    `change_name_count` int unsigned not null default 0 comment '改名次数',
+    `guild_id` int unsigned not null default 0 comment '公会Id',
+    key(`guid`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 角色扩展信息
+create table `userinfo`(
+    `guid` int unsigned not null default 0 comment '玩家id',
+    `online_time_all` int unsigned not null default 0 comment '上线总时间(秒)',
+    `history_fight_value` int unsigned not null default 0 comment '历史最高战斗力',
+    primary key(`guid`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 角色数量相关表
+create table `usercount`(
+    `guid` int unsigned not null default 0 comment '玩家id',
+    primary key(`guid`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 角色次数相关
+create table `usertimes`(
+    `guid` int unsigned not null default 0 comment '玩家id',
+    primary key(`guid`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 角色货币相关表
+create table `usercoin`(
+    `guid` int unsigned not null default 0 comment '玩家id',
+    `gold` int unsigned not null default 0 comment '玩家元宝',
+    `money` int unsigned not null default 0 comment '玩家金钱',
+    `ticket` int unsigned not null default 0 comment '玩家礼金',
+    `water` int unsigned not null default 0 comment '玩家圣水',
+    `star` int unsigned not null default 0 comment '玩家星星',
+    `active_score` int unsigned not null default 0 comment '玩家活跃值',
+    `medal` int unsigned not null default 0 comment '玩家勋章',
+    `tomb` int unsigned not null default 0 comment '玩家墓地',
+    `guild_contribute` int unsigned not null default 0 comment '公会贡献度',
+    `day_task_val` int unsigned not null default 0 comment '日常任务积分',
+    primary key(`guid`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 角色星星表
+create table `userstar`(
+    `guid` int unsigned not null default 0 comment '玩家id',
+    `copy` int unsigned not null default 0 comment '副本星星',
+    `hero` int unsigned not null default 0 comment '英雄星星',
+    `totem` int unsigned not null default 0 comment '图腾星星',
+    primary key(`guid`),
+    key( `copy` ),
+    key( `hero` ),
+    key( `totem` )
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 物品表
+create table `item`(
+    `guid` smallint unsigned not null default 0 comment '物品guid',
+    `role_id` int unsigned not null default 0 comment '玩家id',
+    `bag_type` tinyint unsigned not null default 0 comment '背包类型',
+    `item_id` int unsigned not null default 0 comment '物品id',
+    `due_time` int unsigned not null default 0 comment '到期时间',
+    `count` int unsigned not null default 0 comment '数量',
+    `item_index` smallint unsigned not null default 0 comment '背包index',
+    `flags` tinyint  unsigned not null default 0 comment '绑定及魂石加锁等标识位',
+    `soldier_guid` smallint unsigned not null default 0 comment '武将guid',
+    `main_attr_factor` int unsigned not null default 0 comment '主属性品质系数',
+    `slave_attr_factor` int unsigned not null default 0 comment '副属性品质系数',
+    `slave_attr0` smallint unsigned not null default 0 comment 'unknown',
+    `slave_attr1` smallint unsigned not null default 0 comment 'unknown',
+    `slave_attr2` smallint unsigned not null default 0 comment 'unknown',
+    `slave_attr3` smallint unsigned not null default 0 comment 'unknown',
+    `slave_attr4` smallint unsigned not null default 0 comment 'unknown',
+    `slave_attr5` smallint unsigned not null default 0 comment 'unknown',
+    `slotattr0` tinyint unsigned not null default 0 comment 'unknown',
+    `slotvalue0` smallint unsigned not null default 0 comment 'unknown',
+    `slotattr1` tinyint unsigned not null default 0 comment 'unknown',
+    `slotvalue1` smallint unsigned not null default 0 comment 'unknown',
+    `slotattr2` tinyint unsigned not null default 0 comment 'unknown',
+    `slotvalue2` smallint unsigned not null default 0 comment 'unknown',
+    key(`role_id`),
+    key(`role_id`, `bag_type`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 好友列表
+create table `friend`(
+    `role_id` int unsigned not null default 0 comment '玩家id',
+    `friend_id` int unsigned not null default 0 comment '好友id',
+    `friend_favor` int unsigned not null default 0 comment 'unknown',
+    `friend_group` tinyint unsigned not null default 0 comment 'unknown',
+    `friend_avatar` smallint unsigned not null default 0 comment '头像',
+    `friend_level` tinyint unsigned not null default 0 comment '战队等级',
+    `friend_name` char(32) not null default '' comment '玩家名字',
+    `friend_gname` char(32) not null default '' comment '公会名字',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 好友赠送限制列表
+create table `friend_limit`(
+    `role_id` int unsigned not null default 0 comment '玩家id',
+    `friend_id` int unsigned not null default 0 comment '好友id',
+    `time_limit` int unsigned not null default 0 comment '活跃度时间限制',
+    `type_limit` int unsigned not null default 0 comment '物品时间限制',
+    `num_limit` tinyint unsigned not null default 0 comment '物品数量限制',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- VARLIST
+create table `var_info`(
+    `role_id` int unsigned not null default 0 comment '玩家id', 
+    `var_key` varchar(64) not null default '' comment 'key',
+    `var_value` int unsigned not null default 0 comment 'value',
+    `timelimit` int unsigned not null default 0 comment '有效期',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 武将
+create table `soldier`(
+    `role_id` int unsigned not null default 0 comment '玩家id', 
+    `guid` int unsigned not null default 0 comment '武将guid',
+    `soldier_id` int unsigned not null default 0 comment '武将id', 
+    `soldier_type` int unsigned not null default 0 comment '武将类型', 
+    `soldier_index` smallint unsigned not null default 0 comment '武将位置', 
+    `level` smallint unsigned not null default 0 comment '等级', 
+    `xp` int unsigned not null default 0 comment '经验',
+    `quality` smallint unsigned not null default 0 comment '品质等级',
+    `quality_lv` int unsigned not null default 0 comment '不使用',
+    `quality_xp` int unsigned not null default 0 comment '品质经验',
+    `star` smallint unsigned not null default 0 comment '星级',
+    `hp` int unsigned not null default 0 comment '血量',
+    `mp` int unsigned not null default 0 comment '魔量',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 阵型
+create table `formation`(
+    `role_id` int unsigned not null default 0 comment '玩家id',
+    `guid` int unsigned not null default 0 comment '武将guid',
+    `attr` int unsigned not null default 0 comment '类型',
+    `formation_type` int unsigned not null default 0 comment '武将类型',
+    `formation_index` int unsigned not null default 0 comment '阵型位置',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 玩家战斗二级数据 
+create table `fightextable`(
+    `role_id` int unsigned not null default 0 comment '玩家id', 
+    `attr` int unsigned not null default 0 comment '属性', 
+    `soldier_guid` int unsigned not null default 0 comment '武将guid',
+    `hp` int unsigned not null default 0 comment '血量上限',
+    `physical_ack` int unsigned not null default 0 comment '物理攻击',
+    `physical_def` int unsigned not null default 0 comment '物理防御',
+    `magic_ack` int unsigned not null default 0 comment '魔法攻击',
+    `magic_def` int unsigned not null default 0 comment '魔法防御',
+    `speed` int unsigned not null default 0 comment '速度',
+    `critper` int unsigned not null default 0 comment '暴击',
+    `critper_def` int unsigned not null default 0 comment '暴击抵抗',
+    `recover_critper` int unsigned not null default 0 comment '回血暴击',
+    `recover_critper_def` int unsigned not null default 0 comment '回血暴击抵抗',
+    `crithurt` int unsigned not null default 0 comment '暴击伤害',
+    `crithurt_def` int unsigned not null default 0 comment '暴击伤害抵抗',
+    `hitper` int unsigned not null default 0 comment '命中',
+    `dodgeper` int unsigned not null default 0 comment '闪避',
+    `parryper` int unsigned not null default 0 comment '格挡',
+    `parryper_dec` int unsigned not null default 0 comment '格挡抵抗',
+    `rage` int unsigned not null default 0 comment '怒气',
+    `stun_def` int unsigned not null default 0 comment '眩晕抵抗',
+    `silent_def` int unsigned not null default 0 comment '沉默抵抗',
+    `weak_def` int unsigned not null default 0 comment '虚弱抵抗',
+    `fire_def` int unsigned not null default 0 comment '燃烧抵抗',
+    `recover_add_fix` int unsigned not null default 0 comment '回血增加',
+    `recover_del_fix` int unsigned not null default 0 comment '回血减少',
+    `recover_add_per` int unsigned not null default 0 comment '回血增加百分比',
+    `recover_del_per` int unsigned not null default 0 comment '回血减少百分比',
+    `rage_add_fix` int unsigned not null default 0 comment '怒气增加',
+    `rage_del_fix` int unsigned not null default 0 comment '怒气减少',
+    `rage_add_per` int unsigned not null default 0 comment '怒气增加百分比',
+    `rage_del_per` int unsigned not null default 0 comment '怒气减少百分比',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 公会一级表
+create table `guildsimple`(
+    `guid` int unsigned not null comment '公会ID',
+    `level` smallint unsigned not null default 0 comment '公会等级',
+    `creator_id` int unsigned not null default 0 comment '创建人 role_id',
+    `name` char(32) not null default '' comment '公会名字',
+    primary key(`guid`),
+    key(`name`)
+)engine=innodb auto_increment=1000000 default character set=utf8 collate=utf8_general_ci;
+
+-- 公会扩展信息
+create table `guildinfo`(
+    `guid` int unsigned not null default 0 comment '公会id',
+    `xp` int unsigned not null default 0 comment '等级经验',
+    `create_time` int unsigned not null default 0 comment '创建时间',
+    `post_msg` varchar(128) not null default '' comment '公告',
+    key(`guid`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 公会日志
+create table `guildlog`(
+    `guid` int unsigned not null default 0 comment '公会id',
+    `type` int unsigned not null default 0 comment '日志类型',
+    `time` int unsigned not null default 0 comment '创建时间',
+    `params` varchar(128) not null default '' comment '参数',
+    key(`guid`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 公会成员信息
+create table `guildmember`(
+    `guid` int unsigned not null default 0 comment '公会id',
+    `role_id` int unsigned not null default 0 comment '成员role_id',
+    `job` int unsigned not null default 0 comment '职位, kGuildJobXXX',
+    `join_time` int unsigned not null default 0 comment '加入时间',
+    key(`guid`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 建筑列表
+create table `building`(
+    `role_id` int unsigned not null default 0 comment '玩家id',
+    `info_id` int unsigned not null default 0 comment '建筑id',
+    `info_type` int unsigned not null default 0 comment '建筑类型',
+    `info_level` int unsigned not null default 0 comment '建筑等级',
+    `position_x` int unsigned not null default 0 comment '建筑位置x',
+    `position_y` int unsigned not null default 0 comment '建筑位置y',
+    `production` int unsigned not null default 0 comment '产出，上限',
+    `time_point` int unsigned not null default 0 comment '产出, 时间',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 个人副本基本信息
+create table `copy_user`(
+    `role_id` int unsigned not null default 0 comment '角色id',
+    `copy_id` int unsigned not null default 0 comment '副本id',
+    `posi` int unsigned not null default 0 comment '当前进度',
+    `index` int unsigned not null default 0 comment '进度内索引',
+    `status` int unsigned not null default 0 comment '状态',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 个人副本事件列表
+create table `copy_event`(
+    `role_id` int unsigned not null default 0 comment '角色id',
+    `key` int unsigned not null default 0 comment 'indices索引下标, key[0:chunk, !=0:gut]',
+    `index` int unsigned not null default 0 comment 'array索引下标',
+    `event_type` int unsigned not null default 0 comment '类型',
+    `event_tid` int unsigned not null default 0 comment '对象Id',
+    `event_eid` int unsigned not null default 0 comment '扩展Id',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 个人副本奖励列表
+create table `copy_reward`(
+    `role_id` int unsigned not null default 0 comment '角色id',
+    `index` int unsigned not null default 0 comment '索引下标',
+    `reward_cate` int unsigned not null default 0 comment '0为不要体力, 1为需要体力',
+    `reward_id` int unsigned not null default 0 comment '奖励Id',
+    `reward_guage` int unsigned not null default 0 comment '完成度',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 个人副本掉落列表
+create table `copy_coins`(
+    `role_id` int unsigned not null default 0 comment '角色id',
+    `index_1` int unsigned not null default 0 comment '索引下标1',
+    `index_2` int unsigned not null default 0 comment '索引下标2',
+    `cate` int unsigned not null default 0 comment '货币类型',
+    `objid` int unsigned not null default 0 comment '货币扩展Id',
+    `val` int unsigned not null default 0 comment '货币值',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 用户完成副本记录
+create table `copy_log`(
+    `role_id` int unsigned not null default 0 comment '角色id',
+    `copy_id` int unsigned not null default 0 comment '副本id',
+    `time` int unsigned not null default 0 comment '记录时间',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 副本扫荡信息
+create table `copy_mopup`(
+    `role_id` int unsigned not null default 0 comment '角色id',
+    `type` int unsigned not null comment '副本扫荡类型',
+    `attr` int unsigned not null comment '副本扫荡值类型[ 1:最小阵亡数, 2:扫荡次数, 3:重置次数 ]',
+    `boss_id` int unsigned not null comment '扫荡boss_id',
+    `value` int unsigned not null comment '扫荡次数',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 用户完成副本记录
+create table `area_log`(
+    `role_id` int unsigned not null default 0 comment '角色id',
+    `area_id` int unsigned not null default 0 comment '区域id( copy_id / 1000 )',
+    `normal_full_take_time` int unsigned not null default 0 comment '普通区域满星领奖时间',
+    `elite_full_take_time` int unsigned not null default 0 comment '精英区域满星领奖时间',
+    `normal_pass_take_time` int unsigned not null default 0 comment '普通区域通关领奖时间',
+    `elite_pass_take_time` int unsigned not null default 0 comment '精英区域通关领奖时间',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 副本战斗log
+create table `copy_fightlog`(
+    `copy_id` int unsigned not null comment 'ID',
+    `fight_id` int unsigned not null comment '战斗log',
+    `ack_id` int unsigned not null comment '进攻者',
+    `ack_level` int unsigned not null comment '进攻者等级',
+    `ack_name` char(32) not null default '' comment '进攻者名字',
+    `ack_avatar` smallint unsigned not null comment '进攻者头像',
+    `log_time` int unsigned not null default 0 comment '战斗记录时间',
+    `star` int unsigned not null default 0 comment '星级',
+    `fight_value` int unsigned not null default 0 comment '战斗力',
+    key(`copy_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 用户剧情信息
+create table `gut`(
+    `role_id` int unsigned not null default 0 comment '角色id',
+    `gut_id` int unsigned not null default 0 comment '剧情id',
+    `index` int not null default 0 comment '剧情索引',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 用户剧情事件
+create table `gut_event`(
+    `role_id` int unsigned not null default 0 comment '角色id',
+    `index` int unsigned not null default 0 comment 'array索引下标',
+    `event_type` int unsigned not null default 0 comment '类型',
+    `event_tid` int unsigned not null default 0 comment '对象Id',
+    `event_eid` int unsigned not null default 0 comment '扩展Id',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 用户任务列表
+create table `task`(
+    `role_id` int unsigned not null default 0 comment '角色id',
+    `task_id` int unsigned not null default 0 comment '任务id',
+    `cond` int unsigned not null default 0 comment '条件完成值',
+    `create_time` int unsigned not null default 0 comment '创建时间',
+    key(`role_id`),
+    key(`task_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 用户任务完成列表
+create table `task_log`(
+    `role_id` int unsigned not null default 0 comment '角色id',
+    `task_id` int unsigned not null default 0 comment '任务id',
+    `create_time` int unsigned not null default 0 comment '创建时间',
+    `finish_time` int unsigned not null default 0 comment '创建时间',
+    key(`role_id`),
+    key(`task_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 用户当天日常任务列表
+create table `task_day`(
+    `role_id` int unsigned not null default 0 comment '角色id',
+    `task_id` int unsigned not null default 0 comment '任务id',
+    `create_time` int unsigned not null default 0 comment '创建时间',
+    `finish_time` int unsigned not null default 0 comment '创建时间',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 任务积分奖励列表
+create table `task_day_val_reward`(
+    `role_id` int unsigned not null default 0 comment '角色id',
+    `reward_id` int unsigned not null default 0 comment '奖励id',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 神殿
+create table `temple`(
+    `role_id`      int unsigned not null default 0 comment '角色id',
+    `hole_cloth`   int unsigned not null default 0 comment '布甲神符格数量',
+    `hole_leather` int unsigned not null default 0 comment '皮甲神符格数量',
+    `hole_mail`    int unsigned not null default 0 comment '锁甲神符格数量',
+    `hole_plate`   int unsigned not null default 0 comment '板甲神符格数量',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+-- 组合
+create table `temple_group`(
+    `role_id` int unsigned not null default 0 comment '角色id',
+    `id`      int unsigned not null default 0 comment 'id',
+    `level`   int unsigned not null default 0 comment '等级',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+-- 神符
+create table `temple_glyph`(
+    `role_id`     int unsigned not null default 0 comment '角色id',
+    `guid`        int unsigned not null default 0 comment 'guid',
+    `id`          int unsigned not null default 0 comment 'id',
+    `level`       int unsigned not null default 0 comment '等级',
+    `exp`         int unsigned not null default 0 comment '经验',
+    `embed_type`  int unsigned not null default 0 comment '镶嵌类型',
+    `embed_index` int unsigned not null default 0 comment '镶嵌序号',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+-- 神殿积分
+create table `temple_score`(
+    `role_id`  int unsigned not null default 0 comment '角色id',
+    `is_today` int unsigned not null default 0 comment '是否为今天',
+    `type`     int unsigned not null default 0 comment '积分类型',
+	`count`    int unsigned not null default 0 comment '次数',
+    `score`    int unsigned not null default 0 comment '积分',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+-- 积分奖励
+create table `temple_score_taken`(
+    `role_id`   int unsigned not null default 0 comment '角色id',
+    `reward_id` int unsigned not null default 0 comment '奖励id',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 图腾
+create table `totem`(
+    `role_id`          int unsigned not null default 0 comment '角色id',
+    `packet`           int unsigned not null default 0 comment '背包类型',
+    `guid`             int unsigned not null default 0 comment 'guid',
+    `id`               int unsigned not null default 0 comment '图腾id',
+    `level`            int unsigned not null default 0 comment '图腾等级',
+    `speed_lv`         int unsigned not null default 0 comment '速度等级',
+    `formation_add_lv` int unsigned not null default 0 comment '阵法加成等级',
+    `skill_cd_lv`      int unsigned not null default 0 comment '技能冷却等级',
+    `energy_time`      int unsigned not null default 0 comment '充能时间',
+    `accelerate_count` int unsigned not null default 0 comment '加速次数',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+-- 图腾雕文
+create table `totem_glyph`(
+    `role_id`    int unsigned not null default 0 comment '角色id',
+    `packet`     int unsigned not null default 0 comment '背包类型',
+    `guid`       int unsigned not null default 0 comment 'guid',
+    `id`         int unsigned not null default 0 comment '雕文id',
+    `totem_guid` int unsigned not null default 0 comment '如果镶嵌，对应图腾的guid',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+-- 图腾雕文属性
+create table `totem_glyph_attr`(
+    `role_id`    int unsigned not null default 0 comment '角色id',
+    `packet`     int unsigned not null default 0 comment '背包类型',
+    `glyph_guid` int unsigned not null default 0 comment '雕文guid',
+    `is_hide`    int unsigned not null default 0 comment '是否为隐藏属性',
+    `attr_id`    int unsigned not null default 0 comment '属性id',
+    `attr_value` int unsigned not null default 0 comment '属性值',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 签到 
+create table `sign_day`(
+    `role_id`   int unsigned not null default 0 comment '角色id',
+    `day_id`    int unsigned not null default 0 comment '日期id',
+    `sign_type` int unsigned not null default 0 comment '签到类型',
+    `sign_time` int unsigned not null default 0 comment '签到时间',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+-- 累计签到
+create table `sign_sum`(
+    `role_id`   int unsigned not null default 0 comment '角色id',
+    `reward_id` int unsigned not null default 0 comment '奖励id',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 祭坛系统
+create table `altar`(
+    `role_id`        int unsigned not null default 0 comment '角色id',
+    `reset_time`     int unsigned not null default 0 comment '重置时间',
+    `free_count`     int unsigned not null default 0 comment '免费次数',
+    `free_time`      int unsigned not null default 0 comment '使用免费次数的时间',
+    `gold_free_time` int unsigned not null default 0 comment '钻石使用免费次数的时间',
+    `money_seed_1`   int unsigned not null default 0 comment '种子',
+    `money_seed_10`  int unsigned not null default 0 comment '种子',
+    `gold_seed_1`    int unsigned not null default 0 comment '种子',
+    `gold_seed_10`   int unsigned not null default 0 comment '种子',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 排行榜 
+create table `ranks`(
+    `rank_type` int unsigned not null default 0 comment '排行榜类型', 
+    `guid` int unsigned not null default 0 comment 'guid',
+    `limit` int unsigned not null default 0 comment '等级', 
+    `first` int unsigned not null default 0 comment '排行数据1',
+    `second` int unsigned not null default 0 comment '排行数据2',
+    `data` blob not null default '' comment '扩展数据', 
+    `avatar` smallint unsigned not null default 0 comment '头像',
+    `name` char(32) not null default '' comment '玩家名字',
+    `team_level` int unsigned not null default 0 comment '战队等级',
+    `index` int unsigned not null default 0 comment '记录排名',
+    key(`rank_type`),
+    key(`guid`),
+    key(`limit`),
+    key(`first`),
+    key(`second`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 邮件 
+create table `mailinfo`(
+    `role_id` int unsigned not null default 0 comment '',
+    `mail_id` int unsigned not null default 0 comment '角色内唯一id', 
+    `flag` int unsigned not null default 0 comment '邮件状态', 
+    `path` int unsigned not null default 0 comment '途径', 
+    `deliver_time` int unsigned not null default 0 comment '发送日期', 
+    `sender_name` char(64) not null default 0 comment '发送者名称', 
+    `subject` varchar(100) not null default 0 comment '标题', 
+    `body` varchar(450) not null default 0 comment '正文内容',
+    `coin_flag` int unsigned not null default 0 comment '货币属性',
+    key(`role_id`),
+    key(`mail_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 邮件附件 
+create table `attachment`(
+    `role_id` int unsigned not null default 0 comment '',
+    `mail_id` int unsigned not null default 0 comment '角色内唯一id',
+    `index` tinyint unsigned not null default 0 comment '货币位置', 
+    `cate` tinyint unsigned not null default 0 comment '货币类型', 
+    `objid` int unsigned not null default 0 comment '货币扩展id', 
+    `val` int unsigned not null default 0 comment '货币数量',   
+    key(`role_id`),
+    key(`mail_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 玩家Pay信息
+create table `userpay`(
+    `guid` int unsigned not null default 0 comment '角色id',
+    `pay_sum` int unsigned not null default 0 comment '总充值额',
+    `pay_count` int unsigned not null default 0 comment '总充次数',
+    `month_time` int unsigned not null default 0 comment '月卡到期时间',
+    `month_reward` int unsigned not null default 0 comment '月卡每天奖励',
+    key(`guid`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 支付表, name 与 tid 结合为唯一单号, 不同的 name 可能存在相同的 tid  
+create table `pay`(
+    `uid` int unsigned auto_increment comment '自增id', 
+    `rid` int unsigned not null comment '角色id', 
+    `name` char(32) not null comment '帐号名(openid)',
+    `tid` char(64) not null comment '表单号', 
+    `type` int unsigned not null comment '充值类型(1:普通, 2:特殊)',
+    `coin` int unsigned not null comment '充值元宝',
+    `price` int unsigned not null comment '充值金额',
+    `time` int unsigned not null comment '充值日期', 
+    `flag` tinyint unsigned not null comment '获取标志', 
+    `channel` char(16) not null default '' comment '订单来源渠道标识', 
+    `c1` int unsigned not null comment '抵扣货币1',
+    `c2` int unsigned not null comment '抵扣货币2',
+    `c3` int unsigned not null comment '抵扣贷币3',
+    primary key(`uid`),
+    key(`rid`),
+    key(`name`),
+    key(`tid`),
+    key(`time`),
+    key(`flag`),
+    key(`channel`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 竞技场表
+create table `singlearena`(
+    `target_id` int unsigned not null comment 'ID',
+    `name` char(32) not null default '' comment '名字',
+    `team_level` int unsigned not null default 0 comment '战队等级',
+    `rank` int unsigned not null default 0 comment '排名',
+    `fight_value` int unsigned not null default 0 comment '战力',
+    `avatar` smallint unsigned not null default 0 comment '头像',
+    key(`target_id`),
+    key(`rank`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 竞技场log
+create table `singlearena_log`(
+    `target_id` int unsigned not null comment 'ID',
+    `fight_id` int unsigned not null comment '战斗log',
+    `ack_id` int unsigned not null comment '进攻者',
+    `def_id` int unsigned not null comment '防御者',
+    `ack_level` int unsigned not null comment '进攻者等级',
+    `def_level` int unsigned not null comment '防御者等级',
+    `ack_name` char(32) not null default '' comment '进攻者名字',
+    `ack_avatar` smallint unsigned not null comment '进攻者头像',
+    `def_name` char(32) not null default '' comment '防御者名字',
+    `def_avatar` smallint unsigned not null comment '防御者头像',
+    `win_flag` int unsigned not null default 0 comment '结果',
+    `log_time` int unsigned not null default 0 comment '战斗记录时间',
+    `rank_num` int signed not null default 0 comment '名次变动',
+    key(`target_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 资源点材料采集
+create table `copy_material`(
+    `role_id` int unsigned not null comment '角色ID',
+    `collect_level` int unsigned not null comment '采集点等级',
+    `left_collect_times` int unsigned not null comment '可采集次数',
+    `del_timestamp` int unsigned not null comment '下一次增加次数的时间戳',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 后台定时处理 
+create table `run_time`(
+    `id` int unsigned not null auto_increment comment '自增ID', 
+    `cmd` char(32) not null default '' comment '执行指令', 
+    `data` blob not null default '' comment '执行内容', 
+    primary key(`id`),
+    key(`cmd`)
+)engine=innodb auto_increment=1 default character set=utf8 collate=utf8_general_ci;
+
+-- 拍卖行, 售卖方购买记录
+create table `market_log`(
+    `role_id` int unsigned not null comment '售卖方角色id',
+    `name` char(32) not null comment '玩家名字',
+    `cate` int unsigned not null comment '货物类型',
+    `objid` int unsigned not null comment '货物扩展id',
+    `val` int unsigned not null comment '货物值',
+    `time` int unsigned not null comment '购买时间',
+    `price` int unsigned not null comment '总价',
+    key(`role_id`),
+    key(`time`)
+)engine=innodb auto_increment=1 default character set=utf8 collate=utf8_general_ci;
+
+-- 商品购买记录
+create table `shop_log`(
+    `role_id` int unsigned not null comment '角色ID',
+    `vendible_id` int unsigned not null comment '商品ID',
+    `daily_count` int unsigned not null comment '本日购买数量',
+    `history_count` int unsigned not null comment '历史购买数量',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 神秘商店商品列表
+create table `mystery_shop_goods`(
+    `role_id` int unsigned not null comment '角色ID',
+    `vendible_id` int unsigned not null comment '商品ID',
+    `buyed_count` int unsigned not null comment '已购买数量',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- vip限时商店商品列表
+create table `viptimelimit_shop_goods`(
+    `role_id` int unsigned not null comment '角色ID',
+    `vip_package_id` int unsigned not null comment '礼包ID',
+    `buyed_count` int unsigned not null comment '已购买数量',
+    `next_buy_time` int unsigned not null comment '下次可购买的时间',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 十字军试炼信息
+create table `trial`(
+    `role_id` int unsigned not null comment '角色ID',
+    `trial_id` int unsigned not null comment '试炼Id',
+    `trial_val` int unsigned not null comment '试炼值',
+    `try_count` int unsigned not null comment '挑战次数',
+    `reward_count` int unsigned not null comment '奖励领取次数',
+    `max_single_val` int unsigned not null comment '单次最大val',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 十字军奖励信息
+create table `trial_reward`(
+    `role_id` int unsigned not null comment '角色ID',
+    `trial_id` int unsigned not null comment '试炼Id',
+    `reward` int unsigned not null comment '奖励',
+    `flag` int unsigned not null comment '是否领取',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 墓地信息
+create table `tomb`(
+    `role_id` int unsigned not null comment '角色ID',
+    `try_count` int unsigned not null comment '今天挑战次数',
+    `try_count_now` int unsigned not null comment '当前这次是第几次挑战次数',
+    `win_count` int unsigned not null comment '胜利次数',
+    `max_win_count` int unsigned not null comment '今天最大胜利次数',
+    `reward_count` int unsigned not null comment '领奖次数',
+    `totem_value_self` int unsigned not null comment '图腾值自己',
+    `totem_value_target` int unsigned not null comment '图腾值对面',
+    `history_win_count` int unsigned not null comment '历史最大胜利次数',
+    `history_reset_count` int unsigned not null comment '历史重置次数',
+    `history_pass_count` int unsigned not null comment '历史通关次数',
+    `history_kill_monster1` int unsigned not null comment '历史杀怪记录1',
+    `history_kill_count1` int unsigned not null comment '历史杀怪记录1',
+    `history_kill_monster2` int unsigned not null comment '历史杀怪记录2',
+    `history_kill_count2` int unsigned not null comment '历史杀怪记录2',
+    `history_kill_monster3` int unsigned not null comment '历史杀怪记录3',
+    `history_kill_count3` int unsigned not null comment '历史杀怪记录3',
+    `history_kill_monster4` int unsigned not null comment '历史杀怪记录4',
+    `history_kill_count4` int unsigned not null comment '历史杀怪记录4',
+    `history_kill_monster5` int unsigned not null comment '历史杀怪记录5',
+    `history_kill_count5` int unsigned not null comment '历史杀怪记录5',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 墓地对战信息
+create table `tomb_target`(
+    `role_id` int unsigned not null comment '角色ID',
+    `attr` int unsigned not null comment '怪物玩家',
+    `target_id` int unsigned not null comment 'id',
+    `reward` int unsigned not null comment '奖励是否领取',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 套装等级选择记录
+create table `equip_suit_level`(
+    `role_id` int unsigned not null comment '角色ID',
+    `equip_type1` int unsigned not null comment '甲1选择等级',
+    `equip_type2` int unsigned not null comment '甲2',
+    `equip_type3` int unsigned not null comment '甲3',
+    `equip_type4` int unsigned not null comment '甲4',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 装备系别评分
+create table `equip_grade`(
+    `role_id` int unsigned not null comment '角色ID',
+    `equip_type` int unsigned not null comment '甲类型',
+    `level` int unsigned not null comment '等级',
+    `grade` int unsigned not null comment '评分',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 偏向性数据
+create table `bias`(
+    `role_id` int unsigned not null comment '角色ID',
+    `bias_id` int unsigned not null comment '偏向性id',
+    `use_count` int unsigned not null comment '使用次数',
+    `day_count` int unsigned not null comment '每天掉落次数',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 角色举报数据
+create table `reportpost`(
+    `target_id` int unsigned not null comment '角色ID',
+    `report_id` int unsigned not null comment '举报者ID',
+    `report_time` int unsigned not null comment '举报时间',
+    key(`target_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 账号表
+create table `account`(
+    `id` int unsigned not null auto_increment comment '账号ID',
+    `name` char(32) not null default ''  comment '帐号名称',
+    `channel` char(32) not null default '' comment '渠道来源',
+    `locked` tinyint not null default 0 comment '0 normal, 1 locked',
+    `banned` tinyint not null default 0 comment '0 normal, 1 banned',
+    `banned_reason` varchar(128) not null default '' comment '禁止理由',
+    `last_ip` char(16) not null default '127.0.0.1' comment '上次登录IP',
+    `last_login` int unsigned default 0 comment '上次登录时间',
+    `create_time` int unsigned default 0 comment '创建时间',
+    `identity` char(32) not null default '' comment '身份证',
+    primary key(`id`),
+    key(`name`),
+    key(`channel`),
+    key(`last_login`),
+    key(`create_time`)
+)engine=innodb auto_increment=1000000 default character set=utf8 collate=utf8_general_ci;
+
+-- 数据库版本信息
+insert into `server_info` values( 'version', '60' );

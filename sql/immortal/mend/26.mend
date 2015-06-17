@@ -1,0 +1,8 @@
+begin;
+
+alter table account drop column `inactive`;
+
+update server_info set value = 26 where `key` = 'version';
+
+commit;
+

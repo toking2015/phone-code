@@ -1,0 +1,141 @@
+﻿-- 设备信息记录
+create table `device_info`(
+    `device_code` char(32) not null comment '设备唯一键',
+    `app_core` int unsigned not null comment '内核版本号',
+    `device_name` char(32) not null comment '设备名(型号)',
+    `device_os_ver` char(32) not null comment '系统版本',
+    `device_net_info` char(32) not null comment '网络环境',
+    primary key(`device_code`),
+    key(`app_core`),
+    key(`device_name`),
+    key(`device_os_ver`),
+    key(`device_net_info`)
+)engine=myisam default character set=utf8 collate=utf8_general_ci;
+
+-- 设备加载记录
+create table `device_loading`(
+    `device_code` char(32) not null comment '设备唯一键',
+    `step` int unsigned not null comment '内核版本号',
+    `time` int unsigned not null comment '最后修改时间',
+    primary key(`device_code`),
+    key(`step`),
+    key(`time`)
+)engine=myisam default character set=utf8 collate=utf8_general_ci;
+
+-- 设备报错信息
+create table `device_error`(
+    `md5_key` char(32) not null comment 'md5([版本号]-[报错信息])',
+    `version` char(16) not null comment '版本号',
+    `content` varchar(2048) not null comment '报错信息',
+    `count` int unsigned not null comment '报错数',
+    primary key(`md5_key`),
+    key(`version`)
+)engine=myisam default character set=utf8 collate=utf8_general_ci;
+
+-- 激活码
+create table `activation_code`(
+    `code` char(32) not null comment '激活码',
+    `platform` char(32) not null comment '平台名称',
+    `rid` int unsigned not null comment '激活角色id(0 为未激活)',
+    `time` int unsigned not null comment '激活日期',
+    key(`code`),
+    key(`platform`),
+    key(`time`)
+)engine=myisam default character set=utf8 collate=utf8_general_ci;
+
+-- 拍卖行, 出售信息
+create table `market_sell`(
+    `cargo_id` int unsigned not null comment '全服唯一id',
+    `sid` int unsigned not null comment '服务器id(0为跨服, 非0为指定服)',
+    `role_id` int unsigned not null comment '角色id',
+    `cate` int unsigned not null comment '货物类型',
+    `objid` int unsigned not null comment '货物扩展id',
+    `val` int unsigned not null comment '货物值',
+    `percent` int unsigned not null comment '修正价格[80-180]',
+    `equip_type` int unsigned not null comment '装备类型',
+    `equip_level` int unsigned not null comment '装备等级分段',
+    `start_time` int unsigned not null comment '上架时间',
+    `down_time` int unsigned not null comment '下架时间',
+    `buy_name` int unsigned not null comment '购买人',
+    `buy_count` int unsigned not null comment '购买数量',
+    `money` int unsigned not null comment '金钱',
+    key(`cargo_id`),
+    key(`role_id`),
+    key(`start_time`)
+)engine=innodb auto_increment=1 default character set=utf8 collate=utf8_general_ci;
+
+-- 用户信息
+create table `roleinfo`(
+    `role_id` int unsigned not null comment '角色id',
+    `level` int unsigned not null comment '角色id',
+    `name` char(32) not null comment '角色名称',
+    primary key(`role_id`),
+    key(`level`),
+    key(`name`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 活动时间表
+create table `activity_open`(
+    `guid` int unsigned not null AUTO_INCREMENT comment '唯一',
+    `group` char(32) not null comment '版本标识',
+    `name` char(32) not null comment '活动标志',
+    `data_id` int unsigned not null comment '活动id',
+    `type` int unsigned not null comment '活动开放类型',
+    `first_time` char(32) not null comment '第一时间值',
+    `second_time` char(32) not null comment '第二时间值',
+    `show_time` int unsigned not null comment '可见时间',
+    `hide_time` int unsigned not null comment '隐藏时间',
+    primary key(`guid`),
+    key(`group`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 活动内容表
+create table `activity_data`(
+    `guid` int unsigned not null AUTO_INCREMENT comment '活动id',
+    `group` char(32) not null comment '版本标识',
+    `type` int unsigned not null comment '活动类型',
+    `cycle` int unsigned not null comment '活动周期',
+    `name_ex` char(32) not null comment '活动扩展名字',
+    `name` char(32) not null comment '活动名字',
+    `desc` char(32) not null comment '活动描述',
+    `value_1` char(32) not null comment '条件奖励1',
+    `value_2` char(32) not null comment '条件奖励2',
+    `value_3` char(32) not null comment '条件奖励3',
+    `value_4` char(32) not null comment '条件奖励4',
+    `value_5` char(32) not null comment '条件奖励5',
+    `value_6` char(32) not null comment '条件奖励6',
+    `value_7` char(32) not null comment '条件奖励7',
+    `value_8` char(32) not null comment '条件奖励8',
+    `value_9` char(32) not null comment '条件奖励9',
+    `value_10` char(32) not null comment '条件奖励10',
+    primary key(`guid`),
+    key(`group`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+
+-- 活动条件表
+create table `activity_factor`(
+    `guid` int unsigned not null AUTO_INCREMENT comment '条件id',
+    `group` char(32) not null comment '版本标识',
+    `desc` char(64) not null comment '活动描述',
+    `type` int unsigned not null comment '条件类型',
+    `value` int unsigned not null comment '条件值',
+    `value_1` int unsigned not null comment '条件值2',
+    primary key(`guid`),
+    key(`group`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+
+-- 活动奖励表
+create table `activity_reward`(
+    `guid` int unsigned not null AUTO_INCREMENT comment '奖励id',
+    `group` char(32) not null comment '版本标识',
+    `name` char(32) not null comment '奖励名字',
+    `value_1` char(64) not null comment '奖励值1',
+    `value_2` char(64) not null comment '奖励值2',
+    `value_3` char(64) not null comment '奖励值3',
+    primary key(`guid`),
+    key(`group`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+

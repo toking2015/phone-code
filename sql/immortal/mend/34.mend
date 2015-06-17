@@ -1,0 +1,15 @@
+begin;
+
+-- 套装等级选择记录
+create table `equip_suit_level`(
+    `role_id` int unsigned not null comment '角色ID',
+    `equip_type1` int unsigned not null comment '甲1选择等级',
+    `equip_type2` int unsigned not null comment '甲2',
+    `equip_type3` int unsigned not null comment '甲3',
+    `equip_type4` int unsigned not null comment '甲4',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 34 where `key` = 'version';
+
+commit;

@@ -1,0 +1,7 @@
+begin;
+
+alter table `tomb` add column `history_win_count` int unsigned not null comment '历史最大胜利次数';
+
+update server_info set value = 49 where `key` = 'version';
+
+commit;

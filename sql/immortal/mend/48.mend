@@ -1,0 +1,9 @@
+begin;
+
+alter table `userother` add column `market_day_get` int unsigned not null default 0 comment '拍卖行纯获得金币';
+alter table `userother` add column `market_day_cost` int unsigned not null default 0 comment '拍卖行纯花费金币';
+alter table `userother` add column `market_day_time` int unsigned not null default 0 comment '拍卖行一天时间戳';
+
+update server_info set value = 48 where `key` = 'version';
+
+commit;

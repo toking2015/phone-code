@@ -1,0 +1,642 @@
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- 数据库: `immortal_bms`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_account`
+--
+
+DROP TABLE IF EXISTS `b_account`;
+CREATE TABLE IF NOT EXISTS `b_account` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `sid` varchar(30) NOT NULL,
+  `account_id` varchar(11) NOT NULL,
+  `name` varchar(15) NOT NULL,
+  `user_name` varchar(8) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `level_id` int(2) NOT NULL,
+  `group` int(2) NOT NULL,
+  `permissions_id_list` text NOT NULL,
+  `permissions_id_platform` text NOT NULL,
+  `login_ip` varchar(20) NOT NULL,
+  `location` varchar(50) NOT NULL,
+  `login_time` int(11) NOT NULL,
+  `pre_operation_time` int(11) NOT NULL,
+  `last_operation_time` int(11) NOT NULL,
+  `create_time` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `b_account`
+-- 新后台默认账号密码
+-- 账号：gs_admin 
+-- 密码：dfyjybBASVw91UxwanmHJ3c
+-- 说明：仅仅拥有管理后台账户的功能；其他的必须是新建立的账号来维护游戏；
+
+INSERT INTO `b_account` (`id`, `account_id`, `name`, `user_name`, `password`, `level_id`, `group`, `permissions_id_list`, `permissions_id_platform`, `login_ip`, `location`, `login_time`, `pre_operation_time`, `last_operation_time`, `create_time`) VALUES
+(1, 'A2012102601', 'gs_admin', '系统管理员', 'f72ca356e1f5748c175cd9765cdbb439', 1, 0, '1,11,111,1111,1113', '2,3,7,8', '127.0.0.1', '', 1357796771, 1357804491, 1357804491, 1351235684);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_account_level`
+--
+
+DROP TABLE IF EXISTS `b_account_level`;
+CREATE TABLE IF NOT EXISTS `b_account_level` (
+  `id` int(2) NOT NULL,
+  `level_string` varchar(30) NOT NULL,
+  `lvl_name` VARCHAR(30) NULL DEFAULT '级别',
+  `permission_ids` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `b_account_level`
+--
+
+INSERT INTO `b_account_level` (`id`, `level_string`,`lvl_name`,`permission_ids`) VALUES
+(1, 'admin','管理员', '1,39,40,6,7,8'),
+(2, 'topManagement','高层管理', '1,11,111,1111,1112,1113,1114,112,1121,1122,1123,12317,123171,123172,123173,123174,123175,123176,123177,12318,12319,12320,41,2,21,41,3,31,41,4,51'),
+(3, 'developManagement','研发管理', '1,39,40,2,41,42,43,3,44,45,46,47,48,49,50,51,4,13,18,19,20,21,22,14,23,24,25,26,15,27,28,29,30,31,32,33,82,83,84,17,34,35,36,5,52,59,60,61,62,53,63,64,65,85,86,87,54,66,72,73,55,75,76,57,80,81,6,8'),
+(4, 'internalDevelopment','内部研发', '1,39,40,5,54,73,57,80,81'),
+(5, 'operationsManagement','运营管理', '1,39,40,2,41,42,43,3,44,45,46,47,48,49,50,51,4,13,18,19,20,21,22,14,23,24,25,26,15,27,28,29,30,31,32,33,82,83,84,17,34,35,36,5,52,59,60,61,62,53,63,64,65,85,86,87,54,66,67,68,69,70,71,72,73,74,55,75,76,56,77,78,79,57,81,6,8,9,10,11'),
+(6, 'operationsAccount','运营账号', '1,39,40,3,44,45,46,48,49,50,51,5,52,59,60,61,62,53,63,64,65,85,86,87,54,66,67,68,69,70,71,72,73,74,55,75,76,56,77,79,57,81,6,12'),
+(7, 'GMAccount','GM账号', '1,39,40,5,53,63,64,65,85,86,87,54,68,69,70,71,73,74,57,81'),
+(8, 'unionOperations','联运运营', '1,39,40,3,44,45,5,52,59,60,61,62,53,63,64,65,85,86,87,54,66,67,68,69,70,71,72,73,74,55,75,76,56,77,57,81'),
+(9, 'GMOperations','联运GM', '1,39,40,5,53,63,64,65,85,86,87,54,68,69,70,71,73,74,57,81'),
+(100, 'god','Developer', '1,11,111,1111,1112,1113,1114,112,1121,1122,1123,12317,123171,123172,123173,123174,123175,123176,123177,12318,12319,12320,41,411,4111,4112,4113,4114,412,4121,4122,4123,4124,4125,413,4131,4132,4133,4134,4135,4136,4137,4138,4139,41310,414,4141,4142,4143,2,21,211,2111,2112,2113,212,2121,2122,2123,2124,12317,123171,123172,123173,123174,123175,123176,123177,41,411,4111,4112,4113,4114,412,4121,4122,4123,4124,413,4131,4132,4133,4134,4135,4136,4137,4138,4139,41310,414,4141,4142,4143,3,31,311,3111,3112,3113,3114,312,3121,3122,3123,3124,3125,3126,313,3131,3132,3133,3134,3135,3136,3137,3138,3139,314,3141,3142,3143,315,3151,3152,12317,123171,123172,123173,123174,123175,123176,123177,123178,41,411,4111,4112,4113,4114,412,4121,4122,4123,4124,413,4131,4132,4133,4134,4135,4136,4137,4138,4139,41310,414,4141,4142,4143,4,51');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_bsi_lst`
+--
+DROP TABLE IF EXISTS `b_bsi_lst`;
+CREATE TABLE IF NOT EXISTS `b_bsi_lst` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录编号',
+  `pf` int(11) DEFAULT NULL COMMENT '平台编号',
+  `sid` int(11) DEFAULT NULL COMMENT '服务器编号',
+  `stat` int(11) DEFAULT NULL COMMENT '状态编号：>0可用　<0不可用',
+  `bsi_key` VARCHAR( 30 ) NOT NULL COMMENT '通信标识符',
+  `data` text NOT NULL COMMENT '协议的数据',
+  `add_time` INT NOT NULL COMMENT '首次创建的时间戳戳',
+  PRIMARY KEY (`id`),
+  KEY `pf` (`pf`,`sid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='通信协议数据记录表' AUTO_INCREMENT=1 ;
+
+--
+-- 表的结构 `b_daily_account_created`
+--
+
+DROP TABLE IF EXISTS `b_daily_account_created`;
+CREATE TABLE IF NOT EXISTS `b_daily_account_created` (
+  `date` varchar(8) NOT NULL,
+  `count` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `b_daily_account_created`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_gamer_account_extra`
+--
+
+DROP TABLE IF EXISTS `b_gamer_account_extra`;
+CREATE TABLE IF NOT EXISTS `b_gamer_account_extra` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `platform_id` int(2) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `trueName` varchar(8) NOT NULL,
+  `mobilePhone` varchar(16) NOT NULL,
+  `qq` varchar(12) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `b_gamer_account_extra`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_gamer_browser`  浏览器统计表已经移植到 游戏库中的bc_gamer_browser;
+--
+
+-- DROP TABLE IF EXISTS `b_gamer_browser`;
+-- CREATE TABLE IF NOT EXISTS `b_gamer_browser` (
+-- `id` bigint(20) NOT NULL AUTO_INCREMENT,
+-- `time` datetime NOT NULL,
+--   `role_id` int(11) NOT NULL,
+--   `step` int(11) NOT NULL,
+--   `ip` varchar(15) NOT NULL,
+--   `browser` text NOT NULL,
+--   `flash_ver` float NOT NULL,
+--   `screen_ratio` varchar(14) NOT NULL,
+--   PRIMARY KEY (`id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `b_gamer_browser`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_gamer_copy_info`
+--
+
+DROP TABLE IF EXISTS `b_gamer_copy_info`;
+CREATE TABLE IF NOT EXISTS `b_gamer_copy_info` (
+  `task_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `enter_time` int(11) NOT NULL,
+  `leave_time` int(11) NOT NULL,
+  `leaving_act` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `b_gamer_copy_info`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_gamer_other_info`
+--
+
+DROP TABLE IF EXISTS `b_gamer_other_info`;
+CREATE TABLE IF NOT EXISTS `b_gamer_other_info` (
+  `aid` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `browser` varchar(50) NOT NULL,
+  `flashVer` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `b_gamer_other_info`
+--
+
+-- 添加平台管理模块
+
+CREATE TABLE IF NOT EXISTS `b_gamer_pf_lst` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '平台编号',
+  `name_en` varchar(30) NOT NULL COMMENT '标识',
+  `name_cn` varchar(30) NOT NULL COMMENT '名字',
+  `vis_lst` varchar(255) DEFAULT NULL COMMENT '当前平台可以查看的其他平台列表',
+  `pf_desc` varchar(255) DEFAULT NULL COMMENT '描述',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='平台列表' AUTO_INCREMENT=1 ;
+INSERT INTO `b_gamer_pf_lst` (`name_en`, `name_cn`) VALUES
+('all_pf', '所有平台'),
+('91wan', '91wan平台'),
+('360', '360游戏平台'),
+('37ww', '37wanwan'),
+('kaixin', '开心网');
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_game_platform_list`
+--
+
+DROP TABLE IF EXISTS `b_game_platform_list`;
+CREATE TABLE IF NOT EXISTS `b_game_platform_list` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `parent_id` int NOT NULL default 0,
+  `sid` int NULL COMMENT '服务器编号',
+  `list_string` varchar(20) NOT NULL,
+  `svr_name` varchar(20) NULL DEFAULT '新服' COMMENT '服务器的中文名字',
+  `tag` varchar(5) NOT NULL,
+  `ip` varchar(51) NOT NULL,
+  `log_host` varchar(255) NULL DEFAULT 's0.by.91wan.com:18081/log/getlog/index.php' COMMENT '日志拉取域名',
+  `bak_auth_host` VARCHAR(255) NULL DEFAULT 'user.by.91wan.com' COMMENT '后台直接登录玩家的地址',
+  `back_port` int(11) NOT NULL DEFAULT 30002 COMMENT '游戏服端口用于socket连接（非mysql端口）',
+  `db` varchar(20) NOT NULL default 'immortal',
+  `usr` varchar(20) NOT NULL default 'immortal',
+  `pwd` varchar(50) NOT NULL default '',
+  `auth_key` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '验证服使用的key',
+  `auth_key_ex` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '扩展备用',
+  `serviceTime` int(11) NOT NULL,
+  `belogn_to` varchar(20) NOT NULL COMMENT '平台标识符',
+  `svr_stat` INT NULL COMMENT '服务器状态',
+  `fcm_stat` TINYINT NOT NULL DEFAULT '0' COMMENT '防沉迷的状态：１开启０关闭',
+  `division` varchar(10) NOT NULL,
+  `data_up_lst_dt` INT NOT NULL DEFAULT '0' COMMENT '最后更新时间戳',
+  `sync_t_do` INT NULL DEFAULT '0' COMMENT '订单同步时间',
+  `sync_lst_ord_t` DATETIME NULL COMMENT '同步最后订单的时间',
+  `data_up_stat` TINYINT NOT NULL DEFAULT '0' COMMENT '更新状态',
+  `data_intervals` INT NOT NULL DEFAULT '60' COMMENT '更新频率s',  
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+--
+-- 转存表中的数据 `b_game_platform_list`
+--
+
+INSERT INTO `b_game_platform_list` ( `parent_id`, `list_string`,`svr_name`, `tag`,`bak_auth_host`,`serviceTime`, `belogn_to`, `ip`,`log_host`, `back_port`, `db`, `usr`, `pwd`,  `division`) VALUES
+(0, 'pf_all','所有平台', 'P1','user.by.91wan.com',UNIX_TIMESTAMP(now()), 'all',  '--','--', 0, '--', '--', '--', '--'),
+(0, 'pf_91wan','91wan平台', 'P2','user.by.91wan.com',UNIX_TIMESTAMP(now()), '91wan', '--','--', 0, '--', '--', '--',  '--'),
+(0, 'pf_360','360平台', 'P3','user.byol.g.1360.com',UNIX_TIMESTAMP(now()), '360',  '--','--', 0, '--', '--', '--', '--'),
+(0, 'pf_37wanwan','上去玩玩', 'P4','user.37wanwan.by.91wan.com',UNIX_TIMESTAMP(now()), '37wanwan',  '--','--', 0, '--', '--', '--', '--'),
+(0, 'pf_g1080','GTV', 'P5', 'user.by.g1080.com',UNIX_TIMESTAMP(now()), 'g1080',  '--','--', 0, '--', '--', '--', '--'),
+(0, 'pf_51game','51社区', 'P6', 'user.51game.by.91wan.com',UNIX_TIMESTAMP(now()), '51game',  '--','--', 0, '--', '--', '--', '--'),
+(0, 'pf_sina','新浪平台', 'P7','user.by.wanwan.sina.com',UNIX_TIMESTAMP(now()), 'sinaww',  '--','--', 0, '--', '--', '--', '--'),
+(0, 'pf_kaixin','开心网', 'P8','user.kaixin.by.91wan.com',UNIX_TIMESTAMP(now()), 'kaixin',  '--','--', 0, '--', '--', '--', '--'),
+(0, 'pf_xunlei','迅雷', 'P9','user.by.niu.xunlei.com',UNIX_TIMESTAMP(now()), 'xunlei',  '--','--', 0, '--', '--', '--', '--'),
+(0, 'pf_kuaiwan','快玩', 'P10','user.by.kuaiwan.com',UNIX_TIMESTAMP(now()), 'kuaiwan',  '--','--', 0, '--', '--', '--', '--'),
+(0, 'pf_4399','4399', 'P11', 'user.by.we4399.com',UNIX_TIMESTAMP(now()), '4399',  '--','--', 0, '--', '--', '--', '--'),
+(0, 'pf_pptv','pptv', 'P12', 'user.by.g.pptv.com',UNIX_TIMESTAMP(now()), 'pptv',  '--','--', 0, '--', '--', '--', '--'),
+(0, 'pf_kugou','酷狗', 'P13', 'user.bayu.game.kugou.com',UNIX_TIMESTAMP(now()), 'kugou',  '--','--', 0, '--', '--', '--', '--'),
+(0, 'pf_duowan','多玩', 'P14', 'user.duowan.by.91wan.com',UNIX_TIMESTAMP(now()), 'duowan',  '--','--', 0, '--', '--', '--', '--'),
+(0, 'pf_pps','PPS', 'P15', 'user.by.g.pps.tv',UNIX_TIMESTAMP(now()), 'pps',  '--','--', 0, '--', '--', '--', '--'),
+(0, 'pf_2918','２９１８', 'P16', 'user.2918.by.91wan.com',UNIX_TIMESTAMP(now()), '2918',  '--','--', 0, '--', '--', '--', '--'),
+(0, 'pf_37wan','37wan', 'P17', 'user.by.37wan.com',UNIX_TIMESTAMP(now()), '37wan',  '--','--', 0, '--', '--', '--', '--');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_game_version_info`
+--
+
+DROP TABLE IF EXISTS `b_game_version_info`;
+CREATE TABLE IF NOT EXISTS `b_game_version_info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ver` float NOT NULL,
+  `updateTime` varchar(100) NOT NULL,
+  `remarks` varchar(100) NOT NULL,
+  `content` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `b_game_version_info`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_ingot_record`
+--
+
+DROP TABLE IF EXISTS `b_ingot_record`;
+CREATE TABLE IF NOT EXISTS `b_ingot_record` (
+  `time` int(11) NOT NULL,
+  `aid` int(11) NOT NULL,
+  `ingot_num` int(6) NOT NULL,
+  `p_s` varchar(50) NOT NULL,
+  `ip` varchar(15) NOT NULL,
+  `location` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `b_ingot_record`
+--
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_conf_gold_set`
+--
+
+DROP TABLE IF EXISTS `b_conf_gold_set`;
+CREATE TABLE `b_conf_gold_set` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`pid` VARCHAR(20) NOT NULL COMMENT '平台id',
+	`sid` VARCHAR(20) NOT NULL COMMENT '服id',
+	`max_cnt` INT(11) NOT NULL COMMENT '元宝总量上限',
+	`oper_dt` DATETIME NULL COMMENT '最后编辑时间',
+	`oper_id` INT(10) NULL COMMENT '最后编辑人',
+	`sta` TINYINT NULL DEFAULT '0' COMMENT '0 未开启 1 开启',
+	PRIMARY KEY (id)
+)ENGINE=InnoDB DEFAULT CHARSET =utf8 COMMENT='元宝池配置表' COLLATE='utf8_general_ci';
+
+--
+-- 转存表中的数据 `b_conf_gold_set`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_item_apply_list`
+--
+
+DROP TABLE IF EXISTS `b_item_apply_list`;
+CREATE TABLE IF NOT EXISTS `b_item_apply_list` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `aid` int(11) NOT NULL,
+  `serverTag` varchar(5) NOT NULL,
+  `applyTime` int(11) NOT NULL,
+  `m_cond_json` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '邮件附加信息',
+  `target` text NOT NULL,
+  `items` text NOT NULL COMMENT '物品ID',
+  `items_dsc` text NOT NULL COMMENT '物品描述',
+  `launchTime` int(11) NOT NULL COMMENT '邮件申请的发送时间',
+  `mailTitle` varchar(30) NOT NULL,
+  `mailContent` varchar(200) NOT NULL,
+  `reason` text NOT NULL,
+  `accept` int(2) NOT NULL COMMENT '0新申请-1拒绝1批准',
+  PRIMARY KEY (`id`),
+  KEY `serverTag` (`serverTag`),
+  KEY `aid` (`aid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `b_item_apply_list`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_list`
+--
+
+DROP TABLE IF EXISTS `b_list`;
+CREATE TABLE IF NOT EXISTS `b_list` (
+  `id` int(11) NOT NULL ,
+  `parent_id` varchar(15) NOT NULL,
+  `list_string` varchar(50) NOT NULL,
+  `action_url` varchar(100) NOT NULL,
+  `descript` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `b_list`
+--
+
+INSERT INTO `b_list` (`id`, `parent_id`, `list_string`, `action_url`, `descript`) VALUES
+(1, '0', 'sysCenter', '?a=sysCenter', '总后台'),
+(2, '0', 'platformBg', '?a=platformBg', '平台后台'),
+(3, '0', 'singleServerBg', '?a=singleServerBg', '单服后台'),
+(4, '0', 'versionLog', '?a=versionLog', '版本记录'),
+(11, '1', 'sysCenterMgr', '?a=sysCenterMgr', '总台管理'),
+(21, '2', 'platformMgr', '?a=platformMgr', '平台管理'),
+(31, '3', 'singleServerMgr', '?a=singleServerMgr', '单服管理'),
+(41, '1,2,3', 'dataAnalysis', '?a=dataAnalysis', '数据分析'),
+(51, '4', 'versionLog', '?a=versionLog', '版本记录'),
+(111, '11', 'accountMgr', '?a=accountMgr', '帐号管理'),
+(112, '11', 'dataCollection', '?a=dataCollection', '数据汇总'),
+(211, '21', 'platformSet', '?a=platformSet', '平台设置'),
+(212, '21', 'platformStistics', '?a=platformStistics', '平台统计'),
+(311, '31', 'serverInfo', '?a=serverInfo', '服务器信息'),
+(312, '31', 'gamerInfo', '?a=gamerInfo', '用户信息'),
+(313, '31', 'gamerMgr', '?a=gamerMgr', '用户管理'),
+(314, '31', 'noticeSet', '?a=noticeSet', '设置公告'),
+(315, '31', 'giveOutItems', '?a=giveOutItems', '物品发放'),
+(411, '41', 'userStatistics', '?a=userStatistics', '用户统计'),
+(412, '41', 'lostGamerStatistics', '?a=lostGamerStatistics', '留存统计'),
+(413, '41', 'payStatistics', '?a=payStatistics', '充值消费统计'),
+(414, '41', 'other', '?a=other', '其他统计'),
+(1111, '111', 'loginHistory', '?a=loginHistory', '帐号登陆记录'),
+(1112, '111', 'changePassword', '?a=changePassword', '修改密码'),
+(1113, '111', 'accountManager', '?a=accountManager', '管理后台帐号'),
+(1114, '111', 'accountQueryOperation', '?a=accountQueryOperation', '查询操作记录'),
+(1121, '112', 'serversDistribution', '?a=serversDistribution', '开服分布表'),
+(1122, '112', 'platformIncome', '?a=platformIncome', '平台收入计算（计算分成）'),
+(1123, '112', 'serverIncome', '?a=serverIncome', '开服/收入走势'),
+(1124, '112', 'psAllPayLst', '?a=psAllPayLst', '联运全服收入汇总'),
+(1125, '112', 'tolPSPayLst', '?a=tolPSPayLst', '总收入按日统计'),
+(1126, '112', 'tolMonPSPayLst', '?a=tolMonPSPayLst', '总收入按月统计'),
+(2111, '211', 'giftSet', '?a=giftSet', '设置礼包'),
+(2112, '211', 'giftList', '?a=giftList', '礼包列表'),
+(2113, '211', 'gameLink', '?a=gameLink', '设置游戏内链接'),
+(2114, '211', 'gameWatch', '?a=gameWatch', '聊天框监控'),
+(2121, '212', 'serverList', '?a=serverList', '服务器列表'),
+(2122, '212', 'NOCRatio', '?a=NOCRatio', '新老用户比例'),
+(2123, '212', 'payRank', '?a=payRank', '平台充值排行'),
+(2124, '212', 'singleGamerInfo', '?a=singleGamerInfo', '单个用户查询'),
+(3111, '311', 'singleServerInfo', '?a=singleServerInfo', '单服数据汇总（按天）'),
+(3112, '311', 'regStatistics', '?a=regStatistics', '注册统计（按时）'),
+(3113, '311', 'onlineStatistics', '?a=onlineStatistics', '在线统计（按时）'),
+(3114, '311', 'payStatistics', '?a=payStatistics', '充值统计（按时）'),
+(3121, '312', 'allGamerInfo', '?a=allGamerInfo', '所有用户查询'),
+(3122, '312', 'singleGamerLog', '?a=singleGamerLog', '单个用户日志'),
+(3123, '312', 'onlineGamer', '?a=onlineGamer', '当前在线用户'),
+(3124, '312', 'allPayLog', '?a=allPayLog', '所有充值记录'),
+(3125, '312', 'VIPRank', '?a=VIPRank', 'VIP排行'),
+(3126, '312', 'innerGameRank', '?a=innerGameRank', '游戏内排行'),
+(3127, '312', 'legionInfo', '?a=legionInfo', '军团信息'),
+(3128, '312', 'onlineNum','?a=onlineNum','即时在线人数'),
+(3131, '313', 'innerAccMgr', '?a=innerAccMgr', '内部帐号管理'),
+(3132, '313', 'instructorSet', '?a=instructorSet', '设置指导员'),
+(3133, '313', 'banAcc', '?a=banAcc', '封号'),
+(3134, '313', 'banIP', '?a=banIP', '封IP'),
+(3135, '313', 'banWords', '?a=banWords', '禁言'),
+(3136, '313', 'forceOffline', '?a=forceOffline', '踢下线'),
+(3137, '313', 'backgroundLogin', '?a=backgroundLogin', '后台登录玩家帐号'),
+(3138, '313', 'sug_lst', '?a=sug_lst', '查看投诉意见'),
+(3139, '313', 'gamerChatLog', '?a=gamerChatLog', '查询聊天记录'),
+(31310, '313', 'roleRename', '?a=roleRename', '修改角色名'),
+(31311, '313', 'showBugLst', '?a=showBugLst', '查看报错日志'),
+(31312, '313', 'mngRoleMoney', '?a=mngRoleMoney', '玩家货币管理'),
+(3141, '314', 'sysInfoSet', '?a=sysInfoSet', '设置系统信息'),
+(3142, '314', 'sendSysEmail', '?a=sendSysEmail', '发送系统邮件'),
+(3143, '314', 'build_gift_key', '?a=build_gift_key', '生成礼包代码'),
+(3144, '314', 'bsiRecLst', '?a=bsiRecLst', '批处理'),
+(3151, '315', 'applyItems', '?a=applyItems', '申请物品发放'),
+(3152, '315', 'applyList', '?a=applyList', '审核发放申请'),
+(4111, '411', 'vipPayProportion', '?a=vipPayProportion', 'VIP-付费比例'),
+(4112, '411', 'dailyOnlineStatistics', '?a=dailyOnlineStatistics', '每日在线时长统计'),
+(4113, '411', 'forceAndGrade', '?a=forceAndGrade', '等级-军衔-战力成长'),
+(4114, '411', 'onlineOrPayTimeStatistics', '?a=onlineOrPayTimeStatistics', '在线充值-时间段统计'),
+(4115, '411', 'tolCardRate', '?a=tolCardRate', '礼包卡激活统计'),
+(4121, '412', 'gamerCreatingRateStatistics', '?a=gamerCreatingRateStatistics', '创号率统计'),
+(4122, '412', 'gamerLostpointStatistics', '?a=gamerLostpointStatistics', '流失点统计'),
+(4123, '412', 'gamerOddDayLostStatistics', '?a=gamerOddDayLostStatistics', '一/三/七天留存'),
+(4124, '412', 'actJoinSta', '?a=actJoinSta', '活动参与度统计'),
+(4125, '412', 'load_lst_sta', '?a=load_lst_sta', '加载流失统计'),
+(4131, '413', 'ingotCreatedAndUsageStatistics', '?a=ingotCreatedAndUsageStatistics', '元宝产出/消耗统计'),
+(4132, '413', 'payAndIngotUsageChart', '?a=payAndIngotUsageChart', '元宝充值-消耗走势图'),
+(4133, '413', 'copperCreatedAndUsageStatistics', '?a=copperCreatedAndUsageStatistics', '铜钱产出/消耗统计'),
+(4134, '413', 'copperCreatedAndUsageChart', '?a=copperCreatedAndUsageChart', '铜钱产出-消耗走势图'),
+(4135, '413', 'experienceCreatedAndUsageStatistics', '?a=experienceCreatedAndUsageStatistics', '阅历产出/消耗统计'),
+(4136, '413', 'experienceCreatedAndUsageChart', '?a=experienceCreatedAndUsageChart', '阅历产出-消耗走势图'),
+(4137, '413', 'reputationCreatedAndUsageStatistics', '?a=reputationCreatedAndUsageStatistics', '名望产出统计'),
+(4138, '413', 'legatusRecruitStatistics', '?a=legatusRecruitStatistics', '武将招募统计'),
+(4139, '413', 'theVeryFirstTimeConsumeWhenAccountCreated', '?a=theVeryFirstTimeConsumeWhenAccountCreated', '创建后首次消费'),
+(4141, '414', 'browserStatistics', '?a=browserStatistics', '浏览器统计'),
+(4142, '414', 'flashVersionStatistics', '?a=flashVersionStatistics', 'FLASH版本统计'),
+(4143, '414', 'DPIStatistics', '?a=DPIStatistics', '分辨率统计'),
+(12317, '11,21,31', 'seniorMgr', '?a=seniorMgr', '高级管理'),
+(12318, '11', 'setGlobalPermissions', '?a=setGlobalPermissions', '帐号全局权限设置'),
+(12319, '11', 'clearCache', '?a=clearCache', '清理缓存'),
+(12320, '11', 'platformLog', '?a=platformLog', '查看平台日志'),
+(41310, '413', 'theVeryFirstTimeConsumeWhenGamerPayed', '?a=theVeryFirstTimeConsumeWhenGamerPayed', '充值后首次消费'),
+(123171, '12317', 'versionUpdateHistory', '?a=versionUpdateHistory', '添加版本记录'),
+(123172, '12317', 'illegalWords', '?a=illegalWords', '添加屏蔽词'),
+(123173, '12317', 'servierMgr', '?a=serverList', '服务器管理'),
+(123174, '12317', 'ignotSet', '?a=ignotSet', '元宝池设置'),
+(123175, '12317', 'antiEnthralment', '?a=antiEnthralment', '防沉迷设置'),
+(123176, '12317', 'serverErrs', '?a=serverErrs', '服务端出错日志'),
+(123177, '12317', 'clientErrs', '?a=clientErrs', '客户端出错日志'),
+(123178, '12317', 'shutdownServer', '?a=shutdownServer', '关闭服务器'),
+(123179, '12317', 'mngSvrEntCtrl', '?a=mngSvrEntCtrl', '服务器入口管理'),
+(1231713, '12317', 'menuManager', '?a=menuManager', '功能管理'),
+(511, '51', 'versionLog', '?a=versionLog', '版本记录');
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_operation_record`
+--
+
+DROP TABLE IF EXISTS `b_operation_record`;
+CREATE TABLE IF NOT EXISTS `b_operation_record` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `aid` int(5) NOT NULL,
+  `time` int(11) NOT NULL,
+  `pf` varchar(32) NULL,
+  `event` varchar(40) NOT NULL,
+  `describe` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `b_operation_record`
+--
+
+--
+-- `b_pf_svr_lst_in` 平台所有服收入汇总统计表；
+--  b_pf_svr_tol_in
+DROP TABLE IF EXISTS `b_pf_svr_tol_in`;
+CREATE TABLE `b_pf_svr_tol_in` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pf` int(10) NOT NULL COMMENT '平台编号',
+  `sid` int(10) NOT NULL COMMENT '服务器编号',
+  `in_d` date NOT NULL COMMENT '收入的日期',
+  `in_roles` int(11) NOT NULL COMMENT '角色数',
+  `in_times` int(11) NOT NULL COMMENT '支付的次数',
+  `in_tol` int(10) NOT NULL COMMENT '总收入(角=元宝)',
+  `in_arpu` INT NOT NULL DEFAULT '0' COMMENT 'arpu',
+  `login_cnt` INT NOT NULL DEFAULT '0' COMMENT '登录人数',
+  `ol_cnt` INT NOT NULL DEFAULT '0' COMMENT '在线人数' ,
+  `ol_avg` INT NOT NULL DEFAULT '0' COMMENT '平均在线人数' ,
+  `ol_max` INT NOT NULL DEFAULT '0' COMMENT '最高在线人数' ,
+  `reg_cnt` INT NOT NULL DEFAULT '0' COMMENT '新注册人数',
+  `remain_cnt` INT NOT NULL DEFAULT '0' COMMENT '老用户人数' ,
+  `up_lst_dt` INT NOT NULL DEFAULT '0' COMMENT '最后更新时间戳',
+  `up_stat` TINYINT NOT NULL DEFAULT '0' COMMENT '更新状态',
+  `intervals` INT NOT NULL DEFAULT '60' COMMENT '更新频率s',  
+  `up_dt` int(11) DEFAULT NULL COMMENT '最后更新的时间',
+  `in_ex` int(10) DEFAULT NULL COMMENT '总收入',
+  `rate_in` INT NOT NULL DEFAULT '0' COMMENT '收入占总收入的比率',
+  `rate_in_y` INT NOT NULL DEFAULT '0' COMMENT '收入昨日增长',
+  `rate_in_lw` INT NOT NULL DEFAULT '0' COMMENT '收入上周增长',
+  `rate_rem` INT NOT NULL DEFAULT '0' COMMENT '老用户昨日增长',
+  PRIMARY KEY (`id`),
+  KEY `p_s` (`pf`,`sid`,`in_d`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='所有平台收入汇总' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_platform_user_history`
+--
+
+DROP TABLE IF EXISTS `b_platform_user_history`;
+CREATE TABLE IF NOT EXISTS `b_platform_user_history` (
+  `aid` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `ip` varchar(50) NOT NULL,
+  `location` varchar(100) NOT NULL,
+  `login_time` int(11) NOT NULL,
+  `last_operation_time` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `b_platform_user_history`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_serverpush_msg`
+--
+
+DROP TABLE IF EXISTS `b_serverpush_msg`;
+CREATE TABLE IF NOT EXISTS `b_serverpush_msg` (
+  `aid` int(11) NOT NULL,
+  `sid` varchar(30) NOT NULL,
+  `action` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `b_serverpush_msg`
+--
+
+-- 添加全平台充值订单汇总
+DROP TABLE IF EXISTS `b_ps_pay`;
+CREATE TABLE IF NOT EXISTS `b_ps_pay` (
+  `pfid` int(11) NOT NULL COMMENT '平台编号',
+  `sid` int(11) NOT NULL COMMENT '服务器编号',
+  `order_id` varchar(64) NOT NULL COMMENT '订单号',
+  `in_d` date NOT NULL COMMENT '充值日期',
+  `r_id` int(11) NOT NULL COMMENT '角色编号',
+  `r_name` varchar(32) DEFAULT NULL COMMENT '角色名称',
+  `gold` int(11) NOT NULL COMMENT '充值的元宝数',
+  `in_t` datetime NOT NULL COMMENT '充值时间',
+  `r_job` tinyint(4) DEFAULT NULL COMMENT '职业编号',
+  `r_lvl` int(11) NOT NULL COMMENT '等级',
+  `r_xp` int(11) DEFAULT NULL COMMENT '经验值',
+  `r_fight` int(11) DEFAULT NULL COMMENT '战力',
+  `r_vip_lvl` tinyint(4) DEFAULT NULL COMMENT 'VIP等级',
+  `r_tol_coin` int(11) DEFAULT NULL COMMENT '累计充值',
+  `r_fist_t` datetime DEFAULT NULL COMMENT '首充时间戳',
+  `oper_dt` int(11) NOT NULL COMMENT '记录的时间戳',
+  PRIMARY KEY (`pfid`,`sid`,`order_id`),
+  KEY `in_d` (`in_d`,`r_name`,`in_t`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='全平台充值订单表';
+
+--
+-- 表的结构 `tmp_ol_lst`
+--
+
+DROP TABLE IF EXISTS `tmp_ol_lst`;
+CREATE TABLE IF NOT EXISTS `tmp_ol_lst` (
+  `in_d` date NOT NULL COMMENT '统计日期',
+  `pfid` int(11) NOT NULL COMMENT '平台编号',
+  `sid` int(11) NOT NULL COMMENT '服务器编号',
+  `data_lst` text NOT NULL COMMENT '数据的json',
+  KEY `in_d` (`in_d`,`pfid`,`sid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='每五分钟在线数据缓存表';
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tol_max_ol`
+--
+
+DROP TABLE IF EXISTS `tol_max_ol`;
+CREATE TABLE IF NOT EXISTS `tol_max_ol` (
+  `in_d` int(11) NOT NULL COMMENT '统计日期',
+  `pfid` int(11) NOT NULL COMMENT '0:全平台 >0 平台编号',
+  `max_cnt` int(11) NOT NULL COMMENT '同时在线的峰值',
+  PRIMARY KEY (`in_d`,`pfid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='同时在线峰值统计表';
+
+-- 增加游戏服务器异常日志表
+
+DROP TABLE IF EXISTS `b_server_state`;
+CREATE TABLE IF NOT EXISTS `b_server_state` (
+  `paltform` varchar(64) NOT NULL COMMENT '平台标识',
+  `sid` int(11) NOT NULL COMMENT '服务器编号',
+  `time` datetime NOT NULL COMMENT '记录时间',
+  `msg` varchar(512) NOT NULL,
+  KEY `paltform` (`paltform`),
+  KEY `sid` (`sid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='游戏服务器异常日志表';

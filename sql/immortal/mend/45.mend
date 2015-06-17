@@ -1,0 +1,15 @@
+begin;
+
+-- 装备系别评分
+create table `equip_grade`(
+    `role_id` int unsigned not null comment '角色ID',
+    `equip_type1` int unsigned not null comment '甲1评分',
+    `equip_type2` int unsigned not null comment '甲2',
+    `equip_type3` int unsigned not null comment '甲3',
+    `equip_type4` int unsigned not null comment '甲4',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 45 where `key` = 'version';
+
+commit;

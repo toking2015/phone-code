@@ -1,0 +1,7 @@
+begin;
+
+alter table `pay` add column `type` int unsigned not null comment '充值类型(1:普通, 2:特殊)' after `tid`;
+
+update server_info set value = 10 where `key` = 'version';
+
+commit;

@@ -1,0 +1,13 @@
+begin;
+
+-- 角色举报数据
+create table `reportpost`(
+    `target_id` int unsigned not null comment '角色ID',
+    `report_id` int unsigned not null comment '举报者ID',
+    `report_time` int unsigned not null comment '举报时间',
+    key(`target_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 40 where `key` = 'version';
+
+commit;

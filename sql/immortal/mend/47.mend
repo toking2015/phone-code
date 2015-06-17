@@ -1,0 +1,48 @@
+begin;
+
+-- 神殿
+create table `temple`(
+    `role_id`      int unsigned not null default 0 comment '角色id',
+    `hole_cloth`   int unsigned not null default 0 comment '布甲神符格数量',
+    `hole_leather` int unsigned not null default 0 comment '皮甲神符格数量',
+    `hole_mail`    int unsigned not null default 0 comment '锁甲神符格数量',
+    `hole_plate`   int unsigned not null default 0 comment '板甲神符格数量',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+-- 组合
+create table `temple_group`(
+    `role_id` int unsigned not null default 0 comment '角色id',
+    `id`      int unsigned not null default 0 comment 'id',
+    `level`   int unsigned not null default 0 comment '等级',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+-- 神符
+create table `temple_glyph`(
+    `role_id`     int unsigned not null default 0 comment '角色id',
+    `guid`        int unsigned not null default 0 comment 'guid',
+    `id`          int unsigned not null default 0 comment 'id',
+    `level`       int unsigned not null default 0 comment '等级',
+    `exp`         int unsigned not null default 0 comment '经验',
+    `embed_type`  int unsigned not null default 0 comment '镶嵌类型',
+    `embed_index` int unsigned not null default 0 comment '镶嵌序号',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+-- 神殿积分
+create table `temple_score`(
+    `role_id`  int unsigned not null default 0 comment '角色id',
+    `is_today` int unsigned not null default 0 comment '是否为今天',
+    `type`     int unsigned not null default 0 comment '积分类型',
+	`count`    int unsigned not null default 0 comment '次数',
+    `score`    int unsigned not null default 0 comment '积分',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+-- 积分奖励
+create table `temple_score_taken`(
+    `role_id`   int unsigned not null default 0 comment '角色id',
+    `reward_id` int unsigned not null default 0 comment '奖励id',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 47 where `key` = 'version';
+
+commit;

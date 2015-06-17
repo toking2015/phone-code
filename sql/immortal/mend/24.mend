@@ -1,0 +1,23 @@
+begin;
+
+-- 竞技场log
+create table `singlearena_log`(
+    `target_id` int unsigned not null comment 'ID',
+    `fight_id` int unsigned not null comment '战斗log',
+    `ack_id` int unsigned not null comment '进攻者',
+    `def_id` int unsigned not null comment '防御者',
+    `ack_level` int unsigned not null comment '进攻者等级',
+    `def_level` int unsigned not null comment '防御者等级',
+    `ack_name` char(32) not null default '' comment '进攻者名字',
+    `ack_avatar` smallint unsigned not null comment '进攻者头像',
+    `def_name` char(32) not null default '' comment '防御者名字',
+    `def_avatar` smallint unsigned not null comment '防御者头像',
+    `win_flag` int unsigned not null default 0 comment '结果',
+    `log_time` int unsigned not null default 0 comment '战斗记录时间',
+    `rank_num` int signed not null default 0 comment '名次变动',
+    key(`target_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 24 where `key` = 'version';
+
+commit;

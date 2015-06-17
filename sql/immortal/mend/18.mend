@@ -1,0 +1,14 @@
+begin;
+
+-- 用户当天日常任务列表
+create table `task_day`(
+    `role_id` int unsigned not null default 0 comment '角色id',
+    `task_id` int unsigned not null default 0 comment '任务id',
+    `create_time` int unsigned not null default 0 comment '创建时间',
+    `finish_time` int unsigned not null default 0 comment '创建时间',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 18 where `key` = 'version';
+
+commit;

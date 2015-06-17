@@ -1,0 +1,8 @@
+begin;
+
+alter table usercoin add column `guild_contribute` int unsigned not null default 0 comment '公会贡献度';
+alter table usercoin add column `day_task_val` int unsigned not null default 0 comment '日常任务积分';
+
+update server_info set value = 58 where `key` = 'version';
+
+commit;

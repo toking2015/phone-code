@@ -1,0 +1,14 @@
+begin;
+
+-- 偏向性数据
+create table `bias`(
+    `role_id` int unsigned not null comment '角色ID',
+    `bias_id` int unsigned not null comment '偏向性id',
+    `use_count` int unsigned not null comment '使用次数',
+    `day_count` int unsigned not null comment '每天掉落次数',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 52 where `key` = 'version';
+
+commit;

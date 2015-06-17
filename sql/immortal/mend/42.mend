@@ -1,0 +1,7 @@
+begin;
+
+alter table `trial` add column `max_single_val` int unsigned not null comment '单次最大val';
+
+update server_info set value = 42 where `key` = 'version';
+
+commit;

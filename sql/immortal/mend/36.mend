@@ -1,0 +1,7 @@
+begin;
+
+alter table `market_sell` add column `down_time` int unsigned not null comment '下架时间' after `start_time`;
+
+update server_info set value = 36 where `key` = 'version';
+
+commit;

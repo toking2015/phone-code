@@ -1,0 +1,16 @@
+begin;
+
+drop table `area_log`;
+
+-- 用户完成副本记录
+create table `area_log`(
+    `role_id` int unsigned not null default 0 comment '角色id',
+    `area_id` int unsigned not null default 0 comment '区域id( copy_id / 1000 )', 
+    `normal_take_time` int unsigned not null default 0 comment '普通区域满星领奖时间',
+    `elite_take_time` int unsigned not null default 0 comment '精英区域满星领奖时间',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 20 where `key` = 'version';
+
+commit;

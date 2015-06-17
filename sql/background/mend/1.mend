@@ -1,0 +1,6 @@
+﻿begin;
+set names 'utf8';
+ALTER TABLE `b_operation_record` ADD `pf` VARCHAR( 32 ) CHARACTER SET utf8mb4 COLLATE utf8_general_ci NULL AFTER `time` ;
+
+
+commit;

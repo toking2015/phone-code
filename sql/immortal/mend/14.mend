@@ -1,0 +1,9 @@
+begin;
+
+alter table `copy_mopup` add column `attr` int unsigned not null comment '副本扫荡值类型[ 1:阵亡数, 2:扫荡次数 ]' after `type`;
+alter table `copy_mopup` drop column `times`;
+alter table `copy_mopup` add column `value` int unsigned not null comment '扫荡次数';
+
+update server_info set value = 14 where `key` = 'version';
+
+commit;

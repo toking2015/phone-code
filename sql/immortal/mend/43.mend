@@ -1,0 +1,12 @@
+begin;
+
+-- 添加二级属性
+
+alter table `altar` add column `money_seed_1`  int unsigned not null default 0 comment '种子';
+alter table `altar` add column `money_seed_10` int unsigned not null default 0 comment '种子';
+alter table `altar` add column `gold_seed_1`   int unsigned not null default 0 comment '种子';
+alter table `altar` add column `gold_seed_10`  int unsigned not null default 0 comment '种子';
+
+update server_info set value = 43 where `key` = 'version';
+
+commit;

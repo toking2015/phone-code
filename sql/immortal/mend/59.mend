@@ -1,0 +1,10 @@
+begin;
+
+alter table area_log change `normal_take_time` `normal_full_take_time` int unsigned not null default 0 comment '普通区域满星领奖时间';
+alter table area_log change `elite_take_time` `elite_full_take_time` int unsigned not null default 0 comment '精英敬域满星领奖时间';
+alter table area_log add column `normal_pass_take_time` int unsigned not null default 0 comment '普通区域通关领奖时间';
+alter table area_log add column `elite_pass_take_time` int unsigned not null default 0 comment '精英区域通关领奖时间';
+
+update server_info set value = 59 where `key` = 'version';
+
+commit;

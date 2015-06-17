@@ -1,0 +1,19 @@
+begin;
+
+-- 拍卖行, 购买信息
+create table `market_buy`(
+    `role_id` int unsigned not null comment '角色ID',
+    `guid` int unsigned not null comment '购买数据id',
+    `cargo_id` int unsigned not null comment '售卖数据id',
+    `cate` int unsigned not null comment '货物类型',
+    `objid` int unsigned not null comment '货物扩展id',
+    `val` int unsigned not null comment '货物值',
+    `percent` int unsigned not null comment '修正价格[80-180]',
+    `equip_type` int unsigned not null comment '装备类型',
+    `equip_level` int unsigned not null comment '装备等级分段',
+    key(`role_id`)
+)engine=innodb auto_increment=1 default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 7 where `key` = 'version';
+
+commit;

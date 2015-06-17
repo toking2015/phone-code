@@ -1,0 +1,14 @@
+begin;
+
+-- vip限时商店商品列表
+create table `viptimelimit_shop_goods`(
+    `role_id` int unsigned not null comment '角色ID',
+    `vip_package_id` int unsigned not null comment '礼包ID',
+    `buyed_count` int unsigned not null comment '已购买数量',
+    `next_buy_time` int unsigned not null comment '下次可购买的时间',
+    key(`role_id`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 46 where `key` = 'version';
+
+commit;

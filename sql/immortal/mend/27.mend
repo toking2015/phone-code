@@ -1,0 +1,8 @@
+begin;
+
+alter table userother add column `chat_ban_endtime` int unsigned not null default 0;
+
+update server_info set value = 27 where `key` = 'version';
+
+commit;
+

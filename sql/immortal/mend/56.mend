@@ -1,0 +1,18 @@
+begin;
+
+alter table tomb add column `history_reset_count` int unsigned not null comment '历史重置次数';
+alter table tomb add column `history_pass_count` int unsigned not null comment '历史通关次数';
+alter table tomb add column `history_kill_monster1` int unsigned not null comment '历史杀怪记录1';
+alter table tomb add column `history_kill_count1` int unsigned not null comment '历史杀怪记录1';
+alter table tomb add column `history_kill_monster2` int unsigned not null comment '历史杀怪记录2';
+alter table tomb add column `history_kill_count2` int unsigned not null comment '历史杀怪记录2';
+alter table tomb add column `history_kill_monster3` int unsigned not null comment '历史杀怪记录3';
+alter table tomb add column `history_kill_count3` int unsigned not null comment '历史杀怪记录3';
+alter table tomb add column `history_kill_monster4` int unsigned not null comment '历史杀怪记录4';
+alter table tomb add column `history_kill_count4` int unsigned not null comment '历史杀怪记录4';
+alter table tomb add column `history_kill_monster5` int unsigned not null comment '历史杀怪记录5';
+alter table tomb add column `history_kill_count5` int unsigned not null comment '历史杀怪记录5';
+
+update server_info set value = 56 where `key` = 'version';
+
+commit;

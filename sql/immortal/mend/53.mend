@@ -1,0 +1,7 @@
+begin;
+
+alter table mailinfo add column `coin_flag` int unsigned not null default 0 comment '货币属性';
+
+update server_info set value = 53 where `key` = 'version';
+
+commit;

@@ -1,0 +1,46 @@
+begin;
+
+-- 公会一级表
+drop table if exists `guildsimple`;
+create table `guildsimple`(
+    `guid` int unsigned not null comment '公会ID',
+    `level` smallint unsigned not null default 0 comment '公会等级',
+    `creator_id` int unsigned not null default 0 comment '创建人 role_id',
+    `name` char(32) not null default '' comment '公会名字',
+    primary key(`guid`),
+    key(`name`)
+)engine=innodb auto_increment=1000000 default character set=utf8 collate=utf8_general_ci;
+
+-- 公会扩展信息
+drop table if exists `guildinfo`;
+create table `guildinfo`(
+    `guid` int unsigned not null default 0 comment '公会id',
+    `xp` int unsigned not null default 0 comment '等级经验',
+    `create_time` int unsigned not null default 0 comment '创建时间',
+    `post_msg` varchar(128) not null default '' comment '公告',
+    key(`guid`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 公会日志
+drop table if exists `guildlog`;
+create table `guildlog`(
+    `guid` int unsigned not null default 0 comment '公会id',
+    `type` int unsigned not null default 0 comment '日志类型',
+    `time` int unsigned not null default 0 comment '创建时间',
+    `params` varchar(128) not null default '' comment '参数',
+    key(`guid`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+-- 公会成员信息
+drop table if exists `guildmember`;
+create table `guildmember`(
+    `guid` int unsigned not null default 0 comment '公会id',
+    `role_id` int unsigned not null default 0 comment '成员role_id',
+    `job` int unsigned not null default 0 comment '职位, kGuildJobXXX',
+    `join_time` int unsigned not null default 0 comment '加入时间',
+    key(`guid`)
+)engine=innodb default character set=utf8 collate=utf8_general_ci;
+
+update server_info set value = 51 where `key` = 'version';
+
+commit;

@@ -1,0 +1,11 @@
+begin;
+
+alter table account add column `channel` char(32) not null default '' after platform;
+alter table account drop column `nick`;
+alter table account drop column `platform`;
+alter table account drop column `online_seconds`;
+
+update server_info set value = 25 where `key` = 'version';
+
+commit;
+

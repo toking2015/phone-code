@@ -1,0 +1,9 @@
+begin;
+
+-- 添加二级属性
+alter table `fightextable` add column `recover_critper` int unsigned not null default 0 comment 'recover_critper';
+alter table `fightextable` add column `recover_critper_def` int unsigned not null default 0 comment 'recover_critper_def';
+
+update server_info set value = 4 where `key` = 'version';
+
+commit;
