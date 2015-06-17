@@ -1,0 +1,164 @@
+//=========================常量声明=======================
+#kPathSystemAuto                    //系统处理
+
+#kPlacardFlagScene                  1       //场景公告(跑马灯)
+#kPlacardFlagChat                   2       //聊天框公告
+#kPlacardFlagMsgBox                 4       //弹出框公告
+
+//=========================错误码===========================
+#kErrSystem
+#kErrSystemBusy                     //系统繁忙
+#kErrSystemSession                  //session错误
+#kErrSystemRemoteLogin              //异地登录
+#kErrSystemUnusualError             //系统异常错误
+#kErrSystemResend                   //重发请求异常
+
+//=========================数据中心===========================
+CSystem
+{
+    sessions    : indices< uint32 >;
+}
+
+//=========================通迅协议============================
+//测试用
+PQSystemTest
+{
+}
+PRSystemTest
+{
+}
+
+//ping 包, 检测连接用
+PQSystemPing
+{
+}
+PRSystemPing
+{
+    server_time : uint32;   //服务器时间
+}
+
+//客户端每10分钟发送一次, 服务器30分钟超时作为离线判断
+PQSystemOnline
+{
+}
+
+//客户端请求数据包重发
+PQSystemResend
+{
+    server_order    : uint32;  //重发起始 order
+}
+PRSystemResend
+{
+    result          : uint32;
+}
+
+//网络连接成功
+PRSystemNetConnected
+{
+}
+
+//网络连接断开
+PRSystemNetDisconnected
+{
+}
+
+//测试有效连接( 用于网络重连后检查 )
+PQSystemSessionCheck
+{
+}
+PRSystemSessionCheck
+{
+}
+
+//帐号验证
+PQSystemAuth
+{
+    outside_sock    : int32;        //外部连接号
+}
+PRSystemAuth
+{
+    outside_sock    : int32;        //外部连接号
+}
+
+//角色登录
+PQSystemLogin
+{
+    outside_sock    : int32;       //客户端连接号(服务器中转用)
+}
+
+PRSystemLogin
+{
+    open_time       : uint32;      // 开服时间
+    server_time     : uint32;      //服务器时间
+    minuteswest     : int32;
+    dsttime         : int32;
+    outside_sock    : int32;       //客户端连接号(服务器中转用)
+}
+
+//game 进程sql线程到逻辑线程的数据返回包
+PRSystemUserLoad
+{
+    guid        : uint32;
+    created     : uint8;            //新创建使用
+
+    data        : SUserData;
+}
+
+//game 进程sql线程到逻辑线程的数据返回包
+PRSystemGuildLoad
+{
+    guid        : uint32;
+    created     : uint8;            //新创建工会
+
+    data        : SGuildData;
+}
+
+//更新用户session, auth->game, auth->access
+PRSystemUserUpdateSession
+{
+
+}
+
+//错误通知协议
+PRSystemErrCode
+{
+    err_no      : uint32;
+    err_desc    : uint32;
+}
+
+//协议包序列同步
+PQSystemOrder
+{
+}
+
+PRSystemOrder
+{
+    min         : uint32;
+    max         : uint32;
+}
+
+//踢人
+PQSystemKick
+{
+}
+PRSystemKick
+{
+}
+
+//文本广播
+PQSystemPlacard
+{
+    order           : uint8;        //优先级, 值越大越高级, 最高255, 默认为0
+
+    flag            : uint8;        //广播类型( 位移 ), kPlacardFlagXXX
+    text            : string;
+}
+
+PRSystemPlacard
+{
+    order           : uint8;        //优先级, 值越大越高级, 最高255, 默认为0
+
+    flag            : uint8;        //广播类型( 位移 ), kPlacardFlagXXX
+    text            : string;
+}
+

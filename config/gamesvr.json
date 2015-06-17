@@ -1,0 +1,53 @@
+{
+    "platform" : "test",
+
+    "group" : "inside",
+
+    "area" : "s1.",
+    "net_singal_hosts" : "../net_single_hosts",
+
+    //静态数据目录
+    "extras_dir"                : "../../../extras/",
+    
+    //动态加载 so 路径
+    "so_path"                   : "../so_game/libso_game.so",
+
+    //lua_path
+    "lua_path"                  : "../../../../.local/",
+
+    //用户数据备分目录
+    "user_dir"                  : "../../user/",
+
+    //交互服务器
+    "social_addr"               : "localhost:18001",
+
+    //分服标识
+    "unite"                     : [1],
+
+    //debug模式(GM指令等)
+    "debug_mode"                : 1,
+
+    //本地执行文件夹
+    "local_dir"                 : ".",
+   
+    "sql" :
+    [
+        {
+            "name"      : "master",
+            "host"      : "localhost",
+            "port"      : 3306,
+            "db"        : "db_master",
+            "user"      : "immortal",
+            "pwd"       : "immortal"
+        },
+
+        {
+            "name"      : "db_idx",
+            "host"      : "localhost",
+            "port"      : 3306,
+            "db"        : "db_user",
+            "user"      : "immortal",
+            "pwd"       : "immortal"
+        }
+    ]
+}

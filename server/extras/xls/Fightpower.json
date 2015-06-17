@@ -1,0 +1,15 @@
+{
+	"Array":[
+			{ "type":"1",	"s_type":"1",	"name":"英雄品质",	"tips":"升阶英雄将获得更强大的属性",	"s_tips":"英雄品质可通过强化增加",	"level":"1",	"grate_s":"1",	"open_desc":"",	"open_type":"1",	"open_term":"4" },
+			{ "type":"1",	"s_type":"2",	"name":"英雄星级",	"tips":"星级越高的英雄能力越强大",	"s_tips":"英雄星级可通过强化增加",	"level":"1",	"grate_s":"1",	"open_desc":"",	"open_type":"",	"open_term":"" },
+			{ "type":"1",	"s_type":"3",	"name":"英雄数量",	"tips":"集齐英雄组合可以获得属性加成",	"s_tips":"英雄数量可通过召唤增加",	"level":"1",	"grate_s":"1",	"open_desc":"",	"open_type":"",	"open_term":"" },
+			{ "type":"2",	"s_type":"1",	"name":"图腾能力",	"tips":"升级图腾可以获得更强大的属性",	"s_tips":"图腾能力",	"level":"1",	"grate_s":"1",	"open_desc":"",	"open_type":"4",	"open_term":"1041" },
+			{ "type":"2",	"s_type":"2",	"name":"图腾数量",	"tips":""图腾作为战略需求是必不可少的"",	"s_tips":"图腾数量",	"level":"1",	"grate_s":"1",	"open_desc":"",	"open_type":"",	"open_term":"" },
+			{ "type":"3",	"s_type":"1",	"name":"板甲套装评分",	"tips":"暂无描述",	"s_tips":"板甲套装战力强化板甲",	"level":"1",	"grate_s":"1",	"open_desc":"",	"open_type":"6",	"open_term":"9" },
+			{ "type":"3",	"s_type":"2",	"name":"锁甲套装评分",	"tips":"暂无描述",	"s_tips":"锁甲套装战力强化板甲",	"level":"1",	"grate_s":"1",	"open_desc":"",	"open_type":"",	"open_term":"" },
+			{ "type":"3",	"s_type":"3",	"name":"皮甲套装评分",	"tips":"暂无描述",	"s_tips":"皮甲套装战力强化板甲",	"level":"1",	"grate_s":"1",	"open_desc":"",	"open_type":"",	"open_term":"" },
+			{ "type":"3",	"s_type":"4",	"name":"布甲套装评分",	"tips":"暂无描述",	"s_tips":"布甲套装战力强化板甲",	"level":"1",	"grate_s":"1",	"open_desc":"",	"open_type":"",	"open_term":"" },
+			{ "type":"4",	"s_type":"1",	"name":"神符等级",	"tips":"暂无描述",	"s_tips":"神符等级",	"level":"1",	"grate_s":"1",	"open_desc":"",	"open_type":"6",	"open_term":"12" },
+			{ "type":"4",	"s_type":"2",	"name":"神符品质",	"tips":"暂无描述",	"s_tips":"神符品质",	"level":"1",	"grate_s":"1",	"open_desc":"",	"open_type":"",	"open_term":"" }
+		]
+}

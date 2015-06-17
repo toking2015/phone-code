@@ -1,0 +1,151 @@
+//=========================常量声明============================
+#kPathBuildingLeveUp                          //建筑升级，建筑强行产出最大值
+#kPathBuildingGetOutput                      //领取建筑的产出
+#kPathBuildingSpeedOutput                    //建筑加速产出
+
+
+#kBuildingTypeMajor               1         //主城
+#kBuildingTypeGoldField           2         //金矿
+#kBuildingTypeGoldBank            3         //金库
+#kBuildingTypeWoodField           4         //伐木厂
+#kBuildingTypeWoodBank            5         //木材仓库
+#kBuildingTypeWaterFactory        6         //大阳井
+#kBuildingTypeAspersorium         7         //圣水瓶
+#kBuildingTypeCampsite            8         //营地
+#kBuildingTypeTrainingGround      9         //训练营
+#kBuildingTypeShipField           10        //船坞
+#kBuildingTypeTavern              11        //酒馆
+#kBuildingTypePalace              12        //神殿
+#kBuildingTypeTechnology          13        //科技馆
+#kBuildingTypeToweringOldTrees    14        //天赋树
+#kBuildingTypeBlacksimith         15        //铁匠铺
+#kBuildingTypeAlter               16        //祭坛
+#kBuildingTypeLegion              17        //公会基地
+#kBuildingTypeDecorate            18        //装饰建筑
+#kBuildingTypeJumping             19        //传送门
+#kBuildingTypeSingleArena         20        //竞技场
+#kBuildingTypePVPBattle           21        //冰封王座
+#kBuildingTypePVEBattle           22        //大墓地
+#kBuildingTypeCopyOne             23        //哀嚎洞穴
+#kBuildingTypeCopyFive            24        //死亡矿井
+#kBuildingTypeCopyTen             25        //影牙城堡
+#kBuildingTypeCopyFifteen         26        //剃刀沼泽
+#kBuildingTypeCopyTwenty          27        //诺莫瑞根
+#kBuildingTypeCopyTwentyFive      28        //血色修道院
+
+
+
+//=========================错误码===========================
+#kErrBuildingGuidNotExist                   //建筑物不存在
+#kErrBuildingDataNotExist                   //建筑类型不存在
+#kErrBuildingCountNotMax                    //此类建筑数量已达到最大上限
+#kErrBuildingUpgrateNotMaterial             //升级所需材料不够
+#kErrBuildingUpgrateNotLevel                //当前建筑已达到最高级别
+#kErrBuildingSpeedError                     //加速失败
+
+
+//==========================通迅结构==========================
+//建筑基础信息
+SBuildingBase
+{
+    target_id                    :  uint32;     //拥有者id ( role_id )
+    info_id                      :  uint32;     //建筑id（ 同类型建筑,info_id 唯一）
+    info_type                    :  uint8;     //建筑类型
+    info_level                   :  uint16;     //建筑当前等级
+    info_position                :  S2UInt32;    //建筑中心点位置
+}
+
+SBuildingExt
+{
+    production    : uint32;         //产出, 库存， 上限
+    time_point    : uint32;         //时间点，如金库：上次产出的时间点
+}
+
+SUserBuilding
+{
+    building_type  :  uint8;             //建筑类型<等同data.info_type>
+    building_guid  :  uint32;            //建筑id<等同data.info_id>
+    data           :  SBuildingBase;
+    ext            :  SBuildingExt;
+
+}
+
+//=========================通迅协议============================
+//## 获取建筑列表
+PQBuildingList
+{
+    target_id               :   uint32;       //目标id ( role_id )
+}
+
+
+
+//## 激活建筑
+PQBuildingAdd
+{
+    building_type           : uint8;           //建筑类型
+    building_position       : S2UInt32;         //中心点
+}
+
+//## 升级建筑
+PQBuildingUpgrade
+{
+   building_type           : uint8;          //建筑类型
+   building_id             : uint32;          //建筑id       
+}
+
+//## 移动建筑
+PQBuildingMove
+{
+   building_type           : uint8;          //建筑类型
+   building_id             : uint32;          //建筑id       
+   building_position       : S2UInt32;         //中心点
+}
+
+//## 查询建筑
+PQBuildingQuery
+{
+    target_id            :  uint32;        //目标id ( role_id )
+    building_type        :  uint8;        //建筑类型
+    building_id          :  uint32;        //建筑id
+}
+
+PQBuildingGetOutput
+{ 
+    building_type : uint32;     //建筑类型
+}
+
+PQBuildingSpeedOutput
+{
+    building_type : uint32;    //建筑类型
+    times         : uint32;   //加速次速 1 10
+}
+
+//@@ 下面是返回协议 对应上面的协议
+
+//@@ 返回建筑列表
+PRBuildingList
+{
+    list      :    array<SUserBuilding>;     //建筑群
+}
+
+//@@
+PRBuildingSet
+{
+    set_type          :     uint8;          //kObjectAdd, kObjectUpdate, kObjectDel
+    building          :     SUserBuilding;   
+}
+
+//@@
+PRBuildingQuery
+{
+    target_id             : uint32;             //目标id( role_id)
+    data                  : SUserBuilding;      //请求的数据
+}
+
+PRBuildingSpeedOutput
+{
+    building_type      : uint32;          //建筑类型
+    list_crit_times    : array<uint32>  //暴击列表 
+    add_value          : uint32;         //加速得到的产出
+}
+

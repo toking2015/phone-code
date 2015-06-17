@@ -1,0 +1,59 @@
+//=========================常量声明=======================
+
+//=========================错误码===========================
+
+//============================数据中心========================
+CServer
+{
+    server_ids      : array< uint32 >;      //服务器id列表( 合服后有效 )
+
+    key_value       : map< string >;        //服务器系统变量
+}
+
+//=========================通迅协议============================
+//打开服务
+PRServerOpen
+{
+}
+
+//关闭服务
+PRServerClose
+{
+}
+
+//名称列表处理
+PQServerNameList
+{
+}
+PRServerNameList
+{
+    user_name_id    : map< uint32 >;
+    guild_name_id   : map< uint32 >;
+}
+
+//服务器变量修改通知
+PQServerNotify
+{
+    key     : string;
+    value   : string;
+}
+
+//服务器变量列表处理
+PQServerInfoList
+{
+}
+PRServerInfoList
+{
+    key_value       : map< string >;
+}
+
+PQServerFriendList
+{
+    level       :   uint32;     //team_level >= level的数据全要
+}
+
+PRServerFriendList
+{
+    user_id_friend   :   indices< SFriendData >;
+}
+

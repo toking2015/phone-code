@@ -1,0 +1,9 @@
+{
+	"Array":[
+			{ "quality":"21",	"main_min":"0",	"main_max":"700",	"slave_min":"0",	"slave_max":"0",	"slave_attr_num":"0" },
+			{ "quality":"22",	"main_min":"1000",	"main_max":"2500",	"slave_min":"1000",	"slave_max":"2500",	"slave_attr_num":"1" },
+			{ "quality":"23",	"main_min":"2600",	"main_max":"4000",	"slave_min":"2600",	"slave_max":"4000",	"slave_attr_num":"2" },
+			{ "quality":"24",	"main_min":"4100",	"main_max":"5500",	"slave_min":"4100",	"slave_max":"5500",	"slave_attr_num":"3" },
+			{ "quality":"25",	"main_min":"5600",	"main_max":"7000",	"slave_min":"5600",	"slave_max":"7000",	"slave_attr_num":"4" }
+		]
+}

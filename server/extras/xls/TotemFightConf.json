@@ -1,0 +1,7 @@
+{
+	"Array":[
+			{ "id":"120",	"totem_id":"80101",	"skill_lv":"1",	"formation_lv":"1",	"speed_lv":"1" },
+			{ "id":"121",	"totem_id":"80201",	"skill_lv":"1",	"formation_lv":"1",	"speed_lv":"1" },
+			{ "id":"122",	"totem_id":"80301",	"skill_lv":"1",	"formation_lv":"1",	"speed_lv":"1" }
+		]
+}

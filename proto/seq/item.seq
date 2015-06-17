@@ -1,0 +1,179 @@
+//=========================常量声明=======================
+#kPathItemDice                          //物品拆分
+#kPathItemMove                          //物品移动
+#kPathItemAdd                           //物品移动
+#kPathSell                              //物品删除
+#kPathRedeem                            //物品回购
+#kPathMerge                             //物品合成
+#kPathItemUse                           //使用物品 
+#kPathMergeEquip                        //装备合成
+#kPathMergeBook                         //技能书合成
+
+#kItemRandMax                           6           //物品随机属性最大数目
+#kItemSlotMax                           3           //物品插孔最大数目
+
+//背包类型-功能
+#kBagFuncCommon                         1       //普通背包
+#kBagFuncBank                           2       //银行
+#kBagFuncRedeem                         3       //回收站
+#kBagFuncSoldierEquip                   4       //武将装备
+#kBagFuncSoldierEquipSkill              5       //武将装备技能书
+#kBagFuncSoldierEquipTemp               6       //武将装备合成缓存
+
+#kItemEquipTypeHead                     1           //头
+#kItemEquipTypeChest                    2           //身
+#kItemEquipTypeLegs                     3           //腿
+#kItemEquipTypeShoulders                4           //肩
+#kItemEquipTypeHands                    5           //手
+#kItemEquipTypeFeet                     6           //脚
+
+//物品类型
+#kItemTypeEquip                         1       //装备
+#kItemTypeGift                          2       //礼包
+#kItemTypeMaterial                      3       //材料
+#kItemTypeSoulStone                     4       //灵魂石
+
+//物品客户端类型
+#kItemClientTypeConsume                 1       //消耗品
+#kItemClientTypeSoulStone               2       //灵魂石
+#kItemClientTypeMaterial                3       //材料
+
+//物品使用
+#kItemUseAddRewardRandom                1       //随机获得一个奖励
+#kItemUseAddRewardIndex                 2       //确定获得一个物品
+
+//合成类型
+#kItemMergeTypeEquip                    1       //装备
+#kItemMergeTypeSkillBook                2       //技能书
+
+//=========================错误码===========================
+#kErrItemDataNotExist                               //物品不存在
+#kErrItemGuidNotExist                               //物品不存在
+#kErrItemMoveIllegalBag                             //不能移动到目的背包
+#kErrItemDiceCount                                  //拆分数目不正确
+#kErrItemNoSell                                     //物品不能出售
+#kErrItemSpaceFull                                  //背包已经满  
+#kErrItemMergeLevel                                 //物品合成等级限制
+#kErrItemOpenRewardDataNoExitLevel                  //物品奖励不存在
+#kErrItemUseLimitLevel                              //物品使用等级限制
+
+//==========================通迅结构==========================
+//物品-印佳
+SWildItem
+{
+    item_id                 : uint32;                 //物品ID
+    firm_level              : uint8;                  //强化级别
+    count                   : uint32;                 //数量
+    due_time                : uint32;                 //过期时间
+    main_attr_factor        : uint32;                 //主属性品质系数
+    slave_attr_factor       : uint32;                 //副属性品质系数
+    slave_attrs             : array<uint16>;          //装备副属性索引
+    slotattr                : array<S2UInt16>;        //插槽属性first:物品ID;second:插槽属性ID
+    flags                   : uint8;                  //位移属性
+}
+
+//玩家物品
+SUserItem : SWildItem
+{
+    guid                    : uint32;                 //惟一标识
+    item_index              : uint16;                 //索引
+    soldier_guid            : uint16;                 //武将GUID, 0为角色
+    bag_type                : uint8;                  //所处背包类型
+}
+
+//============================数据中心========================
+CUserItem
+{
+}
+
+//=========================通迅协议============================
+//@@请求物品列表
+PQItemList
+{
+    bag_index               : uint32;                  //所处背包类型
+}
+
+//返回物品列表
+PRItemList
+{
+    bag_index               : uint32;                  //所处背包类型
+    item_list               : array<SUserItem>;        //好友列表
+}
+
+PRItemSet
+{
+    set_type                : uint8;                    //修改类型 kObjectAdd、kObjectDel、kObjectUpdate
+    path                    : uint32;                   //修改系统
+    item                    : SUserItem;                //
+}
+
+//@@添加一个物品
+PQItemAdd
+{
+    id                      : uint32;                   //添加物品的id
+    count                   : uint32;                   //添加物品的数量
+}
+
+//@@物品整理
+PQItemSort
+{
+    bag_index               : uint32;                  //所处背包类型
+}
+
+//@@物品售出
+PQItemSell
+{
+    bag_type                : uint32;                   //kBag
+    item_list               : array<S2UInt32>           //{ [guid], count} 
+}
+
+//@@物品赎回
+PQItemRedeem
+{
+    guid                    : uint32;                   //赎回id
+}
+
+//@@物品合成
+PQItemMerge
+{
+    id                      : uint32;                   //物品合成的ID
+    count                   : uint32;                   //数量
+}
+
+PRItemMerge
+{
+    id                      : uint32;                   //物品合成的ID
+    count                   : uint32;                   //数量
+}
+
+//@@装备穿戴
+PQItemEquip
+{
+    src                     : S2UInt32;                 //装备物品[first:bag_index, second:item_guid]
+}
+
+//@@装备穿戴
+PQItemEquipSkill
+{
+    src                     : S2UInt32;                 //装备物品[first:bag_index, second:item_guid]
+    soldier_guid            : uint32;                   //武将guid
+}
+
+PRItemEquipSkill
+{
+    result                  : uint32;                   //结果
+}
+
+//@@装备使用 
+PQItemUse
+{
+    item                    : S2UInt32;                 //装备物品[first:bag_index, second:item_guid]
+    count                   : uint32;                   //数量
+    index                   : uint32;                   //指定index
+}
+
+PRItemUse
+{
+    item_id                 : uint32;                   //物品id    
+    count                   : uint32;                   //数量
+}

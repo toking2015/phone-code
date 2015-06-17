@@ -1,0 +1,16 @@
+{
+    "area" : "s1.",
+    "net_singal_hosts" : "../net_single_hosts",
+
+    //客户端版本库路径
+    "client_version_dir"        : "../../../../client/version",
+
+    //动态加载 so 路径
+    "so_path"                   : "../so_access/libso_access.so",
+
+    //随机端口地址
+    "outside_addr" : "17001",
+    
+    //连接关闭后冷却时间(秒)
+    "sock_cooling_time" : 60
+}

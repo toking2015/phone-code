@@ -1,0 +1,290 @@
+//=========================常量声明===========================
+#kPathMarketReturn                              //超时返还
+#kPathMarketCargoUp                             //货物上架
+#kPathMarketCargoDown                           //货物下架
+#kPathMarketBuy                                 //货物购买
+#kPathMarketSell                                //货物售出
+#kPathMarketRef                                 //刷新货架内容
+#kPathMarketChange                              //货物修改
+#kPathMarketAutoBuy                             //自动购买
+
+#kMarketCargoTypePaper          1
+#kMarketCargoTypeMaterial       2
+
+//=========================错误码=============================
+#kErrMarketNotService                           //拍卖行服务未开启
+#kErrMarketCargoNoExist                         //货物不存在
+#kErrMarketCargoNoExchange                      //货物不可交易
+#kErrMarketPercentRound                         //货物上架价格指数范围错误
+#kErrMarketCargoCate                            //货物类型错误
+#kErrMarketCargoNotEnough                       //货物售卖数量不足
+#kErrMarketCargoPurview                         //操作权限不足
+#kErrMarketCargoChange                          //数据变更
+#kErrMarketParam                                //参数不合法
+#kErrMarketNotPaperSkill                        //还没选择手工技能
+#kErrMarketRefNotToTime                         //免费刷新时间未到
+
+//==========================通迅结构==========================
+
+//[卖方商品信息]
+SMarketSellCargo
+{
+    sid                     : uint32;           // 0 为跨服拍卖数据, 非0为指定服数据
+    cargo_id                : uint32;           //商品唯一ID
+
+    role_id                 : uint32;           //上架货物主人
+    coin                    : S3UInt32;         //上架货物剩余量
+
+    percent                 : uint8;            //上架货物价值比值[ 80 - 180 ], 默认值 100
+
+    start_time              : uint32;           //上架时间
+    down_time               : uint32;           //下架时间
+
+    buy_name                : string;           //购买人
+    buy_count               : uint32;           //购买数量
+    money                   : uint32;           //已经卖出的价格
+}
+
+//批量匹配信息
+SMarketMatch
+{
+    cargo_id                : uint32;           //商品唯一ID
+
+    coin                    : S3UInt32;         //需要购买量
+
+    percent                 : uint8;            //上架货物价值比值[ 80 - 180 ], 默认值 100
+}
+
+//购买记录
+SMarketLog
+{
+    name                    : string;           //购买方角色名
+    coin                    : S3UInt32;         //购买物品
+    time                    : uint32;           //购买时间
+
+    price                   : uint32;           //购买总价, 卖方收益为 price * 0.9, 税收为 price * 0.1
+}
+
+//============================数据中心========================
+SMarketIndices
+{
+    paper_list              : array< uint32 >;      //图纸分类索引, < cargo_id >
+    material_list           : array< uint32 >;      //材料分类索引, < cargo_id >
+}
+
+CMarket
+{
+    social_time             : uint32;                                   //跨服拍卖开始时间, gamesvr 使用
+
+    global_id               : uint32;                                   //全局id, 0为未初始化
+
+    data_map                : indices< SMarketSellCargo >;              //货品信息, < cargo_id, < data > >
+
+    indices_map             : indices< indices< SMarketIndices > >;     //数据索引, < sid, < type_level, SMarketIndices > >
+    user_map                : indices< array< uint32 > >;               //用户售卖索引, < role_id, < cargo_id > >
+
+    down_map                : indices< indices< array< uint32 > > >;    //下架索引 <timestamp, serverid, < cargo_id> >
+    sell_map                : indices< array< uint32 > >;               //< serverid, < cargo_id > >;
+}
+
+//=========================通迅协议===========================
+//@@请求买方列表
+PQMarketBuyList
+{
+    sid                     : uint32;           //服务器标识(仅服务器处理)
+
+    level                   : uint32;           //玩家等级(服务器处理)
+}
+
+//@@自定义请求拍卖行购买数据, 返回 PRMarketBuyList
+PQMarketCustomBuyList
+{
+    sid                     : uint32;           //服务器标识(仅服务器处理)
+
+    equip                   : uint8;            //YY甲类型 kEquipYYY
+    level                   : uint16;           //T1, T2 ... Tx 对应的等级( 20, 35, 50, 65, 80, 95, 110, 125, 140, 155 )
+}
+
+PRMarketCustomBuyList
+{
+    equip                   : uint8;            //YY甲类型 kEquipYYY
+    level                   : uint16;           //T1, T2 ... Tx 对应的等级( 20, 35, 50, 65, 80, 95, 110, 125, 140, 155 )
+    data                    : array< SMarketSellCargo >;
+}
+
+//返回买方列表
+PRMarketBuyList
+{
+    data                    : indices< SMarketSellCargo >;
+}
+
+//返回买方单数据
+PRMarketBuyData
+{
+    set_type                : uint8;            //kObjectAdd, kObjectUpdate, kObjectDel
+
+    data                    : SMarketSellCargo;
+}
+
+//@@请求卖方列表
+PQMarketSellList
+{
+    sid                     : uint32;           //服务器标识(仅服务器处理)
+}
+
+PRMarketSellList
+{
+    data                    : indices< SMarketSellCargo >;
+}
+
+PRMarketSellData
+{
+    set_type                : uint8;            //kObjectAdd, kObjectUpdate, kObjectDel
+
+    data                    : SMarketSellCargo;
+}
+
+//请求上架货物
+PQMarketCargoUp
+{
+    sid                     : uint32;           //服务器标识(仅服务器处理)
+
+    coin                    : S3UInt32;         //上架货品, 目前只接受[ kCoinItem( 可交易, 未绑定 ) ]
+
+    percent                 : uint8;            //上架货物价值比值[ 80 - 180 ], 默认值 100
+}
+
+//请求下架货物
+PQMarketCargoDown
+{
+    cargo_id                : uint32;           //需下架的货物id
+}
+
+PRMarketCargoDown
+{
+    data                    : SMarketSellCargo;    
+}
+
+//交易口价格修改
+PQMarketCargoChange
+{
+    cargo_id                : uint32;
+    percent                 : uint8;            //物价值修改[ 80 - 180 ]
+}
+
+//购买货物
+PQMarketBuy
+{
+    guid                    : uint32;           //用户内唯一 SUserCargo guid
+
+    count                   : uint32;           //购买数量
+    value                   : uint32;           //guid != 0 为需要花费的金币, 由客户端计算服务器验证, guid = 0 为 购买的 item_id
+
+    percent                 : uint8;            //客户端物价, 服务器对校物价是否存在变动, 变动会导致购买失败
+}
+PRMarketBuy
+{
+    result                  : uint32;           //0 为购买成功, 非 0 为对应错误码
+
+    value                   : uint32;           //花费的金币
+
+    coin                    : S3UInt32;         //购买成功获得货币
+}
+
+//购买全部货物
+PQMarketBuyAll
+{
+    coins                   : array< S3UInt32 >;    //批量购买列表      cate->guid用户内唯一, objid->count购买数量, val->value需要花费的金币
+    percent                 : uint8;            //客户端物价, 服务器对校物价是否存在变动, 变动会导致购买失败
+    value                   : uint32;               //总的价值
+}
+
+PRMarketBuyAll
+{
+    result                  : uint32;           //0 为购买成功, 非 0 为对应错误码
+    value                   : uint32;           //预扣除货币值
+    coin                    : S3UInt32;         //购买成功获得货币
+}
+
+//批量获取购买数据
+PQMarketBatchMatch
+{
+    sid                     : uint32;           //服务器标识(仅服务器处理)
+
+    coins                   : array< S3UInt32 >;    //批量匹配列表
+}
+PRMarketBatchMatch
+{
+    result                  : uint32;           //0 为购买成功, 非 0 为对应错误码
+
+    sid                     : uint32;           //服务器标识(仅服务器处理)
+
+    cargos                  : array< SMarketMatch >;    //预购物信息
+}
+
+//批量货物购买
+PQMarketBatchBuy
+{
+    sid                     : uint32;           //服务器标识(仅服务器处理)
+
+    cargos                  : array< SMarketMatch >;    //购物信息
+
+    value                   : uint32;           //预扣除货币值
+
+    path                    : uint32;           //由客户端传递, 0 为使用默认值
+}
+PRMarketBatchBuy
+{
+    result                  : uint32;           //0 为购买成功, 非 0 为对应错误码
+
+    coins                   : array< S3UInt32 >;    //批量购买列表
+
+    value                   : uint32;           //预扣除货币值
+
+    path                    : uint32;
+}
+
+//请求售出金钱
+PQMarketSell
+{
+    cargo_id                : uint32;           //id
+}
+
+PRMarketSell
+{
+    cargo_id                : uint32;           //id
+    name                    : string;           //购买人名称
+    value                   : uint32;           //交易金币量
+    coin                    : S3UInt32;         //交易货品
+}
+
+PQMarketSocialReset
+{
+    sid                     : uint32;           //将指定服的购买索引转移到跨服索引(sid = 0)
+}
+
+PQMarketDownTimeout
+{
+    sid                     : uint32;           //服务器id
+}
+
+PQMarketSellTimeout
+{
+    sid                     : uint32;           //服务器id 
+}
+
+//服务器中转协议
+PQMarketList
+{
+}
+PRMarketList
+{
+    list                    : array< SMarketSellCargo >;    //list 为空时为最后一个数据包
+}
+
+//返回单条日志( 卖品售出后 )
+PRMarketLogData
+{
+    data                    : SMarketLog;
+}
+

@@ -1,0 +1,15 @@
+{
+	"Array":[
+			{ "id":"1",	"level":"0",	"item1":"12%0%20000",	"item2":"12%0%20000",	"item3":"12%0%10000",	"item4":"",	"real_price":"3%0%200",	"discount_price":"3%0%100" },
+			{ "id":"1",	"level":"1",	"item1":"1%0%200000",	"item2":"1%0%200000",	"item3":"1%0%100000",	"item4":"",	"real_price":"3%0%400",	"discount_price":"3%0%200" },
+			{ "id":"1",	"level":"2",	"item1":"4%36%10",	"item2":"4%36%10",	"item3":"4%36%10",	"item4":"",	"real_price":"3%0%500",	"discount_price":"3%0%250" },
+			{ "id":"1",	"level":"3",	"item1":"4%26%70",	"item2":"4%26%70",	"item3":"4%26%60",	"item4":"",	"real_price":"3%0%1200",	"discount_price":"3%0%600" },
+			{ "id":"1",	"level":"4",	"item1":"4%8%10",	"item2":"4%8%10",	"item3":"4%8%10",	"item4":"",	"real_price":"3%0%1500",	"discount_price":"3%0%750" },
+			{ "id":"1",	"level":"5",	"item1":"4%1042%4",	"item2":"4%1042%3",	"item3":"4%1042%3",	"item4":"",	"real_price":"3%0%600",	"discount_price":"3%0%300" },
+			{ "id":"1",	"level":"6",	"item1":"4%1025%1",	"item2":"4%1025%1",	"item3":"4%1025%1",	"item4":"",	"real_price":"3%0%1800",	"discount_price":"3%0%900" },
+			{ "id":"1",	"level":"7",	"item1":"4%1043%30",	"item2":"4%1043%30",	"item3":"4%1043%20",	"item4":"",	"real_price":"3%0%1200",	"discount_price":"3%0%600" },
+			{ "id":"1",	"level":"8",	"item1":"4%1046%10",	"item2":"4%1046%5",	"item3":"4%1046%5",	"item4":"",	"real_price":"3%0%1300",	"discount_price":"3%0%650" },
+			{ "id":"1",	"level":"9",	"item1":"4%1045%15",	"item2":"4%1045%15",	"item3":"4%1045%10",	"item4":"",	"real_price":"3%0%1600",	"discount_price":"3%0%800" },
+			{ "id":"1",	"level":"10",	"item1":"4%1044%30",	"item2":"4%1044%30",	"item3":"4%1044%20",	"item4":"",	"real_price":"3%0%2200",	"discount_price":"3%0%1100" }
+		]
+}

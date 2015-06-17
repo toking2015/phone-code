@@ -1,0 +1,8 @@
+{
+	"Array":[
+			{ "id":"1",	"coin":"4%26%1",	"quality_xp":"10" },
+			{ "id":"2",	"coin":"4%27%1",	"quality_xp":"50" },
+			{ "id":"3",	"coin":"4%28%1",	"quality_xp":"200" },
+			{ "id":"4",	"coin":"4%29%1",	"quality_xp":"500" }
+		]
+}

@@ -1,0 +1,50 @@
+//=========================数据中心============================
+SSocialRole
+{
+    role_id             : uint32;
+    level               : uint32;
+    name                : string;
+}
+
+CSocial
+{
+    initialized         : uint32;       //数据初始化标识, kTrue, kFlase
+
+    server_socket       : indices< uint32 >;
+    socket_server       : indices< uint32 >;
+
+    last_recv_time      : uint32;   //最后数据接收时间( gamesvr 用 )
+
+    user_map            : indices< SSocialRole >;
+}
+
+//=========================通迅协议============================
+//Ping包
+PQSocialServerPing
+{
+}
+PRSocialServerPing
+{
+}
+
+//角色列表请求
+PQSocialServerRoleList
+{
+}
+PRSocialServerRoleList
+{
+    list    : array< SSocialRole >;
+}
+
+//服务器标识绑定
+PQSocialServerBind
+{
+    sid     : uint32;       //服务器标识号
+}
+
+//角色信息
+PQSocialServerRole
+{
+    role    : SSocialRole;
+}
+

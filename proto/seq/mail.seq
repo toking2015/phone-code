@@ -1,0 +1,117 @@
+//=========================常量声明=======================
+#kMailFlagReaded            1       //已阅读 
+#kMailFlagTake              2       //附件已领取 
+#kMailFlagSystem            4       //系统邮件
+#kMailFlagAutoDel           8       //领取附件后自动删除
+
+#kMailTypePlayer            0       //个人邮件
+#kMailTypeAll               1       //全服邮件
+#kMailTypeOnline            2       //在线邮件
+
+#kPathMailUserSend                  //用户发送邮件
+
+//=========================错误码===========================
+#kErrMailTargetNotExist             //邮件发送对象不存在
+#kErrMailSubjectFormat              //邮件标题格式错误
+#kErrMailBodyFormat                 //邮件正文格式错误
+#kErrMailNotExist                   //邮件不存在
+#kErrMailAttachmentEmpty            //邮件附件为空
+
+//==========================数据中心========================
+CMail
+{
+    system_mail_id  : uint32;   //当前系统邮件最大Id
+}
+
+//==========================通迅结构==========================
+SUserMail
+{
+    mail_id         : uint32;
+    flag            : uint32;   //状态
+    path            : uint32;   //途径 [kPath]
+
+    deliver_time    : uint32;   //发送时间
+    sender_name     : string;   //发送者名称
+
+    subject         : string;   //标题
+    body            : string;   //内容
+
+    coins           : array< S3UInt32 >;    //附件
+    coin_flag       : uint32;   //货币属性
+}
+
+//=========================通迅协议============================
+PQMailWrite
+{
+    target_id       : uint32;           //角色Id
+
+    subject         : string;           //邮件标题
+    body            : string;           //邮件正文
+    coins           : array< S3UInt32 >;    //附件数据
+}
+
+PQMailTake
+{
+    mail_id         : uint32;   //mail id
+}
+
+PQMailDel
+{
+    mail_id         : uint32;   //mail id
+}
+
+PRMailData
+{
+    set_type        : uint32;           //[ kObjectAdd, kObjectUpdate, kObjectDel ]
+
+    data            : SUserMail;
+}
+
+PRMailDataList
+{
+    set_type        : uint32;           //[ kObjectAdd, kObjectUpdate, kObjectDel ]
+
+    list            : array< SUserMail >;
+}
+
+//服务器内部中转协议
+PRMailWriteLocal
+{
+    target_id       : uint32;
+
+    data            : SUserMail;
+}
+
+//修改阅读协议
+PQMailReaded
+{
+    mail_id       : uint32;
+}
+
+//==========================全服邮件用=========================
+PQMailGetSystemId
+{
+}
+PRMailGetSystemId
+{
+    system_mail_id  : uint32;
+}
+
+PQMailSave
+{
+    data            : SUserMail;
+}
+PRMailSave
+{
+    mail_id         : uint32;
+}
+
+PQMailSystemTake
+{
+    auto_id         : uint32;
+}
+PRMailSystemTake
+{
+    data            : indices< SUserMail >;
+}
+

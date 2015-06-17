@@ -1,0 +1,64 @@
+//=========================常量声明============================
+#kAuthRunJsonFlagError          0       //错误
+#kAuthRunJsonFlagSucceed        1       //完成执行
+#kAuthRunJsonFlagDefer          2       //延迟执行
+#kAuthRunJsonFlagLoop           3       //循环执行
+//=========================通迅结构============================
+SAuthRunTime
+{
+    guid                        : uint32;   //运行时id
+    data                        : string;
+}
+
+//用于全局循环执行指令数据
+SAuthRunData
+{
+    guid                        : uint32;       //唯一guid, 由 mysql insert 时生成
+    loop_id                     : uint32;       //AddLoop 后生成的 loop_id
+
+    json_string                 : string;       //执行数据
+}
+
+//=========================数据中心============================
+CAuth
+{
+    loop_map                    : indices< SAuthRunData >;      //< guid, 执行指令数据 >
+
+    online_data                 : indices< uint32 >;            //< guid, 在线时长( 每天清空 ) >
+}
+
+//=========================通迅协议============================
+PQAuthRunJson
+{
+    outside_sock                : int32;        //外部连接
+
+    json_string                 : string;       //执行字符串
+}
+
+//定时执行记录设置
+PQAuthRunTimeSet
+{
+    outside_sock                : int32;        //外部连接
+
+    set_type                    : uint8;        //kObjectAdd, kObjectDel
+    cmd                         : string;
+    run_time                    : SAuthRunTime;
+}
+
+PRAuthRunTimeSet
+{
+    outside_sock                : int32;        //外部连接
+
+    set_type                    : uint8;
+    run_time                    : SAuthRunTime;
+}
+
+PQAuthRunTimeList
+{
+}
+
+PRAuthRunTimeList
+{
+    list                        : array< SAuthRunTime >;
+}
+

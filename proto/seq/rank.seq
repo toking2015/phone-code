@@ -1,0 +1,147 @@
+//=========================常量声明=======================
+#kRankingObjectAdd           0          //添加
+#kRankingObjectDel           1          //删除
+#kRankingObjectUpdate        2          //更新
+
+#kRankAttrReal               1          //实时排行榜
+#kRankAttrCopy               2          //记录排行榜
+
+#kRankCycDay                 1          //天循环
+#kRankCycWeek                2          //周循环
+#kRankCycMonth               3          //月循环
+
+#kRankingTypeSingleArena     1          //竞技场真人排行榜
+#kRankingTypeSoldier         2          //英雄
+#kRankingTypeTotem           3          //图腾
+#kRankingTypeCopy            4          //副本
+#kRankingTypeMarket          5          //拍卖行
+#kRankingTypeEquip           6          //装备
+#kRankingTypeTeamLevel       7          //战队等级
+#kRankingTypeTemple          8          //神殿
+
+//=========================错误码===========================
+
+//==========================通迅结构==========================
+//用户排行榜基本信息
+SRankInfo
+{
+    id          : uint32;           //用户id, 军团id
+    avatar      : uint16;           //头像
+    name        : string;           //名字
+    team_level  : uint32;           //战队等级
+
+    limit   : uint32;           //分阶
+    first   : uint32;           //排行值1
+    second  : uint32;           //排行值2
+
+    index    : uint32;            //记录排行榜的名次
+}
+
+//用户排行榜数据
+SRankData
+{
+    info    : SRankInfo;
+    data    : map< uint32 >;    //排行榜自定义数据
+}
+
+//排行榜数据
+CRank
+{
+   id_data  : indices< SRankData >;     //对象数据
+   rank     : array< SRankInfo >;       //排行榜列表
+}
+
+//============================数据中心========================
+CRankCenter
+{
+    real_map    : indices< CRank >;     //即时排行榜
+    copy_map    : indices< CRank >;     //记录排行榜
+}
+
+//=========================通迅协议============================
+//将记录排行榜数据进行保存
+PQRankCopySave
+{
+    rank_type       : uint8;    //kRankingTypeXXXX
+    set_type        : uint8;    //kObjectDel, kObjectAdd
+    
+    list            : array< SRankData >;   //排行数据
+}
+
+//请求读取记录排行榜数据
+PQRankLoad
+{
+    rank_type       : uint8;    //kRankingTypeXXX
+    rank_attr       : uint8;    //kRankAttrYYY
+}
+
+//返回记录排行榜数据
+PRRankLoad
+{
+    rank_type       : uint8;    //kRankingTypeXXX
+    rank_attr       : uint8;    //kRankAttrYYY
+
+    list            : array< SRankData >;   //排行数据
+}
+
+//请求指定id在指定排行榜中的索引位置(从0开始)
+PQRankIndex
+{
+    limit           : uint32;   //分阶
+    rank_type       : uint8;    //kRankingTypeXXX
+    rank_attr       : uint8;    //kRankAttrYYY
+
+    target_id       : uint32;   //查询id
+}
+
+//返回指定id在排行榜中的位置
+PRRankIndex
+{
+    limit           : uint32;   //分阶
+    rank_type       : uint8;    //kRankingTypeXXX
+    rank_attr       : uint8;    //kRankAttrYYY
+
+    target_id       : uint32;   //查询id
+    index           : int32;    //顺位索引( 从0开始, 不存在返回 -1 )
+
+    data            : SRankData;
+}
+
+//请求排行榜列表
+PQRankList
+{
+    limit           : uint32;   //分阶
+    rank_type       : uint8;    //kRankingTypeXXX
+
+    index           : uint32;   //获取起始偏移索引
+    count           : uint8;    //获取条数( 不建议一次过请求超过100条 )
+}
+
+//请求排行榜列表
+PQRankListType
+{
+    limit           : uint32;   //分阶
+    rank_type       : uint8;    //kRankingTypeXXX
+
+    data_type       : uint8;    //kRankAttrReal 即时　 kRankAttrCopy　记录
+    index           : uint32;   //获取起始偏移索引
+    count           : uint8;    //获取条数( 不建议一次过请求超过100条 )
+}
+
+//返回排行榜列表
+PRRankList
+{
+    limit           : uint32;   //分阶
+    rank_type       : uint8;    //kRankingTypeXXX
+
+    index           : uint32;   //获取起始偏移索引
+    sum             : uint32;   //排行榜总条数
+
+    list            : array< SRankData >;   //返回数据集
+}
+
+PRRankClearData
+{
+    rank_type    : uint8;     //kRankingTypeXXX
+}
+

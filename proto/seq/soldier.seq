@@ -1,0 +1,192 @@
+//=========================常量声明=======================
+#kSoldierTypeCommon             1               //普通
+#kSoldierTypeYesterday          2               //jjc昨天
+#kSoldierTypeTombSelf           3               //墓地自己
+#kSoldierTypeTombTarget         4               //墓地别人
+
+#kPathSoldierQualityUp                          //武将品质升级
+#kPathSoldierLvUp                               //武将等级升级
+#kPathSoldierStarUp                             //武将星级升级
+#kPathSoldierAdd                                //武将添加
+#kPathSoldierDel                                //武将删除
+#kPathSoldierMove                               //武将移动
+#kPathSoldierRecruit                            //武将招募
+#kPathSoldierEquip                              //武将装备
+#kPathSoldierSkillReset                         //武将技能重置
+#kPathSoldierSkillLvUp                          //武将技能升级
+#kPathSoldierQualityXpAdd                       //武将品质经验添加
+#kPathSoldierEquipSkill                         //武将装备技能书
+
+#kSoldierSkillMax               4               //技能数量
+
+#kSoldierOccuPaladin            1               //圣骑士
+#kSoldierOccuDeathKnight        2               //死亡骑士
+#kSoldierOccuWorrier            3               //战士
+#kSoldierOccuHunter             4               //猎人
+#kSoldierOccuShaman             5               //萨满
+#kSoldierOccuDruid              6               //德鲁伊
+#kSoldierOccuRogue              7               //潜行者
+#kSoldierOccuMonk               8               //武僧
+#kSoldierOccuMage               9               //法师
+#kSoldierOccuWarlock            10              //术士
+#kSoldierOccuPriest             11              //牧师
+
+#kSoldierQualityInitLv          1               //初始化品质
+
+//=========================错误码===========================
+#kErrSoldierGuidNotExist                        //武将guid不存在
+#kErrSoldierDataNotExist                        //武将id不存在
+#kErrSoldierQualityNotExist                     //武将品质不存在或者已经升级到最大值
+#kErrSoldierQualityLvLimit                      //武将等级限制
+#kErrSoldierLvNotExist                          //武将等级数据不存在或者已经升级到最大值
+#kErrSoldierStarNotExist                        //武将星级数据不存在或者已经升级到最大值
+#kErrSoldierHave                                //武将已经存在
+#kErrSoldierTeamLevel                           //武将不能超过战队等级
+#kErrSoldierQualityLevel                        //武将等级 品质不够
+#kErrSoldierEquipHave                           //武将已经装备这件装备
+#kErrSoldierEquipMismatch                       //武将装备不匹配
+#kErrSoldierNoSkillPoint                        //无技能点可用
+#kErrSoldierSkillLvLimit                        //技能等级不能超过英雄等级
+#kErrSoldierQualityXpCoinNoExist                //升级需要的材料不存在
+#kErrSoldierQualityXpCoinWrong                  //升级需要的材料错误
+#kErrSoldierLvNotXp                             //经验不够
+#kErrSoldierQualityXpNotEqual                   //经验不匹配
+#kErrSoldierQualityXpLimit                      //经验满级了
+
+//==========================通迅结构==========================
+//武将-技能等级
+SSoldierSkill
+{
+    id                      : uint32;           //技能id
+    level                   : uint32;           //技能等级
+}
+
+//武将-印佳
+SUserSoldier
+{
+    guid                    : uint32;           //惟一标识
+    soldier_id              : uint32;           //武将ID
+    soldier_type            : uint32;           //武将类型
+    soldier_index           : uint16;           //索引
+    level                   : uint16;           //等级
+    xp                      : uint32;           //XP
+    quality                 : uint16;           //品质
+    quality_lv              : uint32;           //不再使用
+    quality_xp              : uint32;           //品质经验
+    star                    : uint16;           //星级
+    hp                      : uint32;           //HP
+    mp                      : uint32;           //MP
+    skill_list              : array<SSoldierSkill>; //技能LIST
+}
+
+//============================数据中心========================
+//=========================通迅协议============================
+//@@请求武将列表
+PQSoldierList
+{
+    soldier_type            : uint32;           //武将类型 kSoldierTypeCommon:1
+}
+
+//返回武将列表
+PRSoldierList
+{
+    soldier_type            : uint32;           //武将类型
+    soldier_map             : indices<SUserSoldier>;      //武将列表
+}
+
+//@@添加武将
+PQSoldierAdd
+{
+    soldier_id              : uint16;           //武将id
+}
+
+//返回武将
+PRSoldierSet
+{
+    set_type                : uint32;           //set_type
+    set_path                : uint32;           //set_path
+    soldier                 : SUserSoldier;     //武将
+}
+
+//@@删除武将
+PQSoldierDel
+{
+    soldier_type            : uint32;           //武将类型
+    soldier                 : S2UInt32;         //武将 first:武将背包类型 second:武将guid
+}
+
+//@@移动武将
+PQSoldierMove
+{
+    soldier                 : S2UInt32;         //武将 first:武将背包类型 second:武将guid
+    index                   : S2UInt32;         //位置 first:武将背包类型 second:位置
+}
+
+
+//@@品质增加经验
+PQSoldierQualityAddXp
+{
+    soldier                 : S2UInt32;         //武将 first:武将背包类型 second:武将guid
+    coin_list               : array<S3UInt32>;  //消耗的物品
+}
+
+//@@品质升级
+PQSoldierQualityUp
+{
+    soldier                 : S2UInt32;         //武将 first:武将背包类型 second:武将guid
+}
+
+//@@等级升级
+PQSoldierLvUp
+{
+    soldier                 : S2UInt32;         //武将 first:武将背包类型 second:武将guid
+}
+
+//@@星级升级
+PQSoldierStarUp
+{
+    soldier                 : S2UInt32;         //武将 first:武将背包类型 second:武将guid
+}
+
+//@@武将招募
+PQSoldierRecruit
+{
+    id                      : uint32;           //招募ID
+}
+
+PRSoldierRecruit
+{
+    id                      : uint32;           //招募ID
+}
+
+//@@装备穿戴
+PQSoldierEquip
+{
+    soldier                 : S2UInt32;         //武将 first:武将背包类型 second:武将guid
+    item                    : S2UInt32;         //物品
+}
+
+//@@洗点
+PQSoldierSkillReset
+{
+    soldier                 : S2UInt32;         //武将 first:武将背包类型 second:武将guid
+}
+
+//@@技能升级
+PQSoldierSkillLvUp
+{
+    soldier                 : S2UInt32;         //武将 first:武将背包类型 second:武将guid
+    skill_id                : uint32;           //需要升级的技能
+}
+
+//@@请求武将装备二级属性
+PQSoldierEquipExt
+{
+    soldier                 : S2UInt32;         //武将 first:武将背包类型 second:武将guid
+}
+
+PRSoldierEquipExt
+{
+    soldier                 : S2UInt32;         //武将 first:武将背包类型 second:武将guid
+    able                    : SFightExtAble;    //装备二级属性
+}

@@ -1,0 +1,121 @@
+//=========================常量声明=======================
+//Type
+#kTempleHoleMaxCount   8   // 最大神符格数量
+
+#kTempleScoreSoldierCollect      1  // 英雄收集
+#kTempleScoreSoldierLevelUp      2  // 英雄升级
+#kTempleScoreSoldierQuality      3  // 英雄进阶
+#kTempleScoreSoldierStar         4  // 英雄升星
+#kTempleScoreTotemCollect        5  // 图腾收集
+#kTempleScoreTotemLevelUp        6  // 图腾升星
+#kTempleScoreTotemSkillLevelUp   7  // 图腾升级
+#kTempleScoreGroupCollect        8  // 组合收集
+#kTempleScoreGroupLevelUp        9  // 组合升级
+
+//Path
+#kPathTemple              // 神殿
+#kPathTempleScoreReward   // 积分奖励
+#kPathTempleOpenHole      // 开孔 
+#kPathTempleGroupLevelUp  // 组合升级 
+#kPathTempleEmbedGlyph    // 镶嵌神符 
+#kPathTempleTrainGlyph    // 培养培养神符 
+#kPathTempleGroupAdd      // 新增组合 
+
+//=========================错误码===========================
+
+//==========================通迅结构==========================
+// 神符
+STempleGlyph
+{
+    guid        : uint32; // guid
+    id          : uint32; // 神符id
+    level       : uint32; // 等级
+    exp         : uint32; // 经验
+    embed_type  : uint32; // 如果镶嵌，非0对应镶嵌的类型
+    embed_index : uint32; // 如果镶嵌，对应的序号，从0开始
+}
+
+// 神殿组合
+STempleGroup
+{
+    id    : uint32; // id
+    level : uint32; // 等级
+}
+
+// 神殿信息
+STempleInfo
+{
+    hole_cloth       : uint32; // 布甲神符格数量
+    hole_leather     : uint32; // 皮甲神符格数量
+    hole_mail        : uint32; // 锁甲神符格数量
+    hole_plate       : uint32; // 板甲神符格数量
+    group_list       : array<STempleGroup>; // 组合列表
+    glyph_list       : array<STempleGlyph>; // 神符列表
+    score_taken_list : array<uint32>; // 积分奖励领取列表
+    score_current    : indices<S2UInt32>; // 当前积分，key为kTempleScoreXXX，first为次数，second为积分
+    score_yesterday  : indices<S2UInt32>; // 昨日积分，key为kTempleScoreXXX，first为次数，second为积分
+}
+
+//============================数据中心========================
+
+//=========================通迅协议============================
+// 神殿信息
+PQTempleInfo
+{
+}
+PRTempleInfo
+{
+    info : STempleInfo;
+}
+
+// 升级组合
+PQTempleGroupLevelUp
+{
+    group_id : uint32; // 需要升级的组合id
+}
+PRTempleGroupLevelUp
+{
+    group : STempleGroup;
+}
+
+// 开神符孔
+PQTempleOpenHole
+{
+    hole_type   : uint32; // 神符类型，kEquipXXX
+    is_use_item : uint32; // 是否使用道具开，否则使用钻石
+}
+PRTempleOpenHole
+{
+}
+
+// 镶嵌神符
+PQTempleEmbedGlyph
+{
+    hole_type  : uint32; // 神符类型，kEquipXXX
+    hole_index : uint32; // 镶嵌序号
+    glyph_guid : uint32; // 神符guid
+}
+PRTempleEmbedGlyph
+{
+}
+
+// 神符升级
+PQTempleGlyphTrain
+{
+    main_guid  : uint32; // 吞噬神符guid
+    eated_guid : uint32; // 被吞噬神符guid
+}
+PRTempleGlyphTrain
+{
+    old_lv : uint32;
+    new_lv : uint32;
+}
+
+// 领取积分奖励
+PQTempleTakeScoreReward
+{
+    reward_id : uint32; // 奖励id
+}
+PRTempleTakeScoreReward
+{
+}

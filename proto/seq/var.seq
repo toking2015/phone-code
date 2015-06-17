@@ -1,0 +1,37 @@
+//=========================常量定义============================
+#kVarFlagClientModifity          1       //允许客户端修改
+
+//=========================数据结构============================
+SUserVar
+{
+    value       : uint32;       //变量值
+    timelimit   : uint32;       //有效期( 结束时间截, 0 为永远有效 )
+}
+
+//=========================通迅协议============================
+//@@请求变量列表
+PQVarMap
+{
+}
+PRVarMap
+{
+    var_map    : map< SUserVar >;
+}
+
+//@@请求变量修改
+PQVarSet
+{
+    set_type    : uint8;        //constant.[ kObjectDel or kObjectUpdate ]
+
+    var_key     : string;
+    var_value   : uint32;
+    timelimit   : uint32;       //有效期
+}
+PRVarSet
+{
+    set_type    : uint8;        //constant.[ kObjectDel or kObjectUpdate ]
+
+    var_key     : string;
+    var_value   : uint32;
+    timelimit   : uint32;       //有效期
+}

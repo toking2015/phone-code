@@ -1,0 +1,49 @@
+//=========================常量声明=======================
+#kPathOpenTargetBuy                         //开服目标购买半价物品
+#kPathOpenTargetTake                        //开服目标领取奖励
+
+#kOpenTargetActionTypeBuy           4           //半价抢购
+
+
+#kOpenTargetIfTypeLogin             1           //登录
+#kOpenTargetIfTypeAddPay            2           //累积充值
+#kOpenTargetIfTypeMainCopy          3           //主线副本
+#kOpenTargetIfTypePefectCopy        4           //精英副本
+#kOpenTargetIfTypeTeamLevel         5           //战队等级
+#kOpenTargetIfTypeEquip             6           //装备
+#kOpenTargetIfTypeSoldier           7           //英雄
+#kOpenTargetIfTypeSingleare         8           //竞技场
+#kOpenTargetIfTypeTomb              9           //大墓地
+#kOpenTargetIfTypeTotem             10          //图腾
+#kOpenTargetIfTypeSoldierTeam       11          //英雄组合
+#kOpenTargetIfTypeGlyph             12          //雕纹
+#kOpenTargetIfTypeAll               100         //全部条件
+
+
+//=========================通迅协议============================
+//领取奖励
+PQOpenTargetTake
+{
+    day     :   uint32;         //天      OpenTarget.xls中的day
+    guid    :   uint32;         //唯一id  OpenTarget.xls中的id
+}
+
+PROpenTargetTake
+{
+    day     :   uint32;
+    guid    :   uint32;
+}
+
+//购买半价物品
+PQOpenTargetBuy
+{
+    day     :   uint32;
+    guid    :   uint32;
+}
+
+PROpenTargetBuy
+{
+    day     :   uint32;
+    guid    :   uint32;
+}
+

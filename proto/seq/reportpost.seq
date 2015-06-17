@@ -1,0 +1,69 @@
+//=========================常量声明=======================
+
+//=========================错误码===========================
+
+//==========================通迅结构==========================
+//举报系统-王子浪
+SReportPostInfo
+{
+    target_id       :   uint32;                 //
+    report_time     :   uint32;                 //举报时间点，如果当前时间 大于 “举报时间限期”　+　report_time 就清空target_list
+    report_list     :   array<uint32>;          //举报者id
+}
+
+//============================数据中心========================
+
+CReportPostMap
+{
+    reportpost_info_map       : indices< SReportPostInfo >;               //玩家信息
+}
+
+
+//==========================通迅协议==========================
+
+//获取基本信息
+PQReportPostInfo
+{
+}
+
+PRReportPostInfo
+{
+    info        :   SReportPostInfo;
+}
+
+//举报
+PQReportPostMake
+{
+    target_id   :   uint32;         //被举报者guid
+}
+
+//举报返回协议，作为是成功等提示
+PRReportPostMake
+{
+    target_id   :   uint32;         //被举报者guid
+}
+
+PRReportPostBan
+{
+}
+
+
+//*****服务器用****************
+//加载
+PQReportPostInfoLoad
+{
+}
+
+PRReportPostInfoLoad
+{
+    info_map       : indices< SReportPostInfo >;
+}
+
+PQReportPostUpdate
+{
+    set_type    :   uint8;      //kObjecAdd, kObjecDel
+    target_id   :   uint32;     //被举报者role_id
+    report_id   :   uint32;     //举报者role_id
+    report_time :   uint32;     //举报者时间,　　其实内部处理只用SReportPostInfo.report_time
+}
+

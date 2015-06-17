@@ -1,0 +1,9 @@
+//定时器事件--黄少卿
+PQTimerEvent
+{
+    time_id     : uint32;
+    time_key    : string;
+    time_param  : string;
+    time_sec    : uint32;
+}
+

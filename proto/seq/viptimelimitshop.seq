@@ -1,0 +1,42 @@
+//=========================常量声明=======================
+#kPathVipTimeLimitShop                          //vip限时商店
+
+//=========================错误码===========================
+#kErrVipTimeLimitShopBuyLimit                   //超出了购买限制
+#kErrVipTimeLimitShopLevelLimit                 //vip等级不够
+
+//==========================通迅结构==========================
+//vip限时商店-黄少杰
+SUserVipTimeLimitGoods
+{
+    vip_package_id      :       uint32;         //礼包等级
+    buyed_count         :       uint32;         //购买数量
+    next_buy_time       :       uint32;         //下次可以购买的时间
+}
+//=========================通迅协议============================
+//@@请求商品列表
+PQVipTimeLimitShopWeek
+{
+}
+
+//@@返回商品列表
+PRVipTimeLimitShopWeek
+{
+    now_week            :       uint32;         //当前周数
+    buyed_list          :       array<SUserVipTimeLimitGoods> //购买记录
+    next_refresh_time   :       uint32;         //下次可以购买的时间
+}
+
+//@@请求购买
+PQVipTimeLimitShopBuy
+{
+    vip_level           :       uint32;         //购买礼包的等级
+    count               :       uint32;         //购买数量
+}
+
+//@@返回购买记录
+PRVipTimeLimitShopBuy
+{
+    buyed_info          :       SUserVipTimeLimitGoods //购买记录单个
+    set_type            :       uint8;            //kObjectAdd, kObjectUpdate, kObjectDel
+}

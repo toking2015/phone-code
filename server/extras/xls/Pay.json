@@ -1,0 +1,11 @@
+{
+	"Array":[
+			{ "pay":"6",	"icon":"2",	"present1":"60",	"present2":"30",	"present3":"0" },
+			{ "pay":"30",	"icon":"3",	"present1":"300",	"present2":"150",	"present3":"20" },
+			{ "pay":"98",	"icon":"4",	"present1":"980",	"present2":"500",	"present3":"100" },
+			{ "pay":"198",	"icon":"5",	"present1":"1980",	"present2":"1500",	"present3":"400" },
+			{ "pay":"328",	"icon":"6",	"present1":"3280",	"present2":"2600",	"present3":"800" },
+			{ "pay":"648",	"icon":"7",	"present1":"6480",	"present2":"5000",	"present3":"1800" },
+			{ "pay":"25",	"icon":"1",	"present1":"",	"present2":"",	"present3":"" }
+		]
+}

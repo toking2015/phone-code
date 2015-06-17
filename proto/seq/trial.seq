@@ -1,0 +1,102 @@
+//=========================常量声明=======================
+#kTrialSurvival                 1       //生存
+#kTrialStrength                 2       //力量
+#kTrialAgile                    3       //敏捷
+#kTrialIntelligence             4       //智力
+
+#kPathTrialSurvival                     //生存
+#kPathTrialStrength                     //力量
+#kPathTrialAgile                        //敏捷
+#kPathTrialIntelligence                 //智力
+#kPathTrialFinish                       //试炼结束
+#kPathTrialRewardGet                    //奖励领取
+
+//=========================错误码===========================
+#kErrTrialRewardDataNoExit              //奖励数据不存在
+#kErrTrialRewardHave                    //奖励已经领取
+#kErrTrialRewardDataNoExitLevel         //这个等级的奖励不存在
+#kErrTrialDataNoExit                    //数据不存在
+#kErrTrialNotOpen                       //暂不开放
+#kErrTrialTryCount                      //进入次数已经满
+#kErrTrialRewardValNot                  //试炼值不够
+
+//==========================通迅结构==========================
+
+SUserTrialReward
+{
+    trial_id        :       uint32;         //试炼Id
+    reward          :       uint32;         //奖励id
+    flag            :       uint32;         //是否领取
+}
+
+SUserTrial
+{
+    trial_id        :       uint32;         //试炼Id
+    trial_val       :       uint32;         //试炼值
+    try_count       :       uint32;         //挑战次数
+    reward_count    :       uint32;         //奖励领取次数
+    max_single_val  :       uint32;         //单次最大值
+}
+
+//=========================通迅协议============================
+PQTrialEnter
+{
+    id              :       uint32;         //试炼Id
+    formation_list  :       array<SUserFormation>;  //试炼阵型
+}
+
+PQTrialRewardList
+{
+    id              :       uint32;         //试炼ID
+}
+
+PRTrialRewardList
+{
+    id              :       uint32;         //试炼ID
+    reward_list     :       array<SUserTrialReward>;    
+}
+
+PQTrialRewardGet
+{
+    id              :       uint32;         //试炼ID
+    index           :       uint32;         //奖励index
+}
+
+PRTrialRewardGet
+{
+    id              :       uint32;         //试炼ID
+    index           :       uint32;         //奖励index
+}
+
+PQTrialRewardEnd
+{
+    id              :       uint32;         //试炼ID
+}
+
+PRTrialRewardEnd
+{
+    id              :       uint32;         //试炼ID
+}
+
+//请求更新
+PQTrialUpdate
+{
+    
+}
+
+PRTrialUpdate
+{
+    user_trial      :       SUserTrial;     //更新    
+}
+
+PQTrialMopUp
+{
+    id              :       uint32;         //试炼ID
+}
+
+PRTrialMopUp
+{
+    id              :       uint32;         //试炼ID
+    trial_val       :       uint32;         //当前的值
+}
+

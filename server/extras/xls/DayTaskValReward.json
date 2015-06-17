@@ -1,0 +1,8 @@
+{
+	"Array":[
+			{ "id":"1",	"need_val":"25",	"reward1":"3%0%20",	"reward2":"1%0%30000",	"reward3":"",	"reward4":"" },
+			{ "id":"2",	"need_val":"50",	"reward1":"3%0%30",	"reward2":"4%36%1",	"reward3":"4%8%1",	"reward4":"" },
+			{ "id":"3",	"need_val":"75",	"reward1":"12%0%5000",	"reward2":"4%1040%2",	"reward3":"4%35%10",	"reward4":"" },
+			{ "id":"4",	"need_val":"95",	"reward1":"3%0%50",	"reward2":"4%1039%5",	"reward3":"4%28%1",	"reward4":"4%60%1" }
+		]
+}

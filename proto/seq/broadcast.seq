@@ -1,0 +1,32 @@
+//=========================错误码===========================
+#kCastUni                   0   //个人[ broad_id:角色Id ]
+#kCastServer                1   //全服
+#kCastCopy                  2   //副本( 暂不使用 )
+#kCastGuild                 3   //公会[ broad_id:工会Id ]
+
+//==========================通迅结构==========================
+//频道标识
+SUserChannel
+{
+    broad_cast      : uint16;           //kCastXXX
+    broad_type      : uint16;           //二级标识
+    broad_id        : uint32;           //三级标识
+}
+
+//=========================通迅协议============================
+
+//请求广播频道列表
+PQBroadCastList
+{
+}
+PRBroadCastList
+{
+    channel_list    : array< SUserChannel >;
+}
+
+//@@设置频道监听, SUserChannel 的所有成员已包含在父类协议中
+PQBroadCastSet
+{
+    set_type        : uint8;        //kObjectAdd, kObjectDel
+}
+

@@ -1,0 +1,96 @@
+//=========================常量声明=======================
+#kPathGameMasterCommand
+
+//=========================错误码===========================
+#kErrChatSoundNotExist              //语音已失效
+
+//=========================通迅协议============================
+//@@请求发送, 发送类型与对象参考 broadcast 模块相关说明
+PQChatContent
+{
+    avater  : uint32;       //角色头像
+    text    : string;       //文本内容
+    text_ext : string;      //文本扩展
+
+    sound_data      : bytes;        //语音数据
+    sound_length    : uint32;       //语音长度(ms)
+    sound_index     : uint32;       //语音索引, 由客户端构造(自增值在登录时由客户端随机初始化0~65535)
+}
+PRChatContent
+{
+    name    : string;       //角色名
+    level   : uint32;       //等级
+
+    avater  : uint32;       //角色头像
+    text    : string;
+    text_ext : string;      //文本扩展
+
+    sound_length  : uint32;       //语音长度(ms)
+    sound_index   : uint32;       //语音索引, 由客户端构造(自增值在登录时由客户端随机初始化0~65535)
+}
+
+//@@请求语音播放
+PQChatSound
+{
+    target_id       : uint32;       //请求用户角色id
+    sound_index     : uint32;       //请求语音数据
+}
+PRChatSound
+{
+    result          : uint32;       //0为正常, 非0 为错误码
+
+    target_id       : uint32;
+    sound_index     : uint32;       //请求语音数据
+    sound_data      : bytes;        //语音内容
+}
+
+PQChatBan
+{
+    end_time    : uint32;   //结束时间
+}
+
+
+//===============相关tips=====================
+//图腾
+PQChatGetTotem
+{
+    target_id   :   uint32;
+    totem_guid  :   uint32;
+}
+
+PRChatGetTotem
+{
+    target_id   :   uint32;
+    totem_data  :   STotem;
+}
+
+//英雄
+PQChatGetSoldier
+{
+    target_id       :   uint32;
+    soldier_guid    :   uint32;
+}
+
+PRChatGetSoldier
+{
+    target_id       :   uint32;
+    soldier_data    :   SUserSoldier;
+    ext_able        :   SFightExtAble;
+}
+
+//装备
+PQChatGetEquip
+{
+    target_id       :   uint32;
+    equip_type      :   uint32;
+    equip_level     :   uint32;
+}
+
+PRChatGetEquip
+{
+    target_id       :   uint32;
+    equip_type      :   uint32;
+    equip_level     :   uint32;
+    item_list       :   array< SUserItem >;
+}
+

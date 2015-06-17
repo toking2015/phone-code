@@ -1,0 +1,18 @@
+{
+    "net_singal_hosts" : "../net_single_hosts",
+
+    //动态加载 so 路径
+    "so_path"                   : "../so_sharedb/libso_sharedb.so",
+
+    "sql" :
+    [
+        {
+            "name"      : "share",
+            "host"      : "192.168.1.249",
+            "port"      : 3306,
+            "db"        : "immortal_data",
+            "user"      : "immortal",
+            "pwd"       : "immortal"
+        }
+    ]
+}

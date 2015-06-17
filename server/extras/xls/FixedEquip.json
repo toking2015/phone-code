@@ -1,0 +1,28 @@
+{
+	"Array":[
+			{ "id":"13001",	"quality":"21",	"main_factor":"0",	"slave_factor":"0" },
+			{ "id":"13001",	"quality":"22",	"main_factor":"2500",	"slave_factor":"2500" },
+			{ "id":"13001",	"quality":"23",	"main_factor":"4000",	"slave_factor":"4000" },
+			{ "id":"13001",	"quality":"24",	"main_factor":"5500",	"slave_factor":"5500" },
+			{ "id":"13101",	"quality":"21",	"main_factor":"0",	"slave_factor":"0" },
+			{ "id":"13101",	"quality":"22",	"main_factor":"2500",	"slave_factor":"2500" },
+			{ "id":"13101",	"quality":"23",	"main_factor":"4000",	"slave_factor":"4000" },
+			{ "id":"13101",	"quality":"24",	"main_factor":"5500",	"slave_factor":"5500" },
+			{ "id":"13201",	"quality":"21",	"main_factor":"0",	"slave_factor":"0" },
+			{ "id":"13201",	"quality":"22",	"main_factor":"2500",	"slave_factor":"2500" },
+			{ "id":"13201",	"quality":"23",	"main_factor":"4000",	"slave_factor":"4000" },
+			{ "id":"13201",	"quality":"24",	"main_factor":"5500",	"slave_factor":"5500" },
+			{ "id":"13301",	"quality":"21",	"main_factor":"0",	"slave_factor":"0" },
+			{ "id":"13301",	"quality":"22",	"main_factor":"2500",	"slave_factor":"2500" },
+			{ "id":"13301",	"quality":"23",	"main_factor":"4000",	"slave_factor":"4000" },
+			{ "id":"13301",	"quality":"24",	"main_factor":"5500",	"slave_factor":"5500" },
+			{ "id":"13401",	"quality":"21",	"main_factor":"0",	"slave_factor":"0" },
+			{ "id":"13401",	"quality":"22",	"main_factor":"2500",	"slave_factor":"2500" },
+			{ "id":"13401",	"quality":"23",	"main_factor":"4000",	"slave_factor":"4000" },
+			{ "id":"13401",	"quality":"24",	"main_factor":"5500",	"slave_factor":"5500" },
+			{ "id":"13501",	"quality":"21",	"main_factor":"0",	"slave_factor":"0" },
+			{ "id":"13501",	"quality":"22",	"main_factor":"2500",	"slave_factor":"2500" },
+			{ "id":"13501",	"quality":"23",	"main_factor":"4000",	"slave_factor":"4000" },
+			{ "id":"13501",	"quality":"24",	"main_factor":"5500",	"slave_factor":"5500" }
+		]
+}

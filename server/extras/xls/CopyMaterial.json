@@ -1,0 +1,10 @@
+{
+	"Array":[
+			{ "collect_level":"1",	"active_score":"15",	"materials1":"20001",	"materials2":"21001",	"materials3":"22001",	"materials4":"23001",	"min_num":"3",	"max_num":"7" },
+			{ "collect_level":"2",	"active_score":"15",	"materials1":"20002",	"materials2":"21002",	"materials3":"22002",	"materials4":"23002",	"min_num":"3",	"max_num":"7" },
+			{ "collect_level":"3",	"active_score":"38",	"materials1":"20003",	"materials2":"21003",	"materials3":"22003",	"materials4":"23003",	"min_num":"3",	"max_num":"7" },
+			{ "collect_level":"4",	"active_score":"50",	"materials1":"20004",	"materials2":"21004",	"materials3":"22004",	"materials4":"23004",	"min_num":"3",	"max_num":"7" },
+			{ "collect_level":"5",	"active_score":"67",	"materials1":"20005",	"materials2":"21005",	"materials3":"22005",	"materials4":"23005",	"min_num":"3",	"max_num":"7" },
+			{ "collect_level":"6",	"active_score":"75",	"materials1":"20006",	"materials2":"21006",	"materials3":"22006",	"materials4":"23006",	"min_num":"3",	"max_num":"7" }
+		]
+}

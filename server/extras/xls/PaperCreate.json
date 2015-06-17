@@ -1,0 +1,28 @@
+{
+	"Array":[
+			{ "item_id":"15001",	"active_score":"15",	"level_limit":"1",	"skill_type":"1",	"paper_skill_level_limit":"1" },
+			{ "item_id":"15002",	"active_score":"30",	"level_limit":"2",	"skill_type":"1",	"paper_skill_level_limit":"20" },
+			{ "item_id":"15003",	"active_score":"75",	"level_limit":"3",	"skill_type":"1",	"paper_skill_level_limit":"40" },
+			{ "item_id":"15004",	"active_score":"150",	"level_limit":"4",	"skill_type":"1",	"paper_skill_level_limit":"60" },
+			{ "item_id":"15005",	"active_score":"200",	"level_limit":"5",	"skill_type":"1",	"paper_skill_level_limit":"80" },
+			{ "item_id":"15006",	"active_score":"300",	"level_limit":"6",	"skill_type":"1",	"paper_skill_level_limit":"100" },
+			{ "item_id":"16001",	"active_score":"15",	"level_limit":"1",	"skill_type":"2",	"paper_skill_level_limit":"1" },
+			{ "item_id":"16002",	"active_score":"30",	"level_limit":"2",	"skill_type":"2",	"paper_skill_level_limit":"20" },
+			{ "item_id":"16003",	"active_score":"75",	"level_limit":"3",	"skill_type":"2",	"paper_skill_level_limit":"40" },
+			{ "item_id":"16004",	"active_score":"150",	"level_limit":"4",	"skill_type":"2",	"paper_skill_level_limit":"60" },
+			{ "item_id":"16005",	"active_score":"200",	"level_limit":"5",	"skill_type":"2",	"paper_skill_level_limit":"80" },
+			{ "item_id":"16006",	"active_score":"300",	"level_limit":"6",	"skill_type":"2",	"paper_skill_level_limit":"100" },
+			{ "item_id":"17001",	"active_score":"15",	"level_limit":"1",	"skill_type":"3",	"paper_skill_level_limit":"1" },
+			{ "item_id":"17002",	"active_score":"30",	"level_limit":"2",	"skill_type":"3",	"paper_skill_level_limit":"20" },
+			{ "item_id":"17003",	"active_score":"75",	"level_limit":"3",	"skill_type":"3",	"paper_skill_level_limit":"40" },
+			{ "item_id":"17004",	"active_score":"150",	"level_limit":"4",	"skill_type":"3",	"paper_skill_level_limit":"60" },
+			{ "item_id":"17005",	"active_score":"200",	"level_limit":"5",	"skill_type":"3",	"paper_skill_level_limit":"80" },
+			{ "item_id":"17006",	"active_score":"300",	"level_limit":"6",	"skill_type":"3",	"paper_skill_level_limit":"100" },
+			{ "item_id":"18001",	"active_score":"15",	"level_limit":"1",	"skill_type":"4",	"paper_skill_level_limit":"1" },
+			{ "item_id":"18002",	"active_score":"30",	"level_limit":"2",	"skill_type":"4",	"paper_skill_level_limit":"20" },
+			{ "item_id":"18003",	"active_score":"75",	"level_limit":"3",	"skill_type":"4",	"paper_skill_level_limit":"40" },
+			{ "item_id":"18004",	"active_score":"150",	"level_limit":"4",	"skill_type":"4",	"paper_skill_level_limit":"60" },
+			{ "item_id":"18005",	"active_score":"200",	"level_limit":"5",	"skill_type":"4",	"paper_skill_level_limit":"80" },
+			{ "item_id":"18006",	"active_score":"300",	"level_limit":"6",	"skill_type":"4",	"paper_skill_level_limit":"100" }
+		]
+}

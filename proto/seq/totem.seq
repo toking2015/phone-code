@@ -1,0 +1,148 @@
+//=========================常量声明=======================
+#kTotemTypeDaDi      1   //大地
+#kTotemTypeHuoYan    2   //火焰
+#kTotemTypeShuiLiu   3   //水流
+#kTotemTypeKongQi    4   //空气
+
+#kTotemSkillTypeSpeed            1   // 速度
+#kTotemSkillTypeFormationAdd     2   // 阵法加成 
+#kTotemSkillTypeWake             3   // 觉醒
+
+#kTotemFormationAddPosition      1   // 阵法加成，按位置加成
+#kTotemFormationAddType          2   // 阵法加成，按类型加成
+
+#kTotemFormationAddTypeFrontRow   1   // 加成图腾所在列的前排英雄
+#kTotemFormationAddTypeBackRow    2   // 加成图腾所在列的后排英雄
+#kTotemFormationAddTypeColumn     3   // 加成图腾所在列的一列英雄
+#kTotemFormationAddTypeTotem      4   // 加成图腾自身
+
+#kTotemEmbedGlyphMaxCount         4   // 图腾最多镶嵌的雕文数量
+
+// Type
+#kTotemPacketNormal       0   // 普通图腾背包
+#kTotemPacketYesterday    1   // 昨天的图腾，用于大墓地
+
+//Path
+#kPathTotemUserInit      // 用户创建时赠送
+#kPathTotemTrain         // 图腾培养
+#kPathTotemAccelerate    // 图腾加速
+#kPathTotemGlyphMerge    // 图腾雕文合成
+#kPathTotemGlyphEmbed    // 图腾雕文镶嵌
+#kPathTotemActivate      // 图腾激活
+
+//=========================错误码===========================
+#kErrUnkownTotem                // 未知图腾
+#kErrTotemAlreadyExist          // 已存在该图腾
+#kErrTotemNoExist               // 不存在该图腾
+#kErrTotemDuringEnergy          // 已有同系别图腾正在充能
+
+//==========================通迅结构==========================
+// 图腾
+STotem
+{
+    guid             : uint32; // guid
+    id               : uint32; // 图腾id
+    level            : uint32; // 图腾等级
+    speed_lv         : uint32; // 速度等级
+    formation_add_lv : uint32; // 阵法加成等级
+    wake_lv          : uint32; // 觉醒等级
+    energy_time      : uint32; // 充能时间
+    accelerate_count : uint32; // 加速次数
+}
+
+// 图腾雕文
+STotemGlyph
+{
+    guid           : uint32; // guid
+    id             : uint32; // 图腾雕文id
+    totem_guid     : uint32; // 如果镶嵌，对应图腾的guid
+    attr_list      : array<S2UInt32>; // 属性
+    hide_attr_list : array<S2UInt32>; // 隐藏属性
+}
+
+STotemInfo
+{
+    totem_list : array<STotem>; // 图腾列表
+    glyph_list : array<STotemGlyph>; // 雕文列表，即雕文背包
+}
+
+//============================数据中心========================
+
+//=========================通迅协议============================
+// 图腾信息
+PQTotemInfo
+{
+}
+PRTotemInfo
+{
+    info : STotemInfo;
+}
+
+// 图腾激活
+PQTotemActivate
+{
+    totem_id : uint32; // 需要激活的图腾id
+}
+PRTotemActivate
+{
+    is_success : uint32;
+    totem_id   : uint32;
+}
+
+// 技能祝福
+PQTotemBless
+{
+    totem_guid : uint32;
+    skill_type : uint32; // kTotemSkillTypeXXX
+}
+PRTotemBless
+{
+    totem : STotem;
+}
+
+// 充能
+PQTotemAddEnergy
+{
+    totem_guid : uint32;
+}
+PRTotemAddEnergy
+{
+    totem : STotem;
+}
+
+// 充能加速
+PQTotemAccelerate
+{
+    totem_guid : uint32;
+    is_free    : uint32; // 0-花钱，1-免费
+}
+PRTotemAccelerate
+{
+    totem : STotem;
+}
+
+// 雕文合成
+PQTotemGlyphMerge
+{
+    guids : S2UInt32; // 需要合成的两个雕文guid
+}
+PRTotemGlyphMerge
+{
+    is_success   : uint32; // 非0表示成功
+    deleted_guid : uint32; // 删除的雕文guid
+    result_glyph : STotemGlyph; // 剩下的雕文
+}
+
+// 雕文镶嵌
+PQTotemGlyphEmbed
+{
+    glyph_guid  : uint32; // 雕文guid
+    totem_guid  : uint32; // 图腾guid
+}
+PRTotemGlyphEmbed
+{
+    glyph_guid   : uint32; // 雕文guid, 来自PQTotemGlyphEmbed
+    totem_guid   : uint32; // 图腾guid, 来自PQTotemGlyphEmbed
+    is_new       : uint32; // 将glyph_guid的雕文的totem_guid设置为totem_guid, 如果非新增，删除deleted_guid的雕文
+    deleted_guid : uint32; // 删除的雕文guid
+}

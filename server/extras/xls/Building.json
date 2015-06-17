@@ -1,0 +1,27 @@
+{
+	"Array":[
+			{ "id":"2",	"type":"0",	"common_open":"8",	"copy_open":"2071",	"task_open":"0",	"run_open":"",	"name":"金矿",	"description":"按照时间产出“黄金”资源，等级越高产出越多",	"length":"15",	"width":"10",	"upgrade":"1",	"up_if":"1",	"icon":"1006",	"isShow":"1" },
+			{ "id":"6",	"type":"0",	"common_open":"0",	"copy_open":"0",	"task_open":"10019",	"run_open":"",	"name":"太阳井",	"description":"按照时间产出“圣水”资源，等级越高产出越多",	"length":"15",	"width":"10",	"upgrade":"1",	"up_if":"1",	"icon":"1005",	"isShow":"1" },
+			{ "id":"9",	"type":"0",	"common_open":"10",	"copy_open":"0",	"task_open":"0",	"run_open":"1",	"name":"装备",	"description":"用于进行穿装备操作",	"length":"15",	"width":"10",	"upgrade":"0",	"up_if":"0",	"icon":"1002",	"isShow":"1" },
+			{ "id":"12",	"type":"0",	"common_open":"15",	"copy_open":"0",	"task_open":"0",	"run_open":"1",	"name":"神殿",	"description":"暂时没用到",	"length":"15",	"width":"10",	"upgrade":"0",	"up_if":"0",	"icon":"1001",	"isShow":"1" },
+			{ "id":"15",	"type":"0",	"common_open":"20",	"copy_open":"0",	"task_open":"0",	"run_open":"1",	"name":"手工技能",	"description":"用于手工技能",	"length":"15",	"width":"10",	"upgrade":"0",	"up_if":"0",	"icon":"1007",	"isShow":"1" },
+			{ "id":"16",	"type":"0",	"common_open":"2",	"copy_open":"0",	"task_open":"0",	"run_open":"",	"name":"祭坛",	"description":"用于抽卡",	"length":"15",	"width":"10",	"upgrade":"0",	"up_if":"0",	"icon":"1004",	"isShow":"1" },
+			{ "id":"17",	"type":"0",	"common_open":"15",	"copy_open":"0",	"task_open":"0",	"run_open":"",	"name":"公会",	"description":"公会飞艇，用于进行公会相关操作",	"length":"15",	"width":"10",	"upgrade":"0",	"up_if":"0",	"icon":"1003",	"isShow":"1" },
+			{ "id":"19",	"type":"0",	"common_open":"20",	"copy_open":"0",	"task_open":"0",	"run_open":"1",	"name":"拍卖行",	"description":"拍卖行",	"length":"15",	"width":"10",	"upgrade":"0",	"up_if":"0",	"icon":"8001",	"isShow":"1" },
+			{ "id":"20",	"type":"0",	"common_open":"22",	"copy_open":"0",	"task_open":"0",	"run_open":"1",	"name":"竞技场",	"description":"竞技场",	"length":"15",	"width":"10",	"upgrade":"0",	"up_if":"0",	"icon":"8004",	"isShow":"1" },
+			{ "id":"21",	"type":"0",	"common_open":"25",	"copy_open":"0",	"task_open":"0",	"run_open":"1",	"name":"十字军试炼",	"description":"PVE玩法",	"length":"15",	"width":"10",	"upgrade":"0",	"up_if":"0",	"icon":"8003",	"isShow":"1" },
+			{ "id":"22",	"type":"0",	"common_open":"30",	"copy_open":"0",	"task_open":"0",	"run_open":"1",	"name":"大墓地",	"description":"PVE玩法",	"length":"15",	"width":"10",	"upgrade":"0",	"up_if":"0",	"icon":"8002",	"isShow":"1" },
+			{ "id":"23",	"type":"0",	"common_open":"1",	"copy_open":"0",	"task_open":"0",	"run_open":"",	"name":"哀号溶洞",	"description":"1级副本",	"length":"",	"width":"",	"upgrade":"0",	"up_if":"0",	"icon":"2001",	"isShow":"1" },
+			{ "id":"24",	"type":"0",	"common_open":"5",	"copy_open":"1041",	"task_open":"0",	"run_open":"",	"name":"死亡矿坑",	"description":"5级副本",	"length":"",	"width":"",	"upgrade":"0",	"up_if":"0",	"icon":"2002",	"isShow":"1" },
+			{ "id":"25",	"type":"0",	"common_open":"5",	"copy_open":"2061",	"task_open":"0",	"run_open":"",	"name":"暗牙堡垒",	"description":"11级副本",	"length":"",	"width":"",	"upgrade":"0",	"up_if":"0",	"icon":"2003",	"isShow":"1" },
+			{ "id":"26",	"type":"0",	"common_open":"10",	"copy_open":"3061",	"task_open":"0",	"run_open":"",	"name":"野猪沼泽",	"description":"18级副本",	"length":"",	"width":"",	"upgrade":"0",	"up_if":"0",	"icon":"2004",	"isShow":"1" },
+			{ "id":"27",	"type":"0",	"common_open":"10",	"copy_open":"4071",	"task_open":"0",	"run_open":"",	"name":"侏儒之乡",	"description":"25级副本",	"length":"",	"width":"",	"upgrade":"0",	"up_if":"0",	"icon":"2005",	"isShow":"1" },
+			{ "id":"28",	"type":"0",	"common_open":"10",	"copy_open":"5071",	"task_open":"0",	"run_open":"",	"name":"血月修道院",	"description":"30级副本",	"length":"",	"width":"",	"upgrade":"0",	"up_if":"0",	"icon":"2006",	"isShow":"1" },
+			{ "id":"29",	"type":"0",	"common_open":"25",	"copy_open":"6061",	"task_open":"0",	"run_open":"",	"name":"土灵王国",	"description":"35级副本",	"length":"",	"width":"",	"upgrade":"0",	"up_if":"0",	"icon":"2007",	"isShow":"1" },
+			{ "id":"30",	"type":"0",	"common_open":"25",	"copy_open":"7071",	"task_open":"0",	"run_open":"",	"name":"野猪高地",	"description":"40级副本",	"length":"",	"width":"",	"upgrade":"0",	"up_if":"0",	"icon":"2008",	"isShow":"1" },
+			{ "id":"31",	"type":"0",	"common_open":"25",	"copy_open":"8071",	"task_open":"0",	"run_open":"",	"name":"沙怒之都",	"description":"45级副本",	"length":"",	"width":"",	"upgrade":"0",	"up_if":"0",	"icon":"2009",	"isShow":"1" },
+			{ "id":"32",	"type":"0",	"common_open":"35",	"copy_open":"9071",	"task_open":"0",	"run_open":"",	"name":"半人马圣地",	"description":"50级副本",	"length":"",	"width":"",	"upgrade":"0",	"up_if":"0",	"icon":"2010",	"isShow":"1" },
+			{ "id":"33",	"type":"0",	"common_open":"35",	"copy_open":"10071",	"task_open":"0",	"run_open":"",	"name":"黑铁深渊",	"description":"55级副本",	"length":"",	"width":"",	"upgrade":"0",	"up_if":"0",	"icon":"2011",	"isShow":"1" },
+			{ "id":"34",	"type":"0",	"common_open":"35",	"copy_open":"11071",	"task_open":"0",	"run_open":"",	"name":"幸运之槌",	"description":"60级副本",	"length":"",	"width":"",	"upgrade":"0",	"up_if":"0",	"icon":"2012",	"isShow":"1" }
+		]
+}

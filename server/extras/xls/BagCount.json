@@ -1,0 +1,8 @@
+{
+	"Array":[
+			{ "bag_type":"1",	"bag_init":"999" },
+			{ "bag_type":"2",	"bag_init":"999" },
+			{ "bag_type":"3",	"bag_init":"999" },
+			{ "bag_type":"4",	"bag_init":"999" }
+		]
+}

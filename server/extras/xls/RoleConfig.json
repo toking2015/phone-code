@@ -1,0 +1,15 @@
+{
+	"Array":[
+			{ "id":"1",	"roleName":"BS01adanzong",	"width":"",	"height":"200",	"bruiseFrame":"22",	"deadFrame":"60",	"physical1Frame":"10,29/48-1000001",	"physical2Frame":"10,29/48-1000002",	"physical3Frame":"10,29/48-1000003",	"sfFrame":"" },
+			{ "id":"2",	"roleName":"BS01bdanzong",	"width":"",	"height":"220",	"bruiseFrame":"20",	"deadFrame":"42",	"physical1Frame":"33/112-1010001",	"physical2Frame":"33/112-1010002",	"physical3Frame":"33/112-1010003",	"sfFrame":"" },
+			{ "id":"3",	"roleName":"XG08huoyuansu",	"width":"",	"height":"110",	"bruiseFrame":"28",	"deadFrame":"54",	"physical1Frame":"16,31/39-1020001",	"physical2Frame":"16,31/39-1020002",	"physical3Frame":"16,31/39-1020003",	"sfFrame":"" },
+			{ "id":"4",	"roleName":"XG13fengshe",	"width":"",	"height":"110",	"bruiseFrame":"29",	"deadFrame":"47",	"physical1Frame":"14,40/56-20001",	"physical2Frame":"14,40/56-20002",	"physical3Frame":"14,40/56-20003",	"sfFrame":"" },
+			{ "id":"5",	"roleName":"YS01kaien",	"width":"",	"height":"130",	"bruiseFrame":"17",	"deadFrame":"41",	"physical1Frame":"18,31,43/56-10101",	"physical2Frame":"27/54-10102",	"physical3Frame":"35/74-10103",	"sfFrame":"" },
+			{ "id":"6",	"roleName":"YS09walimasasi",	"width":"",	"height":"160",	"bruiseFrame":"17",	"deadFrame":"73",	"physical1Frame":"26,32/42-10201",	"physical2Frame":"22/68-10202",	"physical3Frame":"34/52-10203",	"sfFrame":"" },
+			{ "id":"7",	"roleName":"YS11fengxingzhe",	"width":"",	"height":"88",	"bruiseFrame":"21",	"deadFrame":"24",	"physical1Frame":"25/36-10401",	"physical2Frame":"25/34-10402",	"physical3Frame":"19/58-10403",	"sfFrame":"" },
+			{ "id":"8",	"roleName":"YS15salu",	"width":"",	"height":"95",	"bruiseFrame":"22",	"deadFrame":"41",	"physical1Frame":"11,30,50/65-10301",	"physical2Frame":"27/56-10302",	"physical3Frame":"13/84-10303",	"sfFrame":"" },
+			{ "id":"9",	"roleName":"TT01",	"width":"",	"height":"110",	"bruiseFrame":"",	"deadFrame":"22",	"physical1Frame":"",	"physical2Frame":"",	"physical3Frame":"",	"sfFrame":"12/24-80101" },
+			{ "id":"10",	"roleName":"TT02",	"width":"",	"height":"110",	"bruiseFrame":"",	"deadFrame":"22",	"physical1Frame":"",	"physical2Frame":"",	"physical3Frame":"",	"sfFrame":"12/24-80201" },
+			{ "id":"11",	"roleName":"TT03",	"width":"",	"height":"110",	"bruiseFrame":"",	"deadFrame":"22",	"physical1Frame":"",	"physical2Frame":"",	"physical3Frame":"",	"sfFrame":"12/24-80301" }
+		]
+}

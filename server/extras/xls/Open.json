@@ -1,0 +1,15 @@
+{
+	"Array":[
+			{ "id":"1",	"desc":"布阵",	"type":"",	"open_type":"1",	"open_term":"1000",	"run_type":"",	"run_data":"",	"name":"布阵",	"final_command":"" },
+			{ "id":"2",	"desc":"图腾",	"type":"",	"open_type":"4",	"open_term":"1041",	"run_type":"",	"run_data":"",	"name":"图腾",	"final_command":"" },
+			{ "id":"3",	"desc":"英雄",	"type":"",	"open_type":"1",	"open_term":"4",	"run_type":"",	"run_data":"",	"name":"英雄",	"final_command":"" },
+			{ "id":"4",	"desc":"背包",	"type":"",	"open_type":"1",	"open_term":"1",	"run_type":"",	"run_data":"",	"name":"背包",	"final_command":"" },
+			{ "id":"5",	"desc":"商店",	"type":"",	"open_type":"1",	"open_term":"1",	"run_type":"",	"run_data":"",	"name":"商店",	"final_command":"" },
+			{ "id":"6",	"desc":"签到",	"type":"",	"open_type":"1",	"open_term":"1",	"run_type":"",	"run_data":"",	"name":"签到",	"final_command":"" },
+			{ "id":"7",	"desc":"充值",	"type":"",	"open_type":"1",	"open_term":"1",	"run_type":"",	"run_data":"",	"name":"充值",	"final_command":"" },
+			{ "id":"8",	"desc":"领奖",	"type":"",	"open_type":"1",	"open_term":"1",	"run_type":"",	"run_data":"",	"name":"领奖",	"final_command":"" },
+			{ "id":"9",	"desc":"任务",	"type":"",	"open_type":"1",	"open_term":"1",	"run_type":"",	"run_data":"",	"name":"任务",	"final_command":"" },
+			{ "id":"10",	"desc":"活动",	"type":"",	"open_type":"1",	"open_term":"1",	"run_type":"",	"run_data":"",	"name":"活动",	"final_command":"" },
+			{ "id":"11",	"desc":"聊天",	"type":"",	"open_type":"1",	"open_term":"15",	"run_type":"",	"run_data":"",	"name":"聊天",	"final_command":"" }
+		]
+}

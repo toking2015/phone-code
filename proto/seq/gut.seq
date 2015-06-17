@@ -1,0 +1,41 @@
+//=========================常量声明=======================
+#kPathGutCommit                             //剧情提交
+#kPathGutFinish                             //剧情完成
+
+#kGutTypeTalk                       1       //对话
+#kGutTypeBox                        3       //宝箱 [ objid: packet_id ], [val: reward_id ]
+#kGutTypeReward                     4       //奖励 [ objid: reward_id ]
+#kGutTypeVideo                      5       //视频
+#kGutTypeSpecial                    6       //特殊( 针对性代码编写 )
+
+//=========================错误码===========================
+#kErrGutNotExisit                           //剧情不存在
+#kErrGutIndex                               //剧情索引错误
+#kErrGutRewardNotExist                      //剧情奖励不存在
+#kErrGutEventOrder                          //剧情事件序列错误
+
+//==========================通迅结构==========================
+//剧情-黄少卿
+SGutInfo
+{
+    gut_id                  : uint32;
+    index                   : int32;                //当前事件索引, 从0开始( 不保存数据库 )
+
+    event                   : array< S3UInt32 >;    //剧情列表, cate见 kGutTypeXXX
+}
+
+//@@请求剧情事件
+PQGutInfo
+{
+}
+PRGutInfo
+{
+    data                    : SGutInfo;
+}
+
+//事件验证基类
+PQGutCommitEvent
+{
+    index                   : int32;            //剧情事件会包含多个处理步骤(从0开始) 
+}
+

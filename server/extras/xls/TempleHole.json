@@ -1,0 +1,12 @@
+{
+	"Array":[
+			{ "id":"1",	"level":"",	"cost_item1":"",	"cost_item2":"",	"cost_item3":"",	"cost_coin1":"",	"cost_coin2":"",	"cost_coin3":"" },
+			{ "id":"2",	"level":"20",	"cost_item1":"4%79%1",	"cost_item2":"",	"cost_item3":"",	"cost_coin1":"3%0%500",	"cost_coin2":"",	"cost_coin3":"" },
+			{ "id":"3",	"level":"30",	"cost_item1":"4%79%2",	"cost_item2":"",	"cost_item3":"",	"cost_coin1":"3%0%1000",	"cost_coin2":"",	"cost_coin3":"" },
+			{ "id":"4",	"level":"40",	"cost_item1":"4%79%4",	"cost_item2":"",	"cost_item3":"",	"cost_coin1":"3%0%2000",	"cost_coin2":"",	"cost_coin3":"" },
+			{ "id":"5",	"level":"50",	"cost_item1":"4%79%8",	"cost_item2":"",	"cost_item3":"",	"cost_coin1":"3%0%4000",	"cost_coin2":"",	"cost_coin3":"" },
+			{ "id":"6",	"level":"60",	"cost_item1":"4%79%16",	"cost_item2":"",	"cost_item3":"",	"cost_coin1":"3%0%8000",	"cost_coin2":"",	"cost_coin3":"" },
+			{ "id":"7",	"level":"70",	"cost_item1":"4%79%24",	"cost_item2":"",	"cost_item3":"",	"cost_coin1":"3%0%12000",	"cost_coin2":"",	"cost_coin3":"" },
+			{ "id":"8",	"level":"80",	"cost_item1":"4%79%32",	"cost_item2":"",	"cost_item3":"",	"cost_coin1":"3%0%16000",	"cost_coin2":"",	"cost_coin3":"" }
+		]
+}

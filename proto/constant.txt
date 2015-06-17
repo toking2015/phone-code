@@ -1,0 +1,50 @@
+﻿/******************************系统************************************/
+//不同的 kPath 在不同的系统模块中定义, 并且不允许使用固定值
+//kPathSource
+
+//基本判断
+#kFalse                             0       //假
+#kTrue                              1       //真
+
+//通用
+#kYes                               1       //确认
+#kNo                                2       //拒绝
+#kCancel                            3       //取消
+
+//对象变动方式
+#kObjectDel                         0       //删除
+#kObjectAdd                         1       //添加
+#kObjectUpdate                      2       //更新
+#kObjectKick                        3       //被踢
+
+//统一所有弹出的对话框按钮选项
+#kDialogAgree                       1       //同意或确定
+#kDialogDisAgree                    2       //不同意或拒绝
+#kDialogIgnore                      3       //取消
+#kDialogAgreeButError               4       //同意但是出现其他条件错误的情况
+
+#kAttrPlayer                        1       //玩家
+#kAttrSoldier                       2       //武将
+#kAttrTotem                         3       //图腾
+#kAttrMonster                       4       //怪物
+#kAttrNpc                           5       //NPC
+#kAttrSoldierYesterday              100     //昨天玩家的二级属性
+
+#kQualityWhite                      1       //白
+#kQualityGreen                      2       //绿
+#kQualityBlue                       3       //蓝
+#kQualityPurple                     4       //紫
+#kQualityOrange                     5       //橙
+
+#kEquipCloth                        1       //布甲
+#kEquipLeather                      2       //皮甲
+#kEquipMail                         3       //锁甲
+#kEquipPlate                        4       //板甲
+
+#kGenderMan                         0       //男
+#kGenderWomen                       1       //女
+
+#kBoxQualityCopper                  1       //铜
+#kBoxQualitySilver                  2       //银
+#kBoxQualityGolden                  3       //金
+

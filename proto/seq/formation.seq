@@ -1,0 +1,59 @@
+//=========================常量声明=======================
+#kPathFormationSet                               //布阵改变
+
+#kFormationPosMax                       9               //阵型最大数量
+
+#kFormationTypeCommon                   1               //普通
+#kFormationTypeSingleArenaAct           2               //竞技场攻
+#kFormationTypeSingleArenaDef           3               //竞技场防
+#kFormationTypeTrialSurvival            4               //试炼生存
+#kFormationTypeTrialStrength            5               //试炼力量
+#kFormationTypeTrialAgile               6               //试炼敏捷
+#kFormationTypeIntelligence             7               //试炼智力
+#kFormationTypeYesterday                8               //JJC昨天
+#kFormationTypeTomb                     9               //墓地
+#kFormationTypeTombTarget               10              //墓地别人
+
+//=========================错误码===========================
+
+//==========================通迅结构==========================
+//阵型-印佳
+SUserFormation
+{
+    guid                                : uint32;        //guid
+    attr                                : uint32;        //玩家属性
+    formation_type                      : uint32;        //阵型类型
+    formation_index                     : uint32;        //阵型索引
+}
+
+//============================数据中心========================
+
+//=========================通迅协议============================
+//@@请求物品列表
+PQFormationList
+{
+    formation_type                      : uint32;        //阵型类型
+}
+
+//返回物品列表
+PRFormationList
+{
+    formation_type                      : uint32;        //所处背包类型
+    formation_list                      : array<SUserFormation>;        //好友列表
+}
+
+//@@请求阵型移动
+PQFormationMove
+{
+    formation_type                      : uint32;       //kFormationTypeCommon
+    guid                                : uint32;       //guid
+    attr                                : uint32;       //kAttrSoldier
+    index                               : uint32;       //index[0-8]
+}
+
+PQFormationSet
+{
+    formation_type                      : uint32;
+    formation_list                      : array<SUserFormation>;
+}
+

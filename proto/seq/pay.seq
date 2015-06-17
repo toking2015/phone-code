@@ -1,0 +1,102 @@
+//=========================常量声明=======================
+//支付
+#kPayFlagTake                       1       //货币领取标志
+
+#kPayTypeNormal                     1       //普通, 充钻石
+#kPayTypeSpecial                    2       //特殊充值
+
+#kPathPay                           //充值
+#kPathFirstPay                      //首次充值
+#kPathMonthReward                   //月卡奖励
+#kPathPayPresent                    //充值赠送
+
+//=========================错误码===========================
+#kErrPayMonthTimeLack               //月卡已经过期
+#kErrPayMonthRewardHaveGet          //今天的月卡奖励已经领取
+#kErrPayFristPayRewardGet          //已经领取过首充奖励
+
+//==========================通迅结构==========================
+SUserPayInfo
+{
+    pay_sum         :   uint32;     //充值总额
+    pay_count       :   uint32;     //充值次数
+    month_time      :   uint32;     //月卡到期时间
+    month_reward    :   uint32;     //月卡每天奖励
+}
+
+//基本支付-印佳, 所有货币基本值都必须使用 uint32
+SUserPay
+{
+    uid         : uint32;       //唯一id
+    price       : uint32;       //充值金额(RMB), 价值 != 钻石
+    time        : uint32;       //充值日期
+    type        : uint8;        //充值类型 [ kPayTypeNormal | kPayTypeSpecial ]
+    flag        : uint8;        //标记kPayFlagTake
+}
+
+//=========================通迅协议============================
+//@@请求新增加的订单
+PQPayList
+{
+    target_id   : uint32;       //目标ID
+}
+
+PRPayList
+{
+    list        : array<SUserPay>;  //pay_list
+}
+
+//@@请求Pay信息
+PQPayInfo
+{
+
+}
+
+PRPayInfo
+{
+    data        : SUserPayInfo;     //PayInfo
+}
+
+//@@请求领取月卡奖励
+PQPayMonthReward
+{
+
+}
+
+PRPayMonthReward
+{
+    
+}
+
+//@@请求领取首充奖励
+PQPayFristPayReward
+{
+
+}
+//废弃
+PQReplyFristPayReward
+{
+
+}
+
+//废弃
+PRReplyFristPayReward
+{
+    flag        : uint32;       //领取标识
+}
+
+
+
+//充值通知( 仅通知 )
+PRPayNotice
+{
+    uid     :   uint32;         //唯一id
+    coin    :   uint32;         //充值的RMB
+}
+
+//======================服务器中转====================
+PQPayNotice
+{
+    target_id : uint32;         //realdb 通知 game
+}
+

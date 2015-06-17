@@ -1,0 +1,26 @@
+{
+	"Array":[
+			{ "id":"1",	"name":"新手小队",	"get_score":"200",	"init_lv":"1",	"members1":"5%10801",	"members2":"5%10202",	"members3":"5%10401",	"members4":"5%10701",	"members5":"",	"members6":"" },
+			{ "id":"2",	"name":"爸爸去哪儿",	"get_score":"200",	"init_lv":"1",	"members1":"5%10801",	"members2":"5%10804",	"members3":"",	"members4":"",	"members5":"",	"members6":"" },
+			{ "id":"3",	"name":"释放灵魂",	"get_score":"200",	"init_lv":"1",	"members1":"5%10801",	"members2":"5%10805",	"members3":"5%10301",	"members4":"",	"members5":"",	"members6":"" },
+			{ "id":"4",	"name":"菜刀队",	"get_score":"200",	"init_lv":"1",	"members1":"5%10807",	"members2":"5%10802",	"members3":"5%10701",	"members4":"13%80101",	"members5":"",	"members6":"" },
+			{ "id":"5",	"name":"精神领袖",	"get_score":"200",	"init_lv":"1",	"members1":"5%11001",	"members2":"5%11002",	"members3":"5%11003",	"members4":"13%80301",	"members5":"",	"members6":"" },
+			{ "id":"6",	"name":"亲儿子协会",	"get_score":"200",	"init_lv":"1",	"members1":"5%10201",	"members2":"5%10202",	"members3":"5%10203",	"members4":"13%80201",	"members5":"",	"members6":"" },
+			{ "id":"7",	"name":"爆菊专业户",	"get_score":"200",	"init_lv":"1",	"members1":"5%10701",	"members2":"5%10703",	"members3":"5%10702",	"members4":"13%80402",	"members5":"",	"members6":"" },
+			{ "id":"8",	"name":"副本万金油",	"get_score":"200",	"init_lv":"1",	"members1":"5%10001",	"members2":"5%10002",	"members3":"5%10003",	"members4":"13%80401",	"members5":"",	"members6":"" },
+			{ "id":"9",	"name":"强力兽人战",	"get_score":"200",	"init_lv":"1",	"members1":"5%10802",	"members2":"5%10805",	"members3":"5%10807",	"members4":"13%80102",	"members5":"",	"members6":"" },
+			{ "id":"10",	"name":"鸟人议会",	"get_score":"200",	"init_lv":"1",	"members1":"5%10604",	"members2":"5%10302",	"members3":"5%10003",	"members4":"13%80202",	"members5":"",	"members6":"" },
+			{ "id":"11",	"name":"背叛者联盟",	"get_score":"200",	"init_lv":"1",	"members1":"5%10301",	"members2":"5%10803",	"members3":"5%10201",	"members4":"13%80203",	"members5":"",	"members6":"" },
+			{ "id":"12",	"name":"板甲小分队",	"get_score":"200",	"init_lv":"1",	"members1":"5%10806",	"members2":"5%10501",	"members3":"5%10101",	"members4":"13%80103",	"members5":"",	"members6":"" },
+			{ "id":"13",	"name":"射击不止",	"get_score":"200",	"init_lv":"1",	"members1":"5%10402",	"members2":"5%10401",	"members3":"13%80302",	"members4":"13%80304",	"members5":"",	"members6":"" },
+			{ "id":"14",	"name":"传说中的高玩",	"get_score":"200",	"init_lv":"1",	"members1":"5%10202",	"members2":"5%10703",	"members3":"5%10203",	"members4":"5%10806",	"members5":"",	"members6":"" },
+			{ "id":"15",	"name":"幽暗炖骨头",	"get_score":"200",	"init_lv":"1",	"members1":"5%10401",	"members2":"5%10302",	"members3":"5%10803",	"members4":"5%10501",	"members5":"",	"members6":"" },
+			{ "id":"16",	"name":"雷霆烤全牛",	"get_score":"200",	"init_lv":"1",	"members1":"5%10804",	"members2":"5%10801",	"members3":"5%10001",	"members4":"5%10002",	"members5":"",	"members6":"" },
+			{ "id":"17",	"name":"四奶劝退队",	"get_score":"200",	"init_lv":"1",	"members1":"5%10603",	"members2":"5%10001",	"members3":"5%10604",	"members4":"5%10002",	"members5":"",	"members6":"" },
+			{ "id":"18",	"name":"便当队",	"get_score":"200",	"init_lv":"1",	"members1":"5%12001",	"members2":"5%10201",	"members3":"5%11003",	"members4":"5%10702",	"members5":"",	"members6":"" },
+			{ "id":"19",	"name":"野团",	"get_score":"200",	"init_lv":"1",	"members1":"5%12001",	"members2":"5%10601",	"members3":"5%10501",	"members4":"13%80403",	"members5":"",	"members6":"" },
+			{ "id":"20",	"name":"信仰神殿",	"get_score":"200",	"init_lv":"1",	"members1":"5%10603",	"members2":"5%10602",	"members3":"5%10604",	"members4":"5%10601",	"members5":"",	"members6":"" },
+			{ "id":"21",	"name":"部落高管",	"get_score":"200",	"init_lv":"1",	"members1":"5%11002",	"members2":"5%10804",	"members3":"5%10401",	"members4":"5%10101",	"members5":"",	"members6":"" },
+			{ "id":"22",	"name":"四大神器",	"get_score":"200",	"init_lv":"1",	"members1":"13%80104",	"members2":"13%80204",	"members3":"13%80303",	"members4":"13%80404",	"members5":"",	"members6":"" }
+		]
+}

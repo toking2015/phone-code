@@ -1,0 +1,32 @@
+//=========================常量声明=======================
+//=========================错误码===========================
+//==========================通迅结构==========================
+//二级属性-印佳
+SFightExtAbleInfo
+{
+    guid                    :  uint32;          //guid
+    attr                    :  uint32;          //玩家
+    able                    :  SFightExtAble;   //二级属性 
+}
+
+//============================数据中心========================
+
+//=========================通迅协议============================
+//@@请求好友列表
+PQFightExtAbleList
+{
+    attr                    : uint32;           //武将
+}
+
+PRFightExtAbleList
+{
+    attr                    : uint32;           //武将
+    fightextable_list       : array<SFightExtAbleInfo>; //二级属性
+}
+
+PRFightExtAbleSet
+{
+    set_type                : uint32;           //
+    fightextable            : SFightExtAbleInfo;    //
+}
+

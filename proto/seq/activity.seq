@@ -1,0 +1,183 @@
+//=========================常量声明=======================
+#kPathActivityClose                             //活动关闭
+#kPathActivityOpen                              //活动打开
+#kPathActivityReward                            //活动奖励
+
+#kActivityTimeTypeBound             1           //固定时间范围内开启 
+#kActivityTimeTypeOpen              2           //根据开服时间开启 
+#kActivityTimeTypeUnite             3           //根据合服时间开启 
+#kActivityTimeTypeLevel             4           //根据玩家等级开启 
+#kActivityTimeTypePersonal          5           //根据个人变量确定活动开启时间  //暂不实现
+#kActivityTimeTypeLimitOpen         12          //根据开服时间排斥 
+#kActivityTimeTypeLimitUnite        13          //根据合服时间排斥 
+
+
+#kActivityDataTypeMax               30           //最大值       //图标类型
+
+
+#kActivityFactorTypeFirstPay                1           //首充X
+#kActivityFactorTypeAddPay                  2           //累积充值X
+#kActivityFactorTypeLevel                   3           //等级达到X级
+#kActivityFactorTypeSerialLogin             4           //连续登录X天
+#kActivityFactorTypeGetSoldier              5           //搜集X个英雄
+#kActivityFactorTypeUpSoldier               6           //进阶X个英雄到X品质
+#kActivityFactorTypeGetTotem                7           //搜集X个图腾
+#kActivityFactorTypeMaxStartTotem           8           //图腾总星级达到X级
+#kActivityFactorTypePassTomb                9           //大墓地通过第X关
+#kActivityFactorTypeVipLevel                10          //VIP等级达到X级
+#kActivityFactorTypeTimeTatalGold           11          //活动期间累计消耗XX钻石
+#kActivityFactorTypeDayTatalGold            12          //每日消耗XX钻石
+#kActivityFactorTypeTimeTatalMoney          13          //活动期间累计消耗XX金币
+#kActivityFactorTypeDayTatalMoney           14          //每日消耗XX金币
+#kActivityFactorTypeTimeTatalBetGold        15          //活动期间进行X次钻石抽卡
+#kActivityFactorTypeDayTatalBetGold         16          //每日进行X次钻石抽卡
+#kActivityFactorTypeTimeTatalBetMoney       17          //活动期间进行X次普通抽卡
+#kActivityFactorTypeDayTatalBetMoney        18          //每日进行X次普通抽卡
+#kActivityFactorTypeDayTimesPayTimesGold    19          //每日第X次单笔充值X
+#kActivityFactorTypeMax                     20          //最大值
+
+//=========================错误码===========================
+#kErrActivitySqlInvaild                      //数据库存不可用
+
+//==========================通迅结构==========================
+//活动时间数据
+SActivityOpen
+{
+    guid            : uint32;
+    group           : string;           //平台   NULL所有平台
+    name            : string;           
+    data_id         : uint32;           //<对应 SActivityData中的guid>
+    type            : uint32;           //kActivityTimeTypeBound
+    first_time      : string;           
+    second_time     : string;
+    show_time       : uint32;
+    hide_time       : uint32;
+}
+
+//活动数据
+SActivityData
+{
+    guid            : uint32;       //唯一
+    group           : string;
+    type            : uint32;       //kActivityDataTypeFirtPay
+    cycle           : uint32;       //周期      天
+    name            : string;
+    desc            : string;
+    value_list      : array<string>;        //条件奖励值  1%2    1=if_map.key   2=reward_map.key   
+}
+
+//活动条件
+SActivityFactor
+{
+    guid            : uint32;       //唯一
+    group           : string;
+    desc            : string;
+    type            : uint32;       //kActivityFactorTypeFirstPay
+    value           : uint32;
+    value1          : uint32;
+}
+
+//活动奖励
+SActivityReward
+{
+    guid            : uint32;       //唯一
+    group           : string;
+    value_list      : array< string >;
+}
+
+SActivityInfo
+{
+    name            : string;           //活动标志
+    start_time      : uint32;           //活动开启时间
+    end_time        : uint32;           //活动结束时间
+}
+
+//=========================数据中心==========================
+
+CActivity
+{
+    open_map     : indices< SActivityOpen >;            //活动时间
+    data_map     : indices< SActivityData >;            //活动内容
+    factor_map   : indices< SActivityFactor >;          //活动条件
+    reward_map   : indices< SActivityReward >;          //活动奖励
+
+
+    open_name_map   : map< uint32 >;                    //活动名字表        
+}
+
+//=========================通迅协议============================
+//从share 加载数据 -SActivityOpen
+PQActivityOpenLoad
+{
+}
+
+PRActivityOpenLoad
+{
+    list        : array< SActivityOpen >;
+}
+
+//从share 加载数据 -SActivityData
+PQActivityDataLoad
+{
+}
+
+PRActivityDataLoad
+{
+    list        : array< SActivityData >;
+}
+
+//从share 加载数据 - SActivityFactor
+PQActivityFactorLoad
+{
+}
+
+PRActivityFactorLoad
+{
+    list        : array< SActivityFactor >;
+}
+
+//从share 加载数据 -SActivityReward
+PQActivityRewardLoad
+{
+}
+
+PRActivityRewardLoad
+{
+    list        : array< SActivityReward >;
+}
+
+//活动接入--黄少卿
+PQActivityList
+{
+}
+
+PRActivityList
+{
+    activity_open_list    : array< SActivityOpen >;
+	activity_data_list	  : array< SActivityData >;
+    activity_factor_list  : array< SActivityFactor >;
+    activity_reward_list  : array< SActivityReward >;
+}
+
+//进行中的活动
+PQActivityInfoList
+{
+}
+
+PRActivityInfoList
+{
+    list        : array< SActivityInfo >;
+}
+
+PQActivityTakeReward
+{
+    open_guid       : uint32;       //
+    index           : uint32;       //第几个条件 从0开始
+}
+
+PRActivityTakeReward
+{
+    open_guid       : uint32;       //
+    index           : uint32;       //第几个条件 从0开始
+}
+

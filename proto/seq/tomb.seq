@@ -1,0 +1,125 @@
+//=========================常量声明=======================
+#kTombFront                 50          //往前取名次
+#kTombBack                  2000        //往后取名词
+#kTombPart                  5           //分成多少部分
+#kTombPartCount             4           //一部分多少人
+
+#kPathTombRewardGet                     //墓地奖励领取
+#kPathTombPlayerReset                   //墓地人物重置
+#kPathTombFight                         //墓地触发战斗
+#kPathTombMopUp                         //墓地扫荡
+
+//=========================错误码===========================
+#kErrTombPlayerData                     //对战玩家信息出错
+#kErrTombRewardDataNoExitLevel          //奖励数据不存在
+#kErrTombRewardDataNoExit               //奖励数据不存在
+#kErrTombRewardNotGet                   //奖励未领取
+#kErrTombNotOpen                        //未开放
+
+//==========================通迅结构==========================
+//大墓地-印佳
+STombTarget
+{
+    attr            :       uint32;         //怪物玩家
+    target_id       :       uint32;         //id
+    reward          :       uint32;         //奖励是否领取
+}
+
+SUserKillInfo
+{
+    monster_id      :       uint32;         //怪物id
+    count           :       uint32;         //次数
+}
+
+SUserTomb
+{
+    try_count       :       uint32;         //今天挑战次数 
+    try_count_now   :       uint32;         //当前是第几次挑战
+    win_count       :       uint32;         //胜利次数
+    max_win_count   :       uint32;         //今天最大胜利次数
+    reward_count    :       uint32;         //领奖次数 
+    totem_value_self    :   uint32;         //图腾值自己
+    totem_value_target  :   uint32;         //图腾值对面
+    history_win_count   :   uint32;         //历史上最大胜利次数
+    history_reset_count :   uint32;         //历史重置次数
+    history_pass_count  :   uint32;         //历史通关次数
+    history_kill_count  :   array<SUserKillInfo>;    //历史杀怪记录
+}
+
+//============================数据中心========================
+
+
+//==========================通迅协议==========================
+//战斗
+PQTombFight
+{
+    player_index    :       uint32;         //玩家位置 从0开始
+    player_guid     :       uint32;         //玩家GUID
+    formation_list  :       array<SUserFormation>;  //试炼阵型
+}
+
+//领奖
+PQTombRewardGet
+{
+    reward_index    :       uint32;         //奖励位置 从0开始
+}
+
+PRTombRewardGet
+{
+    target          :       STombTarget;    //领取信息 
+    reward_list     :       array<S3UInt32>;  //奖励
+}
+
+//玩家重置
+PQTombPlayerReset
+{
+    player_index    :       uint32;         //玩家位置
+}
+
+PRTombPlayerReset
+{
+    player_index    :       uint32;
+    target          :       STombTarget;    //对战人员嘻嘻 
+}
+
+//重置
+PQTombReset
+{
+}
+
+PRTombReset
+{
+    tomb_info       :       SUserTomb;      //墓地信息
+    tomb_target_list :      array<STombTarget>; //对战信息 
+}
+
+//扫荡
+PQTombMopUp
+{
+    
+}
+
+PRTombMopUp
+{
+    reward_list     :       array< array<S3UInt32> >;  //奖励
+}
+
+PQTombInfo
+{
+
+}
+
+PRTombInfo
+{
+    info        :       SUserTomb;      //info 
+}
+
+PQTombTargetList
+{
+
+}
+
+PRTombTargetList
+{
+    tomb_target_list        : array<STombTarget>;                           //对战信息
+}

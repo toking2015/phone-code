@@ -1,0 +1,24 @@
+{
+	"Array":[
+			{ "id":"2",	"level":"1",	"u_level":"1",	"f_level":"0",	"w_level":"0",	"s_level":"0" },
+			{ "id":"2",	"level":"2",	"u_level":"19",	"f_level":"0",	"w_level":"0",	"s_level":"0" },
+			{ "id":"2",	"level":"3",	"u_level":"29",	"f_level":"0",	"w_level":"0",	"s_level":"0" },
+			{ "id":"2",	"level":"4",	"u_level":"39",	"f_level":"0",	"w_level":"0",	"s_level":"0" },
+			{ "id":"2",	"level":"5",	"u_level":"49",	"f_level":"0",	"w_level":"0",	"s_level":"0" },
+			{ "id":"2",	"level":"6",	"u_level":"59",	"f_level":"0",	"w_level":"0",	"s_level":"0" },
+			{ "id":"2",	"level":"7",	"u_level":"69",	"f_level":"0",	"w_level":"0",	"s_level":"0" },
+			{ "id":"2",	"level":"8",	"u_level":"79",	"f_level":"0",	"w_level":"0",	"s_level":"0" },
+			{ "id":"2",	"level":"9",	"u_level":"89",	"f_level":"0",	"w_level":"0",	"s_level":"0" },
+			{ "id":"2",	"level":"10",	"u_level":"99",	"f_level":"0",	"w_level":"0",	"s_level":"0" },
+			{ "id":"6",	"level":"1",	"u_level":"1",	"f_level":"0",	"w_level":"0",	"s_level":"0" },
+			{ "id":"6",	"level":"2",	"u_level":"19",	"f_level":"0",	"w_level":"0",	"s_level":"0" },
+			{ "id":"6",	"level":"3",	"u_level":"29",	"f_level":"0",	"w_level":"0",	"s_level":"0" },
+			{ "id":"6",	"level":"4",	"u_level":"39",	"f_level":"0",	"w_level":"0",	"s_level":"0" },
+			{ "id":"6",	"level":"5",	"u_level":"49",	"f_level":"0",	"w_level":"0",	"s_level":"0" },
+			{ "id":"6",	"level":"6",	"u_level":"59",	"f_level":"0",	"w_level":"0",	"s_level":"0" },
+			{ "id":"6",	"level":"7",	"u_level":"69",	"f_level":"0",	"w_level":"0",	"s_level":"0" },
+			{ "id":"6",	"level":"8",	"u_level":"79",	"f_level":"0",	"w_level":"0",	"s_level":"0" },
+			{ "id":"6",	"level":"9",	"u_level":"89",	"f_level":"0",	"w_level":"0",	"s_level":"0" },
+			{ "id":"6",	"level":"10",	"u_level":"99",	"f_level":"0",	"w_level":"0",	"s_level":"0" }
+		]
+}

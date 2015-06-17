@@ -1,0 +1,14 @@
+{
+	"Array":[
+			{ "gid":"101",	"coin1":"4%200",	"coin2":"4%201",	"coin3":"4%202",	"coin4":"4%203",	"coin5":"",	"coin6":"",	"coin7":"",	"coin8":"",	"coin9":"",	"coin10":"",	"coin11":"",	"coin12":"",	"coin13":"",	"coin14":"",	"coin15":"",	"coin16":"" },
+			{ "gid":"102",	"coin1":"4%204",	"coin2":"4%205",	"coin3":"4%206",	"coin4":"4%207",	"coin5":"",	"coin6":"",	"coin7":"",	"coin8":"",	"coin9":"",	"coin10":"",	"coin11":"",	"coin12":"",	"coin13":"",	"coin14":"",	"coin15":"",	"coin16":"" },
+			{ "gid":"103",	"coin1":"4%208",	"coin2":"4%209",	"coin3":"4%210",	"coin4":"4%211",	"coin5":"",	"coin6":"",	"coin7":"",	"coin8":"",	"coin9":"",	"coin10":"",	"coin11":"",	"coin12":"",	"coin13":"",	"coin14":"",	"coin15":"",	"coin16":"" },
+			{ "gid":"104",	"coin1":"4%212",	"coin2":"4%213",	"coin3":"4%214",	"coin4":"4%215",	"coin5":"",	"coin6":"",	"coin7":"",	"coin8":"",	"coin9":"",	"coin10":"",	"coin11":"",	"coin12":"",	"coin13":"",	"coin14":"",	"coin15":"",	"coin16":"" },
+			{ "gid":"201",	"coin1":"4%216",	"coin2":"4%217",	"coin3":"4%218",	"coin4":"4%219",	"coin5":"",	"coin6":"",	"coin7":"",	"coin8":"",	"coin9":"",	"coin10":"",	"coin11":"",	"coin12":"",	"coin13":"",	"coin14":"",	"coin15":"",	"coin16":"" },
+			{ "gid":"202",	"coin1":"4%200",	"coin2":"4%201",	"coin3":"4%202",	"coin4":"4%203",	"coin5":"",	"coin6":"",	"coin7":"",	"coin8":"",	"coin9":"",	"coin10":"",	"coin11":"",	"coin12":"",	"coin13":"",	"coin14":"",	"coin15":"",	"coin16":"" },
+			{ "gid":"203",	"coin1":"4%204",	"coin2":"4%205",	"coin3":"4%206",	"coin4":"4%207",	"coin5":"",	"coin6":"",	"coin7":"",	"coin8":"",	"coin9":"",	"coin10":"",	"coin11":"",	"coin12":"",	"coin13":"",	"coin14":"",	"coin15":"",	"coin16":"" },
+			{ "gid":"204",	"coin1":"4%208",	"coin2":"4%209",	"coin3":"4%210",	"coin4":"4%211",	"coin5":"",	"coin6":"",	"coin7":"",	"coin8":"",	"coin9":"",	"coin10":"",	"coin11":"",	"coin12":"",	"coin13":"",	"coin14":"",	"coin15":"",	"coin16":"" },
+			{ "gid":"205",	"coin1":"4%212",	"coin2":"4%213",	"coin3":"4%214",	"coin4":"4%215",	"coin5":"",	"coin6":"",	"coin7":"",	"coin8":"",	"coin9":"",	"coin10":"",	"coin11":"",	"coin12":"",	"coin13":"",	"coin14":"",	"coin15":"",	"coin16":"" },
+			{ "gid":"206",	"coin1":"4%216",	"coin2":"4%217",	"coin3":"4%218",	"coin4":"4%219",	"coin5":"",	"coin6":"",	"coin7":"",	"coin8":"",	"coin9":"",	"coin10":"",	"coin11":"",	"coin12":"",	"coin13":"",	"coin14":"",	"coin15":"",	"coin16":"" }
+		]
+}

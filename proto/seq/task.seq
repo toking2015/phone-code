@@ -1,0 +1,169 @@
+//=========================常量声明=======================
+#kPathTaskAccept                                //任务接受
+#kPathTaskFinished                              //任务完成奖励
+#kPathTaskAutoFinished                          //自动完成任务奖励
+#kPathDayTaskValReward                          //日常任务积分领奖
+#kPathDayTaskValReset                           //日常任务积分重置
+
+#kTaskTypeMain                      1           //主线任务
+#kTaskTypeBranch                    2           //支线任务
+#kTaskTypeDayRepeat                 3           //日常任务
+#kTaskTypeActivity                  4           //活动任务
+
+#kTaskCondGut                       1           //完成剧情          1%[剧情Id]%1
+#kTaskCondMonster                   2           //击杀怪物          2%[怪物ClassId]%[击杀次数]
+#kTaskCondCopyFinished              3           //副本通关          3%[副本Id]%1
+#kTaskCondCopyGroup                 4           //副本集群完成      4%[集群Id]%1
+#kTaskCondItem                      5           //物品收集          5%[物品Id]%[数量]
+#kTaskCondLotteryCard               6           //祭坛抽卡          6%[抽卡类型(0不分类型)]%[次数]
+#kTaskCondBuildingTake              7           //建筑资源领取      7%[建筑类型]%[数量]
+#kTaskCondVipLevel                  8           //VIP等级           8%[0]%[等级]
+#kTaskCondMonthCard                 9           //月卡剩余天数      9%[0]%[天数], 不满1天算1天
+#kTaskCondTime                      10          //指定时间完成      10%[开始小时]%[结束小时]
+#kTaskCondBossKillCount             11          //BOSS击杀数量      11%[分本类型(1:普通,2:精英)]%[数量]
+#kTaskCondSingleArenaBattle         12          //单人竞技场次数    12%[0]%[次数]
+#kTaskCondTrialFinished             13          //十字军试炼        13%[0]%[次数]
+#kTaskCondItemMerge                 14          //打造装备          14%[0]%[次数]
+#kTaskCondMarketCargoUp             15          //市场货品上架      15%[0]%[次数]
+#kTaskCondBuildingSpeed             16          //建筑物加速        16%[建筑类型]%[次数]
+#kTaskCondTotemGlyphMerge           17          //图腾合成          17%[0]%[次数]
+#kTaskCondTeamLevel                 18          //战队等级          18%[0]%[等级]
+#kTaskCondSoldierCollect            19          //英雄数量          19%[0]%[数量]
+#kTaskCondTotemLevel                20          //图腾等级数        20%[等级]%[图腾数]
+#kTaskCondSoldierQuality            21          //英雄品质          21%[等级]%[英雄数]
+#kTaskCondVendibleBuy               22          //商品购买          22%[vendible_id]%[数量]
+#kTaskCondTotemSkillLevelUp         23          //图腾技能升级数    23%0%[次数]
+#kTaskCondSoldierLevelUp            24          //武将升级数        24%0%[次数]
+#kTaskCondBossKillId                25          //BOSS指定击杀      25%[boss_id]%1
+#kTaskCondMonsterTeam               26          //击杀怪物组合      26%[monster_id]%[击杀次数]
+#kTaskCondTotem                     27          //获得图腾          27%[totem_id]%1
+#kTaskCondTomb                      28          //大墓地            28%[关数]%1
+#kTaskCondWeiXinShared              29          //微信分享          29%[0]%[次数]
+#kTaskCondChat                      30          //聊天发言          30%[频道(1全服,2副本,3公会)]%[次数]
+#kTaskCondFriendGiveActiveScoreTimes     31     //好友活跃赠送      31%[0]%[次数]
+
+#kErrTaskLevelLimit                             //任务等级限制
+#kErrTaskExist                                  //任务已存在
+#kErrTaskFrontLog                               //前置任务未完成
+#kErrTaskFrontCopy                              //前置副本未通关
+#kErrTaskLogExist                               //任务已完成
+#kErrTaskDayRepeatMax                           //日常任务数量限制
+#kErrTaskNotExist                               //任务数据不存在
+#kErrTaskCondUnfinished                         //任务条件未完成
+#kErrTaskCondReject                             //任务条件拒绝客户端修改
+#kErrTaskActivityClose                          //活动已关闭, 不能接受活动任务
+#kErrTaskDayRewardNotExist                      //日常任务积分奖励不存在
+#kErrTaskDayRewardNotEnough                     //日常任务积分不足
+#kErrTaskDayRewardAlreadyGot                    //日常任务积分奖励已领取
+
+//=========================错误码===========================
+
+//==========================通迅结构==========================
+//任务-黄少卿
+SUserTask
+{
+    task_id                 : uint32;
+    cond                    : uint32;           //任务条件完成值
+
+    create_time             : uint32;           //任务接受时间
+}
+
+//用于保存 主线任务,支线任务,活动任务 的任务记录( 日常任务不保存完成记录 )
+SUserTaskLog
+{
+    task_id                 : uint32;
+
+    create_time             : uint32;           //任务接受时间
+    finish_time             : uint32;           //任务完成时间
+}
+
+//日常任务记录(每天清空)
+SUserTaskDay
+{
+    task_id                 : uint32;
+
+    create_time             : uint32;           //任务接受时间
+    finish_time             : uint32;           //任务完成时间
+}
+
+//=========================通迅协议============================
+//@@请求任务列表
+PQTaskList
+{
+}
+PRTaskList
+{
+    list                    : indices< SUserTask >;
+}
+
+//@@请求任务记录列表
+PQTaskLogList
+{
+}
+PRTaskLogList
+{
+    list                    : indices< SUserTaskLog >;
+}
+
+//@@请求接受任务
+PQTaskAccept
+{
+    task_id                 : uint32;
+}
+
+//@@任务完成
+PQTaskFinish
+{
+    task_id                 : uint32;
+}
+//@@任务自动完成
+PQTaskAutoFinish
+{
+    task_id                 : uint32;
+}
+
+//@@任务数据更新
+PQTaskSet
+{
+    task_id                 : uint32;
+    cond                    : uint32;           //任务条件完成值( 部分任务由客户端主动提交数值修改 )
+}
+PRTaskSet
+{
+    set_type                : uint8;            //kObjectAdd, kObjectDel, kObjectUpdate
+    data                    : SUserTask;
+}
+
+//返回任务完成记录( 只增不删 )
+PRTaskLog
+{
+    data                    : SUserTaskLog;
+}
+
+//返回单个日常任务记录( 只增改 )
+PRTaskDay
+{
+    data                    : SUserTaskDay;
+}
+
+//返回日常任务记录列表
+PRTaskDayList
+{
+    data                    : indices< SUserTaskDay >;
+}
+
+//日常活动积分领奖
+PQTaskDayValReward
+{
+    id                      : uint32;
+}
+PRTaskDayValReward
+{
+    id                      : uint32;
+    err                     : uint32;
+}
+//日常活动积分奖励列表
+PRTaskDayValRewardList
+{
+    id_list                 : array<uint32>;
+}

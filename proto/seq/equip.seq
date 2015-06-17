@@ -1,0 +1,46 @@
+//=========================常量声明=======================
+#kPathEquipReplace                      //装备替换
+#kPathEquipSelect                       //装备选择T1T2...
+
+SUserEquipGrade
+{
+    equip_type : uint32;
+    level : uint32;
+    grade : uint32;
+}
+
+//@@合成
+PQEquipMerge
+{
+    id                      : uint32;                   //物品合成的ID
+}
+
+PREquipMerge
+{
+    item                    : SUserItem;
+}
+
+//@@装备替换
+PQEquipReplace
+{
+    is_replace : int8;      //[0:保留,1:替换]
+    equip_guid : uint32;    //新装备的guid
+}
+
+PREquipReplace
+{
+    is_replace : int8;      //[0:保留,1:替换]
+}
+
+//@@选择套装生效等级
+PQEquipSelectSuit
+{
+    equip_type : uint32;    //装备[甲]类型 
+    select_level : uint32;  //选择的等级[EquipSuit.xls的level]
+}
+
+//套装选择列表更新
+PREquipSelectSuits
+{
+    select_suits : array<uint32>;
+}

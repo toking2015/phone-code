@@ -1,0 +1,261 @@
+//=========================常量声明=======================
+#kPathFriendSend                          //好友赠送
+
+
+#kFriendGroupFriendMax              300       //好友上限
+#kFriendGroupStrangerMax            20        //陌生人上限
+#kFriendGroupBlackMax               100       //黑名单上限
+
+#kFriendGroupFriend                 1         //好友
+#kFriendGroupStranger               2         //陌生人
+#kFriendGroupBlack                  3         //黑名单
+
+#kFriendGroupMin                    1         //好友分组最小值
+#kFriendGroupMax                    3         //好友分组最大值
+
+#kFriendGiveOne                     1         //赠送活跃度
+#kFriendGiveTwo                     2         //赠送物品
+
+//=========================错误码===========================
+#kErrFriendNoExist                            //好友数据不存在
+#kErrFriendExist                              //好友已存在
+#kErrFriendUpdateParam                        //参数操作错误
+#kErrFriendGroupNotExist                      //分组不存在
+#kErrFriendUpdateNoModified                   //无修改请求
+#kErrFriendNormalMax                          //好友已达上限
+#kErrFriendBlackMax                           //黑名单已达上限
+#kErrFriendSelf                               //不能加自己为好友
+#kErrFriendOffline                            //对方不在线
+#kErrFriendNotOpenForSelf                     //未开启好友功能
+#kErrFriendNotOpen                            //对方未开启好友功能
+#kErrFriendNoExistMine                        //你非对方好友
+#kErrFriendActiveScoreNoEnough                //赠送的活跃度不够
+#kErrFriendActiveScoreLimit                   //现在还不能赠送活跃度
+#kErrFriendItemSendNumLimit                   //赠送数量太多
+#kErrFriendItemMaxNumLimit                    //赠送数量太多
+#kErrFriendActiveScoreMaxNumLimit             //对方人气很高哦，不能再赠送了
+#kErrFriendItemEorror                         //物品赠送类型不符
+#kErrFriendItemNoNum                          //赠送物品数量不能为空
+#kErrFriendItemNumNoEnough                    //赠送物品数量不够
+#kErrFriendFightNoOpenSinglearenaOne          //竞技场未开放，不能挑战
+#kErrFriendFightNoOpenSinglearenaTwo          //对方竞技场未开放，不能挑战
+#kErrFriendSelfLevelLimit                     //等级不够，不能添加好友
+#kErrFriendFrinedLevelLimit                   //对方等级不够，不能被添加好友
+
+//==========================通迅结构==========================
+//好友-黄少卿
+SUserFriend
+{
+    friend_id               :           uint32;
+    friend_favor			:			uint32;			//好感度
+    friend_group			:			uint8;			//好友分组
+    on_time					:			uint32;			//上线时间( on_time == 0 为不在线 )
+    friend_avatar           :           uint16;         //好友头像
+    friend_level            :           uint32;         //好友战队等级
+    friend_name             :           string;         //好友名字
+    friend_gname            :           string;         //好友公会名字
+}
+
+SFriendLimit
+{
+    friend_id               :           uint32;         //好友id
+    time_limit              :           uint32;         //最后一次赠送时间点  针对活跃度
+    type_limit              :           uint32;         //当天重置时间点    针对物品
+    num_limit               :           uint32;         //数量限制
+}
+
+SFriendData
+{
+    target_id               :           uint32;
+    target_avatar           :           uint16;
+    target_level            :           uint32;
+    target_name             :           string;
+}
+//============================数据中心========================
+CFriend
+{ 
+    user_id_friend          :          indices< SFriendData >; 
+
+}
+
+//=========================通迅协议============================
+//@@请求好友列表
+PQFriendList
+{
+
+}
+//@@请求好友限制列表
+PQFriendLimitList
+{
+
+}
+//@@加好友
+PQFriendMake
+{
+    target_id				:	uint32;				//对方角色id
+    group                   :   uint8;              //好友分组
+}
+//@@加好友
+PQFriendMakeByName
+{
+    target_name				:	string;				//对方角色名字  默认为好友分组
+}
+//@@全部加好友
+PQFriendMakeAll
+{
+	target_id_list			:	array< uint32 >;				//对方角色id列表    默认为好友分组
+}
+//@@好友分组修改
+PQFriendUpdate
+{
+	target_id				:	uint32;				//对方角色id
+	set_type				:   uint8;				//操作方式(只接受 kObjectUpdate, kObjectDel)
+	group					:   uint8;				//分组修改
+}
+//@@请求加好友
+PQFriendRequest
+{
+    target_id               :   uint32;             //对方角色id
+}
+//@@消息
+PQFriendMsg
+{
+	target_id				:	uint32;				//对方角色id
+	msg						:   string;				//消息正文
+}
+
+//@@确定加好友
+PQFriendOK
+{
+	target_id               :  uint32;					//发送加好友者id，对应SFriendRMake中targetid
+}
+//@@好友推荐请求
+PQSFriendRecommend
+{
+
+}
+
+//@@好友挑战
+PQFriendFightApply
+{
+    friend_id               :       uint32;         //好友角色id
+}
+
+//@@赠送
+PQFriendGive
+{
+    friend_id               :       uint32;             //好友角色id
+    give_type               :       uint8;              //kFriendGiveOne kFriendGiveTwo
+    active_score            :       uint32;             //活跃度
+    item_list               :       array<S3UInt32>;    //cate=为背包类型 objid=物品guid val=赠送数量
+}
+
+//@@聊天
+PQFriendChatContent
+{
+    friend_id   : uint32;     //好友guid
+    text        : string;       //文本内容
+    sound       : bytes;        //声音内容
+    length      : uint32;       //声音长度(ms)
+
+    avater      : uint32;       //角色头像
+    text_ext    : string;      //文本扩展
+}
+
+//@@拉黑
+PQFriendBlack
+{
+    target_id				:	uint32;				//对方角色id
+}
+
+//@@拉黑
+PQFriendBlackByName
+{
+    target_name				:	string;				//对方角色名字
+}
+
+//返回好友列表
+PRFriendList
+{
+	friend_list			    :	array<SUserFriend>;			//好友列表
+}
+//返回好友限制列表
+PRFriendLimitList
+{
+	limit_list			    :	array<SFriendLimit>;			//好友限制列表
+}
+//被加好友通知
+PRFriendMake
+{
+	target_id				:	uint32;					//对方角色id
+	info					:	SUserFriend;				//好友数据
+}
+//请求加好友
+PRFriendRequest
+{
+    target_id               :   uint32;             //请求者角色id
+    info                    :   SUserFriend;        //
+}
+//好友数据更新
+PRFriendUpdate
+{
+	info					:	SUserFriend;				//好友数据
+	set_type			    :   uint8;							//修改类型
+}
+//好友限制数据更新
+PRFriendLimitUpdate
+{
+	info					:	SFriendLimit;				//好友限制数据
+	set_type			    :   uint8;							//修改类型
+}
+
+//返回消息
+PRFriendMsg
+{
+	friend_id			    :	uint32;						//好友角色id
+	purview				    :	uint8;						//用户权限
+	msg					    :   string;						//消息正文
+}
+
+//好友推荐回复
+PRFriendRecommend
+{
+	target_id_list          :  array< uint32 >;     //好友列表，没有好友可推荐，则列表为空 <兼容>
+    friend_list             :  array< SUserFriend >; //
+}
+
+//@@赠送
+PRFriendGive
+{
+    friend_id               :       uint32;             //好友角色id
+    give_type               :       uint8;              //kFriendGiveOne
+    active_score            :       uint32;             //活跃度
+    item_list               :       array<S2UInt32>;      //赠送数据 first = item_id   second = 数量
+}
+
+PRFriendChatContent
+{
+    
+    target_id   : uint32;       //说话者id
+    name        : string;       //角色名
+    level       : uint32;       //等级
+
+    text    : string;
+    sound   : bytes;
+    length  : uint32;       //声音长度(ms)
+
+    avater  : uint32;       //角色头像
+
+    text_ext : string;      //文本扩展
+}
+
+//赠送时，如果对方不能接收时返回给赠送者的协议
+PRFriendGiveLimit
+{
+    target_id   :   uint32;     //接受者id
+    target_name :   string;     //接受者名字
+    max_num     :   uint32;     //接受者现在最多能接受的赠品数量
+
+}
+
+

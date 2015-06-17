@@ -1,0 +1,287 @@
+//=========================常量声明=========p ==============
+#kPathGuildInit                     //公会初始化
+#kPathGuildLoad                     //公会加载
+#kPathGuildCreate                   //创建公会
+#kPathGuildJoin                     //加入公会
+#kPathGuildExit                     //退出公会
+#kPathGuildJobChange                //公会职位变更
+#kPathGuildContribute               //公会捐献
+#kPathGuildLevelup                  //公会升级
+
+#kGuild
+#kGuildJobCommon            1       //普通成员
+#KGuildJobVip               2       //贵宾
+#kGuildJobMaster            3       //会长
+
+#kGuildLogMax               20
+
+#kGuildLogJoin              1       //加入
+#kGuildLogQuit              2       //退出
+#kGuildLogKick              3       //踢出
+#kGuildLogContribute        4       //贡献
+#kGuildLogLevelup           5       //升级
+#kGuildLogMasterChange      6       //会长转让
+
+//=========================错误码===========================
+#kErrGuild
+#kErrGuildExist                     //公会已存在
+#kErrGuildNameEmpty                 //公会名称不能为空
+#kErrGuildNameSpecial               //公会名称不能存在特殊字符
+#kErrGuildNameExist                 //公会名称已存在
+#kErrGuildNoExist                   //公会不存在
+#kErrGuildExitMaster                //公会会长不允许退出公会
+#kErrGuildJobChangeSelf             //不能对自己职务进行更改
+#kErrGuildJobChangePurview          //职务修改权限不足
+#kErrGuildMemberNoExist             //公会成员不存在
+#kErrGuildApplyMax                  //申请数量已达上限
+#kErrGuildAuthority                 //权限不足
+#kErrGuildApplyFull                 //公会申请人数过多
+#kErrGuildData                      //数据错误
+#kErrGuildApplyNotFound             //找不到申请人
+#kErrGuildMemberMax                 //公会人数已满
+#kErrGuildContributeTimeLimit       //捐献次数已用完
+#kErrGuildLevelupXpLack             //升级经验不足
+//==========================通迅结构==========================
+
+//公会简易信息结构
+SGuildSimple
+{
+    guid                    : uint32;
+    name                    : string;
+    level                   : uint16;       //军团等级
+    creator_id              : uint32;       //创建人role_id
+}
+
+//公会日志
+SGuildLog
+{
+    type                    : uint32;
+    time                    : uint32;
+    params                  : string;
+}
+
+//公会基本信息结构
+SGuildInfo
+{
+    create_time             : uint32;               //创建日期
+    xp                      : uint32;               //经验
+    post_msg                : string;               //公告
+}
+
+SGuildProtect
+{
+    lock_time               : uint32;   //用于临时锁定用户可能产生冲突的操作, 例如: 创建公会, 角色改名等
+}
+
+//公会浏览面板信息结构
+SGuildPanel
+{
+    simple                  : SGuildSimple;
+    info                    : SGuildInfo;
+}
+
+//公会成员信息结构
+SGuildMember
+{
+    role_id                 : uint32;
+    job                     : uint32;        //公会职位
+    join_time               : uint32;
+    daily_contribute        : uint32;
+    history_contribute      : uint32;
+}
+
+//公会存储数据库的所有数据结构
+SGuildData
+{
+    simple                  : SGuildSimple;
+    info                    : SGuildInfo;
+    protect                 : SGuildProtect;
+    
+    log_list                : array<SGuildLog>;         //动态日志
+    member_list             : array<SGuildMember>;      //成员列表
+}
+
+//公会扩展信息结构( 不保存至数据库,只用于服务器内部临时保存 )
+SGuildExt
+{
+    check                   : map< S4Int32 >;   //公会数据一致性校验
+    operate_time            : uint32;           //最后操作时间
+    meet_time               : uint32;           //最后访问时间
+    save_time               : uint32;           //最后保存时间
+    apply_users             : array<uint32>;    //申请人列表
+}
+
+//公会数据集合
+SGuild
+{
+    guid                    : uint32;
+    
+    data                    : SGuildData;
+    ext                     : SGuildExt;
+}
+
+//============================数据中心========================
+CGuildMap
+{
+    guild_map               : indices< SGuild >;    //公会数据集合
+    simple_map              : indices< SGuildSimple >;  //公会基本数据集合
+
+    order_member_count      : array< uint32 >;      //根据成员总数排序的公会id列表
+    
+    save_index              : int32;                //数据保存索引
+
+    guild_name_id         : map< uint32 >;        //名称映射id
+    guild_id_name         : indices< string >;    //id映射名称
+}
+
+//=========================通迅协议============================
+//公会基本数据请求
+PQGuildSimple
+{
+    target_id               : uint32;
+}
+PRGuildSimple
+{
+    data                    : SGuildSimple
+}
+
+//公会显示信息请求
+PQGuildPanel
+{
+    target_id               : uint32;
+}
+PRGuildPanel
+{
+    data                    : SGuildPanel;
+}
+
+//公会成员请求
+PQGuildMemberList
+{
+    target_id               : uint32;           //公会id
+}
+PRGuildMemberList
+{
+    list                    : array< SGuildMember >;
+}
+
+//公会列表请求
+PQGuildList
+{
+    index                   : uint32;           //从索引开始请求, 索引从0开始
+    count                   : uint32;           //请求数量
+}
+PRGuildList
+{
+    index                   : uint32;           //返回的数据从索引index处开始, 索引从0开始
+    sum                     : uint32;           //总长度( 全服列表总数 )
+
+    list                    : array< uint32 >;  //公会 id 列表
+}
+
+//所有公会基本信息列表请求(用于服务器初始化)
+PQGuildSimpleList
+{
+}
+PRGuildSimpleList
+{
+    list                    : array< SGuildSimple >;    //公会基本信息列表数据
+}
+
+//创建公会
+PQGuildCreate
+{
+    name                    : string;           //公会名称
+}
+PRGuildCreate
+{
+    guild_id                : uint32;           //公会id
+    name                    : string;           //公会名称
+    create_time             : uint32;           //创建时间
+}
+
+//邀请
+PQGuildInvite
+{
+    target_id : uint32;     //被邀请人
+}
+
+//申请
+PQGuildApply
+{
+    set_type : uint32;      //[kObjectAdd,kObjectDel]
+    guild_id : uint32;
+}
+
+//申请人更新
+PRGuildApplySet
+{
+    set_type : uint32;
+    target_id : uint32;
+}
+
+//申请人列表
+PRGuildApply
+{
+    apply_list : array<uint32>;
+}
+
+//审批
+PQGuildApprove
+{
+    target_id : uint32;
+    is_accept : int8;
+}
+
+//退团
+PQGuildQuit
+{
+}
+
+//踢人
+PQGuildKick
+{
+    target_id : uint32;
+}
+
+//任命
+PQGuildSetJob
+{
+    target_id : uint32;
+    job : uint8;
+}
+
+//成员数据更新
+PRGuildMemberSet
+{
+    set_type : uint32;
+    member : SGuildMember;
+}
+
+//贡献
+PQGuildContribute
+{
+    id : uint32;
+}
+
+//公会升级
+PQGuildLevelup
+{
+}
+
+//等级经验更新
+PRGuildLevel
+{
+    level : uint32;
+    xp : uint32;
+}
+
+//公告
+PQGuildPost
+{
+    content : string;
+}
+PRGuildPost
+{
+    content : string;
+}

@@ -1,0 +1,16 @@
+{
+    "area" : "s1.",
+    "net_singal_hosts" : "../net_single_hosts",
+
+    //连接关闭后冷却时间(秒)
+    "sock_cooling_time" : 60,
+
+    //动态加载 so 路径
+    "so_path"                   : "../so_auth/libso_auth.so",
+
+    //日志输出路径
+    "log_path"                  : "/usr/local/nginx/html/log/",
+
+    //随机端口地址
+    "outside_addr" : "12000"
+}

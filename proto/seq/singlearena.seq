@@ -1,0 +1,231 @@
+//=========================常量声明=======================
+#kPathSingleArena                               //竞技场
+
+#kSingleArenaObjectAdd           0          //添加
+#kSingleArenaObjectDel           1          //删除
+
+
+//=========================错误码===========================
+#kErrSingleArenaNotExist                        //竞技场未开放
+#kErrSingleArenaCD                               //挑战时间未到
+#kErrSingleArenaTimes                           //挑战次数不够
+#kErrSingleArenaGold                            //元宝不足
+#kErrSingleArenaNoLoad                          //竞技场数据加载未完成
+
+//==========================通迅结构==========================
+//竟技场-王子浪
+SSingleArenaOpponent
+{
+    target_id       :   uint32;                 //对手guid, 少于7位数的为假人
+    name            :   string;                 //对手名字
+    avatar          :   uint16;                 //对手头像
+    team_level      :   uint32;                 //战队等级
+    rank            :   uint32;                 //对手名次
+    fight_value     :   uint32;                 //战力，假人
+    formation_list  :   array<SUserFormation>;  //阵型     //如果此结构体做为排行榜数据，这list总为空
+}
+
+SSingleArenaLog
+{
+    target_id   :   uint32;     //拥有者role_id <因为要保存到DB>
+    fight_id    :   uint32;     //战斗log
+    ack_id      :   uint32;     //进攻者id
+    def_id      :   uint32;     //防御者id
+    ack_level   :   uint32;     //进攻者等级
+    def_level   :   uint32;     //防御者等级
+    ack_name    :   string;     //进攻者名字
+    ack_avatar  :   uint16;     //进攻者头像
+    def_name    :   string;     //防御者名字
+    def_avatar  :   uint16;     //防御者头像
+    win_flag    :   uint32;     //1,进攻者羸 2，反之
+    log_time    :   uint32;     //战斗记录时间
+    rank_num    :   int32;      //名次的变动
+}
+
+SSingleArenaInfo
+{
+    opponent_list       :   array<SSingleArenaOpponent>;     //对手    
+    fightlog_list       :   array<SSingleArenaLog>;         //战斗log
+    cur_rank            :   uint32;                         //当前排名
+    max_rank            :   uint32;                         //历史最高排名
+    fight_value         :   uint32;                         //当前战力
+    time_cd             :   uint32;                         //挑战CD
+    add_times           :   uint32;                         //增加的挑战次数
+    cur_times           :   uint32;                         //当前挑战次数
+}
+//============================数据中心========================
+
+CSingleArenaMap
+{
+    singlearena_info_map       : indices< SSingleArenaInfo >;               //玩家信息
+    singlearena_rank_map       : indices< SSingleArenaOpponent >;           //排行榜信息
+    singlearena_show_map       : indices< SSingleArenaOpponent >;           //用来显示的排行榜信息<暂定前50名>
+    id_rank_map                : indices< uint32 >;                         //id 与排名 对应表
+    target_guid                : uint32;                                    //假人的guid递增
+    load_log                   : uint32;                                    //从DB加载数据标志,2 加载完成
+}
+
+
+//==========================通迅协议==========================
+
+
+//获取基本信息
+PQSingleArenaInfo
+{
+}
+
+PRSingleArenaInfo
+{
+    info        :   SSingleArenaInfo;
+}
+
+//刷新对手
+PQSingleArenaRefresh
+{
+}
+
+PRSingleArenaRefresh
+{
+    opponent_list    :   array<SSingleArenaOpponent>;    //对手，固定四个
+}
+
+//申请挑战CD
+PQSingleArenaReplyCD
+{
+}
+
+PRSingleArenaReplyCD
+{
+    time_cd     :   uint32;         //CD时间， 用现在的时间与此时间作比较，
+}
+
+//清空挑战CD
+PQSingleArenaClearCD
+{
+}
+
+PRSingleArenaClearCD
+{
+    time_cd     :   uint32;         //CD时间， 其实，只要监听到此协议，就代表清空CD成功
+}
+
+//增加挑战次数
+PQSingleArenaAddTimes
+{
+}
+
+//add_times  + Level.xls中的singlearena_times - cur_times就是今天还可以挑战的次数
+PRSingleArenaAddTimes
+{
+    add_times   :   uint32;         //增加的挑战次数
+    cur_times   :   uint32;         //当前挑战次数
+}
+
+
+//申请最近的竞技log
+PQSingleArenaLog
+{
+}
+
+PRSingleArenaLog
+{
+    fightlog_list       :   array<SSingleArenaLog>;                  //战斗log
+}
+
+//申请排行榜数据
+PQSingleArenaRank
+{
+    index   : uint32;   //从第几名开始
+    count   : uint32;   //数量
+}
+
+PRSingleArenaRank
+{
+    list : array<SSingleArenaOpponent>;
+}
+
+PRSingleBattleReply
+{
+    cur_rank : uint32;    //当前排名（最高排名也是这）
+    win_flag : uint32;    //羸：kFightLeft 输: kFightRight
+    add_rank : uint32;    //增加的名次
+    coin     : S3UInt32;    //奖励
+}
+
+//申请自己竞技场的当前排名<没有开放的话就不会有 PRSingleArenaMyRank 返回>
+PQSingleArenaMyRank
+{
+}
+
+PRSingleArenaMyRank
+{
+    rank    : uint32;   //当前排名
+}
+
+//如果自己被玩家打败将会收到此协议作提醒
+PRSingleArenaBattleed
+{
+}
+
+//战斗结束后，发掉落包
+PRSingleArenaBattleEnd
+{
+    win_flag        : uint32;    //1,赢 2,输
+    coins           : array< S3UInt32 >   //奖励
+}
+
+//申请玩家竞技场当前四个对手的中真人竞技防御阵里所有的武将id与图腾id
+PQUserSingleArenaPre
+{
+}
+PRUserSingleArenaPre
+{
+
+    s_map       : indices< array< S2UInt32 > >;       //武将
+    t_map       : indices< array< S2UInt32 > >;       //图腾
+}
+
+//对手排名有变动
+PRSingleArenaCheck
+{
+    flag        : uint8;            //0 代表战斗开始前就检测到对手排名已改变   1 代表战斗结束后检测到对手排名已改变
+}
+//==============================服务器用========================
+PQSingleArenaSave
+{
+    set_type   : uint8;             //kSingleArenaObjectAdd
+    data       : SSingleArenaOpponent;
+}
+
+//加载排行榜数据
+PQSingleArenaRankLoad
+{
+}
+
+
+PRSingleArenaRankLoad
+{
+    list :  array<SSingleArenaOpponent>;
+}
+
+PQSingleArenaLogLoad
+{
+}
+
+PRSingleArenaLogLoad
+{
+    list :  array<SSingleArenaLog>;
+}
+
+PQSingleArenaLogSave
+{
+    target_id   : uint32;
+    list       : array<SSingleArenaLog>;
+}
+
+//////////////////
+//引导过后发送此协议，可获得奖励等
+PQSingleArenaGetFirstReward
+{
+}
+

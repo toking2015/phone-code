@@ -1,0 +1,24 @@
+{
+	"Array":[
+			{ "count":"1",	"cost":"3%0%30",	"power":"120" },
+			{ "count":"2",	"cost":"3%0%30",	"power":"120" },
+			{ "count":"3",	"cost":"3%0%40",	"power":"120" },
+			{ "count":"4",	"cost":"3%0%40",	"power":"120" },
+			{ "count":"5",	"cost":"3%0%50",	"power":"120" },
+			{ "count":"6",	"cost":"3%0%50",	"power":"120" },
+			{ "count":"7",	"cost":"3%0%60",	"power":"120" },
+			{ "count":"8",	"cost":"3%0%60",	"power":"120" },
+			{ "count":"9",	"cost":"3%0%70",	"power":"120" },
+			{ "count":"10",	"cost":"3%0%70",	"power":"120" },
+			{ "count":"11",	"cost":"3%0%80",	"power":"120" },
+			{ "count":"12",	"cost":"3%0%80",	"power":"120" },
+			{ "count":"13",	"cost":"3%0%90",	"power":"120" },
+			{ "count":"14",	"cost":"3%0%90",	"power":"120" },
+			{ "count":"15",	"cost":"3%0%100",	"power":"120" },
+			{ "count":"16",	"cost":"3%0%100",	"power":"120" },
+			{ "count":"17",	"cost":"3%0%110",	"power":"120" },
+			{ "count":"18",	"cost":"3%0%110",	"power":"120" },
+			{ "count":"19",	"cost":"3%0%120",	"power":"120" },
+			{ "count":"20",	"cost":"3%0%120",	"power":"120" }
+		]
+}

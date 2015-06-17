@@ -1,0 +1,39 @@
+{
+    "group" : "inside",
+
+    "area" : "s1.",
+    "net_singal_hosts" : "../net_single_hosts",
+
+    //动态加载 so 路径
+    "so_path"                   : "../so_realdb/libso_realdb.so",
+
+    "sql" :
+    [
+        {
+            "name"      : "share",
+            "host"      : "192.168.1.249",
+            "port"      : 3306,
+            "db"        : "immortal_data",
+            "user"      : "immortal",
+            "pwd"       : "immortal"
+        },
+
+        {
+            "name"      : "master",
+            "host"      : "localhost",
+            "port"      : 3306,
+            "db"        : "db_master",
+            "user"      : "immortal",
+            "pwd"       : "immortal"
+        },
+
+        {
+            "name"      : "db_idx",
+            "host"      : "localhost",
+            "port"      : 3306,
+            "db"        : "db_user",
+            "user"      : "immortal",
+            "pwd"       : "immortal"
+        }
+    ]
+}

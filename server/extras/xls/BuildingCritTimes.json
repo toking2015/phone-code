@@ -1,0 +1,6 @@
+{
+	"Array":[
+			{ "building_type":"2",	"times1":"3000%1",	"times2":"2000%2",	"times3":"1500%3",	"times4":"1000%4",	"times5":"800%5",	"times6":"500%6",	"times7":"350%7",	"times8":"200%8",	"times9":"100%9",	"times10":"50%10" },
+			{ "building_type":"6",	"times1":"3000%1",	"times2":"2000%2",	"times3":"1500%3",	"times4":"1000%4",	"times5":"800%5",	"times6":"500%6",	"times7":"350%7",	"times8":"200%8",	"times9":"100%9",	"times10":"50%10" }
+		]
+}

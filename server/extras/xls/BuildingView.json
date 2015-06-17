@@ -1,0 +1,10 @@
+{
+	"Array":[
+			{ "id":"1001",	"name":"建筑物1",	"page":"1",	"depth":"1",	"x":"200",	"y":"250",	"command":"showBuilding",	"desc":"tips1" },
+			{ "id":"1002",	"name":"建筑物2",	"page":"1",	"depth":"2",	"x":"167",	"y":"96",	"command":"",	"desc":"tips2" },
+			{ "id":"1003",	"name":"建筑物3",	"page":"1",	"depth":"3",	"x":"600",	"y":"397",	"command":"",	"desc":"tips3" },
+			{ "id":"1004",	"name":"建筑物4",	"page":"1",	"depth":"4",	"x":"468",	"y":"225",	"command":"",	"desc":"tips4" },
+			{ "id":"1005",	"name":"建筑物5",	"page":"1",	"depth":"5",	"x":"547",	"y":"86",	"command":"",	"desc":"tips5" },
+			{ "id":"1006",	"name":"建筑物6",	"page":"1",	"depth":"6",	"x":"755",	"y":"203",	"command":"",	"desc":"tips6" }
+		]
+}

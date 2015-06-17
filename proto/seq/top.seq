@@ -1,0 +1,31 @@
+#kTopUser                    1
+#kTopGuild                   2
+
+#kErrNoUser
+
+//用户排行相关信息
+SUserTop
+{
+    dailygain_time          :   uint32;     //日增变量时间戳
+    dailygain_xp            :   uint32;     //日增经验值
+    dailygain_soldier       :   uint16;     //日增武将数量
+    dailygain_fame          :   uint32;     //日增名望值
+}
+
+//##玩家排行相关数据保存
+PQTopSave
+{
+    top_data				: SUserTop;
+}
+
+//@@玩家排行相关数据获取
+PQTopData
+{
+    
+}
+
+PRTopData
+{
+    top_data				: SUserTop;
+}
+

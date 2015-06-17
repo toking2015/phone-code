@@ -1,0 +1,78 @@
+# depslib dependency file v1.0
+1322019445 source:/home/luojianwei/workspace/zj2/gate/CConfig.cpp
+	"CConfig.h"
+	<string.h>
+	<libxml/parser.h>
+	<libxml/tree.h>
+
+1322019430 /home/luojianwei/workspace/zj2/gate/CConfig.h
+	<list>
+	<map>
+
+1322019473 source:/home/luojianwei/workspace/zj2/gate/main.cpp
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<string.h>
+	<sys/param.h>
+	<sys/types.h>
+	<sys/stat.h>
+	"server.h"
+
+1321845944 source:/home/luojianwei/workspace/zj2/gate/main.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<signal.h>
+	<sys/param.h>
+	<sys/types.h>
+	<sys/stat.h>
+	"../common/assert.h"
+	"server.h"
+	"../common/datadef.h"
+	"../common/logger.h"
+
+1322018506 /home/luojianwei/workspace/zj2/gate/server.h
+
+1322019039 source:/home/luojianwei/workspace/zj2/gate/epoll.cpp
+	"epoll.h"
+	<signal.h>
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<string.h>
+	<sys/param.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<list>
+
+1321845944 /home/luojianwei/workspace/zj2/gate/epoll.h
+	<pthread.h>
+	<errno.h>
+	<unistd.h>
+	<signal.h>
+	<stdarg.h>
+	<sys/types.h>
+	<arpa/inet.h>
+	<sys/socket.h>
+	<sys/epoll.h>
+	<fcntl.h>
+
+1322019419 source:/home/luojianwei/workspace/zj2/gate/ipc.cpp
+	"ipc.h"
+	"CConfig.h"
+	"epoll.h"
+	<stdio.h>
+	<string.h>
+	<pthread.h>
+
+1322019077 /home/luojianwei/workspace/zj2/gate/ipc.h
+	<zmq.h>
+
+1322019575 source:/home/luojianwei/workspace/zj2/gate/server.cpp
+	"epoll.h"
+	"ipc.h"
+	"CConfig.h"
+	<string.h>
+	<stdio.h>
+

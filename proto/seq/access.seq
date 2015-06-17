@@ -1,0 +1,27 @@
+//=========================错误码===========================
+#kErrAccessSockOpen                 //连接已打开
+#kErrAccessSockClose                //连接已关闭
+
+
+//=========================通迅协议============================
+PQAccessEvent
+{
+    sock            : int32;
+    code            : uint32;
+}
+
+//请求广播频道列表
+PQAccessBroadCastList
+{
+}
+PRAccessBroadCasetList
+{
+    channel_list    : array< uint32 >;
+}
+
+//@@设置频道监听
+PQAccessBroadCastSet
+{
+    channel         : uint32;
+    set_type        : uint8;        //kObjectAdd, kObjectDel
+}

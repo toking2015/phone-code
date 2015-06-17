@@ -1,0 +1,92 @@
+//=========================常量声明=======================
+#kShopTypeMedal                     1           //勋章商店
+#kShopTypeCommon                    2           //游戏商城
+#kShopTypeMystery                   3           //神秘商店
+#kShopTypeTomb                      4           //大墓地商店
+#kShopTypeGuild                     5           //公会商店
+#kShopTypeAchievementMedal          6           //竞技场成就商店
+#kShopTypeAchievementTomb           7           //大墓地成就商店
+
+//Path
+#kPathMedalShop                                 //勋章商店购买
+#kPathCommonShop                                //游戏商城购买
+#kPathMysteryShop                               //神秘商店购买
+#kPathTombShop                                  //大墓地商店购买
+#kPathClearMasteryCD                            //清除商店CD
+#kPathTombShopRefresh                           //清除大墓地商店限购记录
+#kPathGuildShop                                 //公会商店购买
+#kPathAchievementMedalShop                      //竞技场成就商店购买
+#kPathAchievementTombShop                       //大墓地成就商店购买
+
+//成就商店条件
+#kASCondArenaWinTimes               1           //竞技场胜利次数达到n次
+#kASCondArenaRank                   2           //竞技场历史排名达到n名
+#kASCondMedalConsume                3           //竞技场勋章消费过n
+#kASCondTombWinTimes                4           //大墓地打通n关
+#kASCondTombReset                   5           //大墓地重置n次
+#kASCondTombPass                    6           //大墓地杀死巫妖小克n次
+
+//=========================错误码===========================
+
+//==========================通迅结构==========================
+//购买记录
+SUserShopLog
+{
+    id : uint32;            //商品id
+    daily_count : uint32;   //本日购买数量
+    history_count : uint32; //历史购买数量
+}
+
+//神秘商店商品
+SUserMysteryGoods
+{
+    id : uint32;            //商品id
+    buyed_count : uint16;   //已购买数量
+}
+
+//============================数据中心========================
+
+//=========================通迅协议============================
+//购买
+PQShopBuy
+{
+    id : uint32;            //商品id
+    count : uint32;         //数量
+}
+PRShopBuy
+{
+    status : int8;          //0:失败，1:成功
+    id : uint32;            //商品id
+    count : uint32;         //数量
+}
+
+//神秘商店刷新请求
+PQShopRefresh
+{
+}
+
+//请求购买记录
+PQShopLog
+{
+}
+PRShopLog
+{
+	log : array<SUserShopLog>;
+}
+
+//购买记录（单独更新）
+PRShopLogSet
+{
+	log : SUserShopLog;
+}
+
+//神秘商店商品列表
+PRShopMysteryGoods
+{
+    goods_list : array<SUserMysteryGoods>;
+}
+
+//大墓地商店刷新
+PQShopTombRefresh
+{
+}

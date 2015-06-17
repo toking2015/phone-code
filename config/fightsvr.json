@@ -1,0 +1,18 @@
+{
+    "area" : "s1.",
+    "net_singal_hosts" : "../net_single_hosts",
+
+    "save_log_step" : 1,
+    "free_log_step" : 10,
+    "fightlog_path" : "./fightlog",
+
+    //静态数据目录
+    "extras_dir" : "../../../extras/",
+
+    //lua_path
+    "lua_path"                  : "../../../../.local/",
+
+    //动态加载 so 路径
+    "so_path"                   : "../so_fight/libso_fight.so"
+
+}

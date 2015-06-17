@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<group>
+<gates max="4000">
+	<gate id="0" public_port="8082" ip="127.0.0.1" port="10500">
+	<send_to ip="127.0.0.1" port="10600"/>
+	</gate>
+</gates>
+</group>

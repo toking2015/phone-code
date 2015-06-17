@@ -1,0 +1,45 @@
+//=========================常量声明=======================
+#kPathTeamLevelUp                               //战队等级升级
+#kPathChangeName                                //修改名字
+#kPathChangeAvatar                             //修改头像
+
+//=========================错误码===========================
+#kErrTeamNameHave                               //该名字已经被占用
+#kErrTeamNameLong                               //名字太长
+#kErrTeamNameInvalid                            //名字中有不合法的字符
+#kErrTeamAvatarNoExist                          //头像不存在
+
+//==========================通迅结构==========================
+STeamInfo
+{
+    can_change_name             : uint32;       //是否可以改名
+    change_name_count           : uint32;       //改名的次数
+}
+
+//=========================通迅协议============================
+//@@请求升级
+PQTeamLevelUp
+{
+}
+
+PRTeamLevelUp
+{
+    old_strength                : uint16;       //旧体力
+    old_level                   : uint16;       //旧等级
+    new_level                   : uint16;       //新等级
+}
+
+PQTeamChangeName
+{
+    name                        : string;       //修改的名字
+}
+
+PRTeamChangeName
+{
+    name                        : string;       //修改OK的名字
+}
+
+PQTeamChangeAvatar
+{
+    avatar                      : uint32;       //头像id
+}

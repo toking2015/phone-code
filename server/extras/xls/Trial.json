@@ -1,0 +1,8 @@
+{
+	"Array":[
+			{ "id":"1",	"name":"板甲试炼",	"open_day1":"1",	"open_day2":"5",	"open_day3":"7",	"strength_cost":"15",	"try_count":"2",	"monster_id":"10001",	"trial_occu":"4",	"occu_odd1":"1309%1",	"occu_odd2":"1387%1",	"occu_odd3":"",	"desc":"根据造成的伤害总量获得奖励，伤害量越高奖励越多；推荐使用板甲英雄和土系图腾。" },
+			{ "id":"2",	"name":"锁甲试炼",	"open_day1":"2",	"open_day2":"5",	"open_day3":"7",	"strength_cost":"15",	"try_count":"2",	"monster_id":"10003",	"trial_occu":"3",	"occu_odd1":"1309%1",	"occu_odd2":"1387%1",	"occu_odd3":"",	"desc":"根据造成的伤害总量获得奖励，伤害量越高奖励越多；推荐使用锁甲英雄和火系图腾。" },
+			{ "id":"3",	"name":"皮甲试炼",	"open_day1":"3",	"open_day2":"6",	"open_day3":"7",	"strength_cost":"15",	"try_count":"2",	"monster_id":"10005",	"trial_occu":"2",	"occu_odd1":"1309%1",	"occu_odd2":"1387%1",	"occu_odd3":"",	"desc":"根据造成的伤害总量获得奖励，伤害量越高奖励越多；推荐使用皮甲英雄和风系图腾。" },
+			{ "id":"4",	"name":"布甲试炼",	"open_day1":"4",	"open_day2":"6",	"open_day3":"7",	"strength_cost":"15",	"try_count":"2",	"monster_id":"10007",	"trial_occu":"1",	"occu_odd1":"1309%1",	"occu_odd2":"1387%1",	"occu_odd3":"",	"desc":"根据治疗总量获得奖励，治疗量越高奖励越多；推荐使用布甲英雄和水系图腾。" }
+		]
+}

@@ -1,0 +1,71 @@
+//手工技能－甘显辉
+//=========================常量声明=======================
+#kMaterialCollectMaxTime        30      //资源点最大可采集次数
+#kMaterialRefreshInterval       300    //资源点增加次数时间间隔
+
+#kPathPaperSkillLevelUp                 //升级手工技能
+#kPathPaperSkillForget                  //遗忘手工技能
+#kPathPaperCreate                       //制造装备图纸
+#kPathCopyCollect                       //副本原料采集
+#kPathActiveScoreReset                  //清零活跃值上限
+//=========================错误码===========================
+#kErrPaperWrongSkillType                //未学习对应的手工技能
+#kErrPaperCreateLevelLimit              //手工技能等级不足
+#kErrPaperCollectTimeLimit              //原料采集技能次数不足
+
+//==========================通迅结构==========================
+
+//副本原料
+SUserCopyMaterial
+{
+    collect_level : uint32; //资源点等级
+    left_collect_times : uint32;    //剩余可采集次数
+    del_timestamp : uint32; //满次数时的采集时间戳
+}
+
+//=========================通迅协议============================
+//@@升级手工技能
+PQPaperLevelUp
+{
+    skill_type : uint32;    //技能类型（仅用于第一次学习）
+}
+
+//@@遗忘
+PQPaperForget
+{
+}
+
+//@@制作图纸
+PQPaperCreate
+{
+    paper_id : uint32;      //图纸id
+}
+PRPaperCreate
+{
+    paper_id : uint32;      //图纸id
+}
+
+//@@采集
+PQPaperCollect
+{
+    collect_level : uint32;       //资源点等级
+}
+
+//资源点更新
+PRPaperCopyMaterialPoint
+{
+    info : SUserCopyMaterial;   //采集数据
+}
+
+//采集成功
+PRPaperCollect
+{
+    item_id : uint32;
+    num : uint32;
+}
+
+//资源点列表更新
+PRPaperCopyMaterial
+{
+    material_list : array<SUserCopyMaterial>;
+}

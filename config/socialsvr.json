@@ -1,0 +1,15 @@
+{
+    "net_singal_hosts" : "../net_single_hosts",
+
+    //动态加载 so 路径
+    "so_path"                   : "../so_social/libso_social.so",
+
+    //静态数据目录
+    "extras_dir"                : "../../../extras/",
+
+    //随机端口地址
+    "outside_addr" : "18001",
+    
+    //连接关闭后冷却时间(秒)
+    "sock_cooling_time" : 60
+}

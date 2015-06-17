@@ -1,0 +1,18 @@
+<xml>
+	<protocol name="protocol" />
+	<constant name="constant" >
+        <extend name="path" key="kPath" />
+        <extend name="coin" key="kCoin" />
+    </constant>
+	<seq dir="seq" />
+	<client dir="../client/src/proxy/struct">
+		<seq import="" />
+		<path name="proxy.struct" />
+		<import name="proxy.protocol.CSeq" />
+		<import name="proxy.protocol.CSeqEleInfo" />
+		<ignore name="ignore" />
+	</client>
+	<server dir="../server/src/common/proto">
+		<path name="proto" />
+	</server>
+</xml>

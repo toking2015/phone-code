@@ -1,0 +1,29 @@
+{
+	"Array":[
+			{ "id":"1",	"reward":"5201",	"tomb_coin":"",	"desc":"" },
+			{ "id":"2",	"reward":"5202",	"tomb_coin":"",	"desc":"" },
+			{ "id":"3",	"reward":"5203",	"tomb_coin":"",	"desc":"" },
+			{ "id":"4",	"reward":"5204",	"tomb_coin":"",	"desc":"" },
+			{ "id":"5",	"reward":"5205",	"tomb_coin":"5226",	"desc":"" },
+			{ "id":"6",	"reward":"5206",	"tomb_coin":"",	"desc":"" },
+			{ "id":"7",	"reward":"5207",	"tomb_coin":"",	"desc":"" },
+			{ "id":"8",	"reward":"5208",	"tomb_coin":"",	"desc":"" },
+			{ "id":"9",	"reward":"5209",	"tomb_coin":"",	"desc":"" },
+			{ "id":"10",	"reward":"5210",	"tomb_coin":"5227",	"desc":"" },
+			{ "id":"11",	"reward":"5211",	"tomb_coin":"",	"desc":"" },
+			{ "id":"12",	"reward":"5212",	"tomb_coin":"",	"desc":"" },
+			{ "id":"13",	"reward":"5213",	"tomb_coin":"",	"desc":"" },
+			{ "id":"14",	"reward":"5214",	"tomb_coin":"",	"desc":"" },
+			{ "id":"15",	"reward":"5215",	"tomb_coin":"5228",	"desc":"" },
+			{ "id":"16",	"reward":"5216",	"tomb_coin":"",	"desc":"" },
+			{ "id":"17",	"reward":"5217",	"tomb_coin":"",	"desc":"" },
+			{ "id":"18",	"reward":"5218",	"tomb_coin":"",	"desc":"" },
+			{ "id":"19",	"reward":"5219",	"tomb_coin":"",	"desc":"" },
+			{ "id":"20",	"reward":"5220",	"tomb_coin":"5229",	"desc":"" },
+			{ "id":"21",	"reward":"5221",	"tomb_coin":"",	"desc":"" },
+			{ "id":"22",	"reward":"5222",	"tomb_coin":"",	"desc":"" },
+			{ "id":"23",	"reward":"5223",	"tomb_coin":"",	"desc":"" },
+			{ "id":"24",	"reward":"5224",	"tomb_coin":"",	"desc":"" },
+			{ "id":"25",	"reward":"5225",	"tomb_coin":"5230",	"desc":"" }
+		]
+}

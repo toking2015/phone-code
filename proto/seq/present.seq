@@ -1,0 +1,27 @@
+//=========================常量声明=======================
+#kPathPresentGlobalTake                     //激活码礼包领取
+
+//=========================错误码===========================
+#kErrPresentCodeEmpty                       //激活码不能为空
+#kErrPresentCodeFormation                   //激活码格式错误
+#kErrPresentSqlInvaild                      //数据库不可用
+#kErrPresentNoExist                         //礼包key不存在
+#kErrPresentTaken                           //礼包已领取
+#kErrPresentSame                            //已领取过相同的礼包
+
+//=========================通迅协议============================
+//@@请求获取全局礼包领取
+PQPresentGlobalTake
+{
+    platform            : string;           //平台key(服务器自动修改, 客户端不用填写)
+
+    code                : string;           //激活礼包key
+}
+
+PRPresentGlobalTake
+{
+    err_code            : uint32;           //错误码
+
+    reward_id           : uint32;           //礼包reward
+}
+

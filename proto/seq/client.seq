@@ -1,0 +1,130 @@
+//=========================甯搁噺澹版槑=======================
+//=========================閿欒鐮�==========================
+//==========================閫氳繀缁撴瀯==========================
+
+SLocalData
+{
+    data            : string;
+}
+
+SFightClientSkillObject
+{
+    time            : uint32;
+    totem_time      : uint32;
+    skill_object    : SFightSkillObject;
+}
+
+SFightClientRoundData
+{
+    time            : uint32;
+    totem_time      : uint32;
+    log_list        : array<SFightLog>;
+}
+
+SFightClientSeed
+{
+    value           : uint32;
+}
+
+SFightClientLog
+{
+    fight_id        : uint32;
+    fight_type      : uint32;
+    fight_randomseed: SFightClientSeed;
+    fight_info_list : array<SFightPlayerInfo>;
+
+    round_soldier   : array<SFightClientSkillObject>;
+    round_data_list : array<SFightClientRoundData>;
+    totem_skill_list: array<SFightClientRoundData>;
+}
+
+SEffectSound
+{
+	attr			: uint8;
+	time			: int16;
+	sound			: string;
+}
+
+STimeShaftSound
+{
+	flag			: string;
+	effectIndex		: uint8;
+	list			: array<SEffectSound>;
+}
+
+SBodySound
+{
+	style			: string;
+	soundList		: array<SEffectSound>;
+	dataList		: array<STimeShaftSound>;
+}
+
+SSoundData
+{
+    list            : array<SBodySound>;
+}
+
+SPhoneActionEffect
+{
+    index           : uint8;
+    ackEffect       : string;
+    fireEffect      : string;
+    targetEffect    : string;
+    timeShaftDataList : array<int16>;
+}
+
+
+SPhoneAction
+{
+    flag            : string;
+    frame           : uint16;
+    count           : uint8;
+    targetFocusX    : int16;
+    attribute       : uint8;
+    play	        : uint8;
+    line			: uint8;
+    listEffect      : array<SPhoneActionEffect>;
+}
+
+SPhoneBody
+{
+    style           : string;
+    headX           : int16;
+    headY           : int16;
+    bodyX           : int16;
+    bodyY           : int16;
+    footX           : int16;
+    footY           : int16;
+	scale			: int16;
+    list            : array<SPhoneAction>;
+}
+
+SPhoneData
+{
+    list            : array<SPhoneBody>;
+}
+
+SEffectItem
+{
+	flag			: string;
+	layer			: uint8;
+	count			: uint8;
+	coordX			: int16;
+	coordY			: int16;
+	focusX			: int16;
+    mirror          : int8;
+    binding         : string;
+	scale			: int16;
+}
+
+SEffect
+{
+    style           : string;
+	scale			: int16;
+    list	        : array<SEffectItem>;
+}
+
+SEffectData
+{
+    DataList        : array<SEffect>;
+}

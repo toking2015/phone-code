@@ -1,0 +1,560 @@
+#! /bin/bash
+
+# 删除定时器
+crontab -r
+
+# 同步时间
+# ntpdate 113.106.18.171
+
+# 打印日期
+date
+
+# 导入变量
+. ~/.bash_profile
+
+# 进入目录
+#cd /usr/local/project/phone-code/server/build
+
+dir=`pwd`
+lock=$dir/control.lock
+
+if [ -f $lock ]
+then
+    echo "单实例正在执行中!"
+    exit 0
+else
+    echo "进入单实例执行环境."
+    touch $lock
+    chmod 600 $lock
+fi
+
+killall crond
+sleep 1
+/sbin/service crond start
+#/usr/sbin/crond
+trap "rm -f $lock; crontab -r; exit" 0 1 2 3 9 15
+
+# 获取分组标识
+if [ -d ../../.local ]
+then
+    group=`cat ../../.local/group`
+else
+    group=""
+fi
+
+# 参与编译的服务
+make_progs=(
+    'common'
+    'public'
+    'gamesvr'
+    'so_game'
+    'fightsvr'
+    'so_fight'
+    'access'
+    'so_access'
+    'realdbsvr'
+    'so_realdb'
+    'authsvr'
+    'so_auth'
+    'socialsvr'
+    'so_social'
+    'sharedbsvr'
+    'so_sharedb'
+    'robotsvr'
+)
+
+# 参与启动的服务
+run_progs=(
+    'gamesvr'
+    'fightsvr'
+    'access'
+    'realdbsvr'
+    'authsvr'
+    'socialsvr'
+    'sharedbsvr'
+)
+
+function goto()
+{
+    cd $dir
+}
+
+function fun_removeobj()
+{
+    rm -f bin/common/libco.a
+    rm -f bin/public/libpb.a
+
+    for ((i=0;i<${#make_progs[@]};++i))
+    do
+        rm -f bin/${make_progs[i]}/lib${make_progs[i]}.so
+        rm -f bin/${make_progs[i]}/${make_progs[i]}
+    done
+
+    goto
+}
+
+function fun_svn_up_all()
+{
+    if [ -d ../../.local ]
+    then
+        svn up --accept tf ../../config
+        svn up --accept tf ../../proto
+        svn up --accept tf ../../server
+        svn up --accept tf ../../sql
+        svn up --accept tf ../../xls
+
+        svn up --accept tf ../../.local/client-xls
+        svn up --accept tf ../../.local/lua
+    else
+        svn up --accept tf ../..
+    fi
+}
+
+function fun_svn_commit()
+{
+    svn st $1 | sed -n "/\?/p" | awk '{print $2}' | xargs svn add
+    svn commit $1 --message ""
+}
+
+function fun_seq()
+{
+    cd ../../proto/
+
+    ./proto
+
+    fun_svn_commit ../server/src/common/proto/
+
+    if [ -d ../.local ]
+    then
+        fun_svn_commit ../.local/lua
+    else
+        fun_svn_commit ../client/War/lua
+    fi
+
+    goto
+}
+
+function fun_make()
+{
+    fun_removeobj
+    cmake ..
+
+    for ((i=0;i<${#make_progs[@]};++i))
+    do
+        cd bin/${make_progs[i]}
+        make -j8
+        goto
+    done
+
+    goto
+}
+
+function fun_start()
+{
+    for ((i=0;i<${#run_progs[@]};++i))
+    do
+        cd bin/${run_progs[i]}
+        rm -f log.txt
+        ./${run_progs[i]} -daemon -l ../../log.properties -c ${run_progs[i]}.json -cl core.log -p msglog --$group-logic
+        goto
+    done
+
+    echo "service started!"
+
+    goto
+}
+
+function fun_startrobot()
+{
+    fun_stoprobot
+
+    cd bin/robotsvr
+    ./robotsvr -l ../../log.properties -host localhost -port 17001 -msg /usr/local/msg_file -uid 1000001 1000001 --robot
+
+    echo "robotsvr started!"
+
+    goto
+}
+
+function fun_stoprobot()
+{
+    ps fx | grep "\-\-robot" | awk '{ print $1 }' | xargs kill
+    goto
+}
+
+function fun_stop()
+{
+    ps fx | grep "\-\-$group\-logic" | awk '{print $1}' | xargs kill -s 10
+
+    goto
+}
+
+function fun_restart()
+{
+    find . -name "core.*"| xargs rm -f
+    find . -name "msglog"| xargs rm -f
+    fun_stop
+    fun_start
+
+    goto
+}
+
+function fun_clean()
+{
+    make clean
+    find . -name "core.*" | xargs rm -f
+
+    goto
+}
+
+function fun_distclean()
+{
+    # 清除bin目录内容
+    rm -rf bin/cmake_install.cmake bin/Makefile
+    rm -rf bin/common
+    rm -rf bin/CMakeFiles
+    for ((i=0;i<${#make_progs[@]};++i))
+    do
+        rm -rf bin/${make_progs[i]}
+    done
+
+    # 清除本目录内容
+    rm -f CMakeCache.txt cmake_install.cmake Makefile
+    rm -rf CMakeFiles
+
+    goto
+}
+
+# 配置项目服务器软件config.json
+function fun_config()
+{
+    if [ ! -d bin ]
+    then
+        mkdir bin
+    fi
+
+    for ((i=0;i<${#run_progs[@]};++i))
+    do
+        if [ ! -d bin/${run_progs[i]} ]
+        then
+            mkdir bin/${run_progs[i]}
+        fi
+
+        rm -f ./bin/${run_progs[i]}/${run_progs[i]}.json
+        cp ../../config/${run_progs[i]}.json ./bin/${run_progs[i]}/
+    done
+
+    sed -i "s/\"outside_addr\"[^:]*:[^\"]*\"\([^\"]*\)\"/\"outside_addr\" : \"$((17000+${group}))\"/g" bin/access/access.json
+    sed -i "s/\"outside_addr\"[^:]*:[^\"]*\"\([^\"]*\)\"/\"outside_addr\" : \"$((18000+${group}))\"/g" bin/socialsvr/socialsvr.json
+    sed -i "s/\"social_addr\"[^:]*:[^\"]*\"\([^\"]*\)\"/\"social_addr\" : \"localhost:$((18000+${group}))\"/g" bin/gamesvr/gamesvr.json
+    sed -i "s/\"outside_addr\"[^:]*:[^\"]*\"\([^\"]*\)\"/\"outside_addr\" : \"$((12000+${group}))\"/g" bin/authsvr/authsvr.json
+
+    sed -i "s/\"db\"[^:]*:[^\"]*\"db_master\"/\"db\" : \"immortal_$group\"/g" bin/gamesvr/gamesvr.json
+    sed -i "s/\"db\"[^:]*:[^\"]*\"db_master\"/\"db\" : \"immortal_$group\"/g" bin/realdbsvr/realdbsvr.json
+
+    sed -i "s/\"db\"[^:]*:[^\"]*\"db_user\"/\"db\" : \"immortal_$group\"/g" bin/gamesvr/gamesvr.json
+    sed -i "s/\"db\"[^:]*:[^\"]*\"db_user\"/\"db\" : \"immortal_$group\"/g" bin/realdbsvr/realdbsvr.json
+
+    sed -i "s/\"name\"[^:]*:[^\"]*\"db_idx\"/\"name\" : \"$group\"/g" bin/gamesvr/gamesvr.json
+    sed -i "s/\"name\"[^:]*:[^\"]*\"db_idx\"/\"name\" : \"$group\"/g" bin/realdbsvr/realdbsvr.json
+
+    sed -i "s/\"unite\"[^:]*: \[1\]/\"unite\" : \[$group\]/g" bin/gamesvr/gamesvr.json
+
+    goto
+}
+
+# 初始化游戏数据库
+function fun_sql_user()
+{
+    fun_stop
+
+    cd ../../sql
+
+    mysql --raw -e "drop database if exists immortal_$group"
+    mysql --raw -e "create database immortal_$group"
+    cat immortal/immortal.tb | sed "s/auto_increment=[^d]*/auto_increment=$1000000 /g" | mysql -uimmortal -pimmortal immortal_$1
+
+    goto
+
+    cp -f ../../sql/immortal/immortal.ver ./immortal.ver
+
+    fun_config
+    fun_start
+}
+
+# 更新游戏数据库
+function fun_sql_update()
+{
+    if [ -f ./immortal.ver ]
+    then
+        current_version=`cat ./immortal.ver`
+    else
+        current_version=1
+    fi
+
+    immortal_name=$1
+    if [ ! $immortal_name ]
+    then
+        immortal_name="immortal_$group"
+    fi
+
+    database_version=`mysql --raw -uroot -e "select value from $immortal_name.server_info where \\\`key\\\` = 'version'" | sed '1d'`
+
+    if [ "$current_version" -ne "$database_version" ]
+    then
+        echo "immortal.ver[$current_version] not match to server_info.version[$database_version]!"
+        return
+    fi
+
+    immortal_version=`cat ../../sql/immortal/immortal.ver`
+
+    # 版本顺序升级
+    for ((i=$current_version+1;i<=$immortal_version;++i))
+    do
+        if [ -f ../../sql/immortal/mend/$i.mend ]
+        then
+            echo "update version to $i"
+            mysql -uimmortal -pimmortal $immortal_name < ../../sql/immortal/mend/$i.mend
+        else
+            echo "version $1 no mend"
+        fi
+    done
+
+    # 覆盖版本文件
+    cp -f ../../sql/immortal/immortal.ver ./immortal.ver
+
+    echo "current version `cat ./immortal.ver`"
+
+    goto 
+}
+
+function fun_svn_commit()
+{   
+    svn st $1 | sed -n "/\?/p" | awk '{print $2}' | xargs svn add
+    svn commit $1 --message ""
+}
+
+# 自动编译服务器
+function fun_export()
+{
+    fun_sql_update
+    fun_make
+    fun_stop
+    fun_config
+    fun_start
+
+    goto
+}
+
+# 发布整个服务器(auth除外)
+function fun_all()
+{
+    fun_export
+
+    goto
+}
+
+function fun_attach()
+{
+    if [ 1 -gt $# ]
+    then
+        echo "input: gamesvr"
+        exit -1
+    fi
+
+    cd bin/$1
+
+    gdb attach `ps fx | grep $1 | grep log.properties | grep "\-\-$group\-logic" | awk '{print $1}'`
+}
+
+function fun_xlstojson()
+{
+    cd ../../xls/
+    python xls2json.py
+
+    goto
+
+    fun_svn_commit ../extras/xls/
+
+    if [ -d ../../.local ]
+    then
+        fun_svn_commit ../../.local/client-xls/
+        fun_svn_commit ../../.local/lua/
+    else
+        fun_svn_commit ../../client/War/xls
+        fun_svn_commit ../../client/War/lua
+    fi
+}
+
+function fun_date()
+{
+    if [ 2 -gt $# ]
+    then
+        echo "input: [YYYY-mm-dd HH:MM:SS]"
+        exit -1
+    fi
+
+    fun_stop
+    date -s "$1 $2"
+    fun_start
+}
+
+function fun_lint_once()
+{
+    echo "check $1"
+    python ./cpplint.py --linelength=140 --filter=-legal/copyright,-build/include,-readability/casting,-readability/streams,-whitespace,-runtime/references,-build/header_guard,-readability/todo,-runtime/explicit,-readability/fn_size --extensions=c,h,cpp ../src/$1/*.* 2> __lint.log
+    cat __lint.log | grep :
+    rm -f __lint.log
+}
+
+function fun_lint()
+{
+    if [ 1 -gt $# ]
+    then
+        fun_lint_once common
+        fun_lint_once common/resource
+        fun_lint_once gamesvr
+        fun_lint_once so_game
+        fun_lint_once access
+        fun_lint_once so_access
+        fun_lint_once fightsvr
+        fun_lint_once so_fight
+        exit 0
+    fi      
+
+    fun_lint_once $1
+
+    goto
+}
+
+function fun_proto()
+{
+    rm -f ./bin/proto/proto
+
+    cd ./bin/proto
+    make
+
+    goto
+
+    if [ -f ./bin/proto/proto ]
+    then
+        rm -f ../../proto/proto
+        cp ./bin/proto/proto ../../proto/proto
+        svn commit ../../proto/proto --message ""
+    fi
+}
+
+function fun_release()
+{
+    find ../src | grep CMakeLists | xargs sed -i "s/#REMOVE_DEFINITIONS/REMOVE_DEFINITIONS/g"
+    find ../src | grep CMakeLists | xargs sed -i "s/#ADD_DEFINITIONS/ADD_DEFINITIONS/g"
+}
+
+if ! which cmake
+then
+    echo "install cmake before"
+    exit -1
+fi
+
+sleep 3
+
+goto
+
+case $1 in
+    seq)
+        svn up --accept tf ../../proto
+        svn up --accept tf ../../server/src/common/proto
+
+        if [ -d ../../.local ]
+        then
+            svn up --accept tf ../../.local/lua/trans
+        else
+            svn up --accept tf ../../client/War/lua/trans
+        fi
+
+        fun_seq
+        ;;
+    make)
+        fun_make
+        ;;
+    stop)
+        fun_stop
+        ;;
+    restart)
+        fun_restart
+        ;;
+    startrobot)
+        fun_startrobot
+        ;;
+    stoprobot)
+        fun_stoprobot
+        ;;
+    clean)
+        fun_clean
+        ;;
+    distclean)
+        fun_distclean
+        ;;
+    config)
+        svn up --accept tf ../../config
+
+        fun_config
+        ;;
+    sql_user)
+        svn up --accept tf ../../sql
+
+        fun_sql_user $group
+        ;;
+    sql_update)
+        svn up --accept tf ../../sql
+
+        fun_sql_update $2
+        ;;
+    all)
+        fun_svn_up_all
+
+        fun_xlstojson
+        fun_seq
+        fun_all $2
+        ;;
+    attach)
+        fun_attach $2
+        ;;
+    xls)
+        svn up --accept tf ../extras
+        svn up --accept tf ../../xls
+
+        if [ -d ../../.local ]
+        then
+            svn up --accept tf ../../.local/client-xls
+            svn up --accept tf ../../.local/lua
+        else
+            svn up --accept tf ../../client/War/xls
+            svn up --accept tf ../../client/War/lua
+        fi
+
+        fun_xlstojson
+        fun_restart
+        ;;
+    date)
+        fun_date $2 $3
+        ;;
+    proto)
+        svn up --accept tf ../../server/src/proto
+
+        fun_proto
+        ;;
+    reload)
+        ps fx | grep "\-\-$group\-logic" | awk '{print $1}' | xargs kill -s 12
+        ;;
+    lint)
+        fun_lint $2 $3
+        ;;
+    release)
+        fun_release
+        ;;
+    *)
+        echo "Usage: `basename $0` [seq|make|stop|restart|clean|distclean|config|sql_user|sql_update|attach|reload|lint]"
+        ;;
+esac
+

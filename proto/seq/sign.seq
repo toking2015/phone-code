@@ -1,0 +1,65 @@
+//=========================常量声明=======================
+#kSignNormal          1 // 正常签到
+#kSignAdditional      2 // 补签
+
+//Path
+#kPathSign    // 签到
+
+//=========================错误码===========================
+#kErrSignBeforeSvrOpen                // 签到日期比开服时间早
+
+//=========================错误码===========================
+
+//==========================通迅结构==========================
+// 每日签到
+SSign
+{
+    day_id    : uint32; // 签到日期id
+    sign_type : uint32; // 签到类型, kSignNormal或kSignAdditional
+    sign_time : uint32; // 签到时间
+}
+
+SSignInfo
+{
+    sign_list : array<SSign>;  // 签到列表
+    sum_list  : array<uint32>; // 累计签到已领取奖励id列表
+}
+
+//============================数据中心========================
+
+//=========================通迅协议============================
+// 签到信息
+PQSignInfo
+{
+}
+PRSignInfo
+{
+    info : SSignInfo;
+}
+
+// 签到
+PQSign
+{
+}
+PRSign
+{
+    sign : SSign;
+}
+
+// 领取累计签到奖励
+PQTakeSignSumReward
+{
+    reward_id : uint32; // 奖励id
+}
+PRTakeSignSumReward
+{
+    reward_id : uint32;
+}
+
+// 领取豪华奖励
+PQTakeHaohuaReward
+{
+}
+PRTakeHaohuaReward
+{
+}

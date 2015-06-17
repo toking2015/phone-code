@@ -1,0 +1,9 @@
+{
+	"Array":[
+			{ "id":"1",	"name":"",	"monster_id":"11011",	"ratio":"5000",	"desc":"" },
+			{ "id":"2",	"name":"",	"monster_id":"11021",	"ratio":"6000",	"desc":"" },
+			{ "id":"3",	"name":"",	"monster_id":"11031",	"ratio":"8000",	"desc":"" },
+			{ "id":"4",	"name":"",	"monster_id":"11041",	"ratio":"10000",	"desc":"" },
+			{ "id":"5",	"name":"",	"monster_id":"11051",	"ratio":"12000",	"desc":"" }
+		]
+}

@@ -1,0 +1,9 @@
+{
+	"Array":[
+			{ "item_type":"1",	"bag_type":"1",	"bag_moves1":"4",	"bag_moves2":"1",	"bag_moves3":"",	"bag_moves4":"" },
+			{ "item_type":"2",	"bag_type":"1",	"bag_moves1":"1",	"bag_moves2":"",	"bag_moves3":"",	"bag_moves4":"" },
+			{ "item_type":"3",	"bag_type":"1",	"bag_moves1":"1",	"bag_moves2":"5",	"bag_moves3":"",	"bag_moves4":"" },
+			{ "item_type":"4",	"bag_type":"1",	"bag_moves1":"1",	"bag_moves2":"",	"bag_moves3":"",	"bag_moves4":"" },
+			{ "item_type":"5",	"bag_type":"1",	"bag_moves1":"1",	"bag_moves2":"",	"bag_moves3":"",	"bag_moves4":"" }
+		]
+}

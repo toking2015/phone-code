@@ -1,0 +1,93 @@
+//通讯包头-黄少卿
+
+//协议包头
+SMsgHead
+{
+    msg_cmd     : uint32;           //协议号
+    role_id     : uint32 = 0;       //角色ID
+    session     : uint32 = 0;       //登陆游戏sessionid
+    order       : uint32 = 0;       //协议包处理顺序
+    action      : uint32 = 0;       //用户行为号
+
+    broad_cast  : uint16 = 0;       //广播id
+    broad_type  : uint16 = 0;       //广播二级标识
+    broad_id    : uint32 = 0;       //广播三级标识
+}
+
+//压缩数据
+SCompressData
+{
+    size    : uint32;           //原文长度
+    data    : bytes;            //压缩内容
+}
+
+SInteger
+{
+    value   : uint32;
+}
+
+S2UInt16
+{
+    first :         uint16;
+    second :        uint16;
+}
+
+S2Int16
+{
+	first :         int16;
+    second :        int16;
+}
+
+S2UInt32
+{
+    first :         uint32;
+    second :        uint32;
+}
+
+S2Int32
+{
+	first :         int32;
+    second :        int32;
+}
+
+S2Float
+{
+	first :			float;
+	second :		float;
+}
+
+S3UInt32
+{
+    cate  :         uint32;						//类型
+    objid :         uint32;						//扩展Id
+    val   :         uint32;						//数值
+}
+
+S4Int32
+{
+    v1  :           int32;
+    v2  :           int32;
+    v3  :           int32;
+    v4  :           int32;
+}
+
+//地图结构
+SMapVal
+{
+    id :            uint16;            //ID
+    x :             uint8;             //X
+    y :             uint8;             //Y
+}
+
+SKeyValue 
+{
+    key :           string;
+    val :           uint32;
+}
+
+S2String
+{
+    first :         string;
+    second :        string;
+}
+

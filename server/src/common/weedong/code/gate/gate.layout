@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Debug" />
+	<File name="CConfig.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="1734" topLine="45" />
+	</File>
+	<File name="CConfig.h" open="1" top="1" tabpos="3">
+		<Cursor position="723" topLine="0" />
+	</File>
+	<File name="epoll.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="6225" topLine="273" />
+	</File>
+	<File name="epoll.h" open="1" top="0" tabpos="9">
+		<Cursor position="606" topLine="0" />
+	</File>
+	<File name="ipc.cpp" open="1" top="0" tabpos="6">
+		<Cursor position="355" topLine="1" />
+	</File>
+	<File name="ipc.h" open="1" top="0" tabpos="8">
+		<Cursor position="161" topLine="0" />
+	</File>
+	<File name="main.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="950" topLine="25" />
+	</File>
+	<File name="server.cpp" open="1" top="0" tabpos="7">
+		<Cursor position="1270" topLine="8" />
+	</File>
+	<File name="server.h" open="1" top="0" tabpos="2">
+		<Cursor position="54" topLine="0" />
+	</File>
+</CodeBlocks_layout_file>
